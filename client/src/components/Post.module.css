@@ -4,7 +4,7 @@
     background-color: white;
     max-width: 600px;
     width: 100%;
-    margin: 0 auto 50px;
+    margin: 0 auto 30px;
   }
   
   .info {
@@ -21,19 +21,21 @@
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
+    cursor: pointer;
   }
   
   .postImg{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-  }
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    cursor: pointer;
+}
   
   .interaction{
       display: flex;
       align-items: center;
       padding: 5px 10px;
-      position: relative;
+      background-color: w;
   }
   
   .cardIcon{
