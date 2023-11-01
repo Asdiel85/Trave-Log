@@ -1,0 +1,51 @@
+.navigation {
+    display: block;
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    z-index: 10;
+    background-color: white;
+    height: 50px;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+     
+    }
+  ul li {
+    list-style: none;
+  }
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  
+    .links {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  
+    .icons {
+      display: flex;
+      align-items: center;
+    }
+    a {
+      cursor: pointer;
+    }
+  
+  .add {
+      width: 35px;
+      height: 35px;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+    margin: auto 10px;
+  }
+  

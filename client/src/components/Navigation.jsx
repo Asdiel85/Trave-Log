@@ -1,44 +1,35 @@
+import styles from './Navigation.module.css';
+
 export default function Navigation() {
   return (
-    <nav className="navigation">
-        <ul className="navigation links">
+    <nav className={styles.navigation}>
+      <ul className={styles.links}>
+          <a>
+            <div className={styles.title}>Travel Log</div>
+          </a>
+        <div className={styles.icons}>
+          <a>
+            <li className={styles.add}>
+              <span>add</span>
+            </li>
+          </a>
+          <a>
+            <li>
+              <span>home</span>
+            </li>
+          </a>
+          <a>
+            <li>
+              <span>dashboard</span>
+            </li>
+          </a>
           <li>
             <a>
-              <div className="navigation title">Travel Log</div>
+              <span className="material icons">account_circle</span>
             </a>
           </li>
-          <div className="navigation icons">
-            <a>
-              <li className="navigation add">
-                <span
-                 
-                  className="material icons md-light"
-                >
-                  add
-                </span>
-              </li>
-            </a>
-            <a>
-              <li>
-                <span
-                  className="material icons"
-                >
-                  home
-                </span>
-              </li>
-            </a>
-            <a> 
-              <li>
-                <span className="material icons">dashboard</span>
-              </li>
-            </a>
-            <li>
-              <a>
-                <span className="material icons">account_circle</span>
-              </a>
-            </li>
-          </div>
-        </ul>
+        </div>
+      </ul>
     </nav>
   );
 }

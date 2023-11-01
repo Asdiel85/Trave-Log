@@ -1,18 +1,13 @@
+import styles from './Post.module.css'
 export default function Post () {
     return (
-        <article className="post-card">
-            <div className="post-header">
-                <img className="post-header-image" src="https://images.unsplash.com/flagged/photo-1566127992631-137a642a90f4?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D" alt="Header Image" />
-                <p className="post-header-text">Card Header Text</p>
-            </div>
-            <div>
-            <img className="post-image" src="https://images.unsplash.com/flagged/photo-1566127992631-137a642a90f4?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D" alt="Post Image" />
-            </div>
-            <div>
-                <button>Test button</button>
-                <button>Test button</button>
-                <button>Test button</button>
-            </div>
+        <article className={styles.card}>
+        <div className={styles.info}>
+          <img src='https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg' alt="" className={styles.userImg} />
+          <span>Post Name</span>
+        </div>
+        <img src='https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg' alt="" className={styles.postImg} />
+       <div className={styles.interaction}></div>
         </article>
     )
 }
