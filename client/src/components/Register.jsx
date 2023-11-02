@@ -2,10 +2,14 @@ import styles from './Register.module.css';
 import { useState, useEffect } from 'react';
 
 export default function Register() {
+  const emailPattern =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const [inputFields, setInputFields] = useState({
     email: '',
     firstName: '',
+    lastName: '',
     password: '',
+    repeatPassword: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -13,11 +17,20 @@ export default function Register() {
 
   const validateValues = (inputValues) => {
     let errors = {};
-    if (inputValues.email.length < 10) {
-      errors.email = 'Email is too short';
+    if (!inputValues.email.match(emailPattern)) {
+      errors.email = 'Invalid email';
     }
     if (inputValues.password.length < 5) {
       errors.password = 'Password is too short';
+    }
+    if (inputValues.password !== inputValues.repeatPassword) {
+      errors.repeatPassword = "Passwords don't match";
+    }
+    if(!inputValues.firstName) {
+      errors.firstName = 'Please enter First name'
+    }
+     if(!inputValues.lastName) {
+      errors.lastName= 'Please enter Last name'
     }
     return errors;
   };
@@ -52,17 +65,23 @@ export default function Register() {
           value={inputFields.email}
           onChange={handleChange}
         />
-        {errors.email ? (
-          <p className={styles.errors}>Email should be at least 10 characters long</p>
-        ) : null}
+        {errors.email ? <p className={styles.errors}>{errors.email}</p> : null}
         <input
           type="text"
           name="firstName"
-          placeholder="first name"
+          placeholder="First name is required"
           value={inputFields.firstName}
           onChange={handleChange}
         />
-        <input type="text" name="lastName" placeholder="last name" />
+        {errors.firstName ? <p className={styles.errors}>{errors.firstName}</p> : null}
+        <input
+          type="text"
+          name="lastName"
+          placeholder="Last name is required"
+          value={inputFields.lastName}
+          onChange={handleChange}
+        />
+        {errors.lastName ? <p className={styles.errors}>{errors.lastName}</p> : null}
         <input
           type="password"
           name="password"
@@ -70,11 +89,19 @@ export default function Register() {
           value={inputFields.password}
           onChange={handleChange}
         />
+        {errors.password ? (
+          <p className={styles.errors}>{errors.password}</p>
+        ) : null}
         <input
           type="password"
           name="repeatPassword"
           placeholder="repeat password"
+          value={inputFields.repeatPassword}
+          onChange={handleChange}
         />
+        {errors.repeatPassword ? (
+          <p className={styles.errors}>{errors.repeatPassword}</p>
+        ) : null}
         <button type="submit" className={styles.button}>
           Register
         </button>
