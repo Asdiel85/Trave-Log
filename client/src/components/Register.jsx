@@ -53,7 +53,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.email ? (
-          <p className="error">Email should be at least 10 characters long</p>
+          <p className={styles.errors}>Email should be at least 10 characters long</p>
         ) : null}
         <input
           type="text"
