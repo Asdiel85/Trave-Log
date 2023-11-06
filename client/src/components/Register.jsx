@@ -58,44 +58,54 @@ export default function Register() {
     <div className={styles.login}>
       <h2>Travel Log</h2>
       <form className={styles.login} onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="Email is required"
+          id='email'
           value={inputFields.email}
           onChange={handleChange}
         />
         {errors.email ? <p className={styles.errors}>{errors.email}</p> : null}
+        <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           name="firstName"
           placeholder="First name is required"
+          id='firstName'
           value={inputFields.firstName}
           onChange={handleChange}
         />
         {errors.firstName ? <p className={styles.errors}>{errors.firstName}</p> : null}
+        <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
           name="lastName"
           placeholder="Last name is required"
+          id='lastName'
           value={inputFields.lastName}
           onChange={handleChange}
         />
         {errors.lastName ? <p className={styles.errors}>{errors.lastName}</p> : null}
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           placeholder="password"
+          id='password'
           value={inputFields.password}
           onChange={handleChange}
         />
         {errors.password ? (
           <p className={styles.errors}>{errors.password}</p>
         ) : null}
+        <label htmlFor="repeatPassword">Repeat Password</label>
         <input
           type="password"
           name="repeatPassword"
           placeholder="repeat password"
+          id='repeatPassword'
           value={inputFields.repeatPassword}
           onChange={handleChange}
         />
