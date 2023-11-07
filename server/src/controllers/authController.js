@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
 
     res.status(200);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).json(error.message);
   }
 });
 
@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
     const token = await userManager.login(email, password);
     res.status(200).json(token);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).json(error.message);
   }
 });
 

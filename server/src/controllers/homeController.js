@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
         const data = await postManager.getPosts();
         res.status(200).json(data)
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).json(error.message)
     }
 })
 

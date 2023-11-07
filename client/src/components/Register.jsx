@@ -1,6 +1,7 @@
 import styles from './Register.module.css';
 import { useState, useEffect } from 'react';
-import * as userService from '../service/userService'
+import * as userService from '../service/userService';
+import InputField from './InputField.jsx';
 
 export default function Register() {
   const emailPattern =
@@ -27,11 +28,11 @@ export default function Register() {
     if (inputValues.password !== inputValues.repeatPassword) {
       errors.repeatPassword = "Passwords don't match";
     }
-    if(!inputValues.firstName) {
-      errors.firstName = 'Please enter First name'
+    if (!inputValues.firstName) {
+      errors.firstName = 'Please enter First name';
     }
-     if(!inputValues.lastName) {
-      errors.lastName= 'Please enter Last name'
+    if (!inputValues.lastName) {
+      errors.lastName = 'Please enter Last name';
     }
     return errors;
   };
@@ -47,9 +48,16 @@ export default function Register() {
   };
 
   const finishSubmit = async () => {
-   const user = await userService.register(inputFields)
-   console.log(user);
+    try {
+      const response = await userService.register(inputFields);
+      if (response) {
+        errors.apiCall = response;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
@@ -58,56 +66,68 @@ export default function Register() {
 
   return (
     <div className={styles.login}>
+      {errors.apiCall ? (
+        <p className={styles.errors}>{errors.apiCall}</p>
+      ) : null}
       <h2>Travel Log</h2>
       <form className={styles.login} onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
+        <InputField
+          label="email"
+          title="Email"
           type="email"
           name="email"
           placeholder="Email is required"
-          id='email'
+          id="email"
           value={inputFields.email}
           onChange={handleChange}
         />
         {errors.email ? <p className={styles.errors}>{errors.email}</p> : null}
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
+        <InputField
+          label="firstName"
+          title="First name"
+          type="firstName"
           name="firstName"
           placeholder="First name is required"
-          id='firstName'
+          id="firstName"
           value={inputFields.firstName}
           onChange={handleChange}
         />
-        {errors.firstName ? <p className={styles.errors}>{errors.firstName}</p> : null}
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
+        {errors.firstName ? (
+          <p className={styles.errors}>{errors.firstName}</p>
+        ) : null}
+        <InputField
+          label="lastName"
+          title="Last name"
+          type="lastName"
           name="lastName"
           placeholder="Last name is required"
-          id='lastName'
+          id="lastName"
           value={inputFields.lastName}
           onChange={handleChange}
         />
-        {errors.lastName ? <p className={styles.errors}>{errors.lastName}</p> : null}
-        <label htmlFor="password">Password</label>
-        <input
+        {errors.lastName ? (
+          <p className={styles.errors}>{errors.lastName}</p>
+        ) : null}
+        <InputField
+          label="password"
+          title="Password"
           type="password"
           name="password"
-          placeholder="password"
-          id='password'
+          placeholder="Password is required"
+          id="password"
           value={inputFields.password}
           onChange={handleChange}
         />
         {errors.password ? (
           <p className={styles.errors}>{errors.password}</p>
         ) : null}
-        <label htmlFor="repeatPassword">Repeat Password</label>
-        <input
-          type="password"
+        <InputField
+          label="repeatPassword"
+          title="Repeat password"
+          type="repeatPassword"
           name="repeatPassword"
-          placeholder="repeat password"
-          id='repeatPassword'
+          placeholder="Repeat password is required"
+          id="repeatPassword"
           value={inputFields.repeatPassword}
           onChange={handleChange}
         />

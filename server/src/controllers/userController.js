@@ -7,7 +7,7 @@ router.get('/', adminGuard, async (req, res) => {
     const data = await userManager.getUsers();
     res.status(200).json(data);
   } catch (error) {
-    res.status(401).send(error.message);
+    res.status(401).json(error.message);
   }
 });
 
@@ -44,7 +44,7 @@ router.put('/:userId/edit', routeGuard, async (req, res) => {
 router.delete('/:userId', adminGuard, async (req, res) => {
     try {
         await userManager.deleteUser(req.params.userId)
-        res.status(200).send('User Deleted');
+        res.status(200).json('User Deleted');
     } catch (error) {
         res.status(401).json(error.message); 
     }
