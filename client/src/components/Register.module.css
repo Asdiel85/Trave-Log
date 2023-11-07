@@ -23,3 +23,11 @@
     color: red;
     margin: 0;
   }
+
+
+  textarea {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }

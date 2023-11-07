@@ -1,5 +1,5 @@
 import Navigation from "./components/Navigation.jsx"
-import Login from "./components/Login.jsx"
+import CreatePost from "./components/CreatePost.jsx"
 import styles from  './App.module.css'
 
 
@@ -8,7 +8,7 @@ function App() {
     <>    
     <Navigation /> 
     <div className={styles.container}>
-  <Login />
+  <CreatePost />
     </div>
     </>
   )
