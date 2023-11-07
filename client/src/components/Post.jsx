@@ -1,13 +1,13 @@
 import styles from './Post.module.css'
 import heart from '../img/heart.svg'
-export default function Post () {
+export default function Post ({userImg, country, postImgUrl}) {
     return (
         <article className={styles.card}>
         <div className={styles.info}>
-          <img src='https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg' alt="" className={styles.userImg} />
-          <span>Post Name</span>
+          <img src={userImg} alt="" className={styles.userImg} />
+          <span>{country}</span>
         </div>
-        <img src='https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg' alt="" className={styles.postImg} />
+        <img src={postImgUrl} alt="" className={styles.postImg} />
        <div className={styles.interaction}>
         <img className={styles.cardIcon} src={heart} alt="" />
        </div>

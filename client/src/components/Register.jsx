@@ -1,5 +1,6 @@
 import styles from './Register.module.css';
 import { useState, useEffect } from 'react';
+import * as userService from '../service/userService'
 
 export default function Register() {
   const emailPattern =
@@ -45,8 +46,9 @@ export default function Register() {
     setSubmitting(true);
   };
 
-  const finishSubmit = () => {
-    console.log(inputFields);
+  const finishSubmit = async () => {
+   const user = await userService.register(inputFields)
+   console.log(user);
   };
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {

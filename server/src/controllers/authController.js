@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('express');
 const userManager = require('../managers/userManager');
 
 router.get('/register', (req, res) => {
@@ -17,7 +18,7 @@ router.post('/register', async (req, res) => {
       isAdmin: false,
     });
 
-    res.send('Success');
+    res.status(200);
   } catch (error) {
     res.status(400).send(error.message);
   }
