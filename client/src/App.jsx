@@ -1,5 +1,5 @@
 import Navigation from "./components/Navigation.jsx"
-import Register from "./components/Register.jsx"
+import Login from "./components/Login.jsx"
 import styles from  './App.module.css'
 
 
@@ -8,7 +8,7 @@ function App() {
     <>    
     <Navigation /> 
     <div className={styles.container}>
-    <Register />
+  <Login />
     </div>
     </>
   )
