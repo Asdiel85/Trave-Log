@@ -24,6 +24,7 @@ export default function CreatePost() {
     return (
         <>
         <form onSubmit={handleSubmit} className={styles.login}>
+          <h2>Create Post</h2>
         <InputField
         label="country"
         title="Country"

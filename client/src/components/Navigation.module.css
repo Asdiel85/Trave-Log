@@ -23,7 +23,7 @@
     .links {
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
     }
   
     .icons {
@@ -33,16 +33,9 @@
     a {
       cursor: pointer;
     }
-  
-  .add {
-      width: 35px;
-      height: 35px;
-      border-radius: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    span {
+      margin-left: 20px;
     }
-  
   
   a {
     text-decoration: none;
