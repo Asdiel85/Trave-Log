@@ -65,12 +65,12 @@ export default function Register() {
   }, [errors]);
 
   return (
-    <div className={styles.login}>
-      {errors.apiCall ? (
+    <>      
+    {errors.apiCall ? (
         <p className={styles.errors}>{errors.apiCall}</p>
       ) : null}
-      <h2>Travel Log</h2>
       <form className={styles.login} onSubmit={handleSubmit}>
+      <h2>Register</h2>
         <InputField
           label="email"
           title="Email"
@@ -138,6 +138,6 @@ export default function Register() {
           Register
         </button>
       </form>
-    </div>
+    </>
   );
 }
