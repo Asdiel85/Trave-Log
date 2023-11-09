@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './components/Navigation.jsx';
 import Feed from './components/Feed.jsx';
 import Register from './components/Register.jsx';
