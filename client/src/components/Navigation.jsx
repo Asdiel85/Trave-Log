@@ -9,23 +9,38 @@ export default function Navigation() {
           </a>
         <div className={styles.icons}>
           <a>
-            <li className={styles.add}>
-              <span>add</span>
+            <li >
+              <span>Dashboard</span>
             </li>
           </a>
           <a>
             <li>
-              <span>home</span>
+              <span>Create Post</span>
             </li>
           </a>
           <a>
             <li>
-              <span>dashboard</span>
+              <span>Profile</span>
+            </li>
+          </a>
+          <a>
+            <li >
+              <span>Login</span>
+            </li>
+          </a>
+          <a>
+            <li >
+              <span>Logout</span>
+            </li>
+          </a>
+          <a>
+            <li >
+              <span>Register</span>
             </li>
           </a>
           <li>
             <a>
-              <span className="material icons">account_circle</span>
+              <span>account_circle</span>
             </a>
           </li>
         </div>
