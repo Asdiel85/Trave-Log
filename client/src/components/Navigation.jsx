@@ -1,47 +1,48 @@
+import { Link } from 'react-router-dom';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
   return (
     <nav className={styles.navigation}>
       <ul className={styles.links}>
-          <a>
+          <Link to={'/'}>
             <div className={styles.title}>Travel Log</div>
-          </a>
+          </Link>
         <div className={styles.icons}>
-          <a>
-            <li >
+          <Link to={'/'}>
+            <li>
               <span>Dashboard</span>
             </li>
-          </a>
-          <a>
+          </Link>
+          <Link to={'/create'}>
             <li>
               <span>Create Post</span>
             </li>
-          </a>
-          <a>
+          </Link>
+          <Link>
             <li>
               <span>Profile</span>
             </li>
-          </a>
-          <a>
-            <li >
+          </Link>
+          <Link to={'/login'}>
+            <li>
               <span>Login</span>
             </li>
-          </a>
-          <a>
-            <li >
+          </Link>
+          <Link to={'/logout'}>
+            <li>
               <span>Logout</span>
             </li>
-          </a>
-          <a>
-            <li >
+          </Link>
+          <Link to={'/register'}>
+            <li>
               <span>Register</span>
             </li>
-          </a>
+          </Link>
           <li>
-            <a>
+            <Link>
               <span>account_circle</span>
-            </a>
+            </Link>
           </li>
         </div>
       </ul>
