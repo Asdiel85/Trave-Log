@@ -1,4 +1,4 @@
-import Post from './Post';
+import PostCard from './PostCard';
 import * as postService from '../service/postService';
 import { useState, useEffect } from 'react';
 
@@ -14,7 +14,7 @@ export default function Feed() {
   return (
     <>
       {posts.map((post) => (
-        <Post key={post._id} country={post.country} postImgUrl={post.imageUrl} />
+        <PostCard key={post._id} {...post} />
       ))}
     </>
   );
