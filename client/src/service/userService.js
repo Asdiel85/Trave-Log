@@ -20,6 +20,5 @@ export const login = async (email, password) => {
         },
         body: JSON.stringify(email, password)
     })
-    const token = await response.json();
-    return token;
+   return response.json();
 }

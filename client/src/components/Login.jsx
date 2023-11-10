@@ -1,7 +1,7 @@
 import styles from './Register.module.css';
 import InputField from './InputField';
 import * as userService from '../service/userService'
-
+import { handleResponse } from '../utils/handleResponse.js';
 import { useState } from 'react';
 
 export default function Login() {
@@ -9,17 +9,20 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const token = await userService.login(inputFields)
-    } catch (error) {
-      console.log(error);
+      const response = await userService.login(inputFields);
+      handleResponse(response)
+      const token = response.json();
+    } catch (err) {
+     setError(err.message)
     }
   };
 
@@ -47,6 +50,9 @@ export default function Login() {
           value={inputFields.password}
           onChange={handleChange}
         />
+         {error ? (
+        <p>{error}</p>
+      ) : null}
         <button type="submit" className={styles.button}>
           Login
         </button>

@@ -6,12 +6,15 @@ import InputField from './InputField.jsx';
 export default function Register() {
   const emailPattern =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const avatarPattern = /^(http|https):\/\//;
+
   const [inputFields, setInputFields] = useState({
     email: '',
     firstName: '',
     lastName: '',
     password: '',
     repeatPassword: '',
+    userAvatar: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -34,11 +37,14 @@ export default function Register() {
     if (!inputValues.lastName) {
       errors.lastName = 'Please enter Last name';
     }
+    if (!inputValues.userAvatar.match(avatarPattern)) {
+      errors.userAvatar = 'Invalid image url';
+    }
     return errors;
   };
 
   const handleChange = (e) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+    setInputFields(inputFields => ({ ...inputFields, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (event) => {
@@ -50,11 +56,11 @@ export default function Register() {
   const finishSubmit = async () => {
     try {
       const response = await userService.register(inputFields);
-      if (response) {
-        errors.apiCall = response;
+      if (!response ||!response.ok) {
+        throw new Error (response)
       }
     } catch (error) {
-      console.log(error);
+      errors.apiCall = error.message;
     }
   };
 
@@ -65,12 +71,12 @@ export default function Register() {
   }, [errors]);
 
   return (
-    <>      
-    {errors.apiCall ? (
+    <>
+      {errors.apiCall ? (
         <p className={styles.errors}>{errors.apiCall}</p>
       ) : null}
       <form className={styles.login} onSubmit={handleSubmit}>
-      <h2>Register</h2>
+        <h2>Register</h2>
         <InputField
           label="email"
           title="Email"
@@ -124,7 +130,7 @@ export default function Register() {
         <InputField
           label="repeatPassword"
           title="Repeat password"
-          type="repeatPassword"
+          type="password"
           name="repeatPassword"
           placeholder="Repeat password is required"
           id="repeatPassword"
@@ -133,6 +139,19 @@ export default function Register() {
         />
         {errors.repeatPassword ? (
           <p className={styles.errors}>{errors.repeatPassword}</p>
+        ) : null}
+        <InputField
+          label="userAvatar"
+          title="User Avatar"
+          type="text"
+          name="userAvatar"
+          placeholder="Avatar is required"
+          id="userAvatar"
+          value={inputFields.userAvatar}
+          onChange={handleChange}
+        />
+        {errors.userAvatar ? (
+          <p className={styles.errors}>{errors.userAvatar}</p>
         ) : null}
         <button type="submit" className={styles.button}>
           Register
