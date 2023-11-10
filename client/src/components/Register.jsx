@@ -2,6 +2,8 @@ import styles from './Register.module.css';
 import { useState, useEffect } from 'react';
 import * as userService from '../service/userService';
 import InputField from './InputField.jsx';
+import ErrorParagraph from './ErrorParagraph.jsx';
+import SubmitBtn from './SubmitBtn.jsx';
 
 export default function Register() {
   const emailPattern =
@@ -73,7 +75,7 @@ export default function Register() {
   return (
     <>
       {errors.apiCall ? (
-        <p className={styles.errors}>{errors.apiCall}</p>
+        <ErrorParagraph message = {errors.apiCall}/>
       ) : null}
       <form className={styles.login} onSubmit={handleSubmit}>
         <h2>Register</h2>
@@ -86,8 +88,8 @@ export default function Register() {
           id="email"
           value={inputFields.email}
           onChange={handleChange}
-        />
-        {errors.email ? <p className={styles.errors}>{errors.email}</p> : null}
+        />  
+        {errors.email ? <ErrorParagraph message = {errors.email}/> : null}
         <InputField
           label="firstName"
           title="First name"
@@ -99,7 +101,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.firstName ? (
-          <p className={styles.errors}>{errors.firstName}</p>
+          <ErrorParagraph message = {errors.firstName}/>
         ) : null}
         <InputField
           label="lastName"
@@ -112,7 +114,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.lastName ? (
-          <p className={styles.errors}>{errors.lastName}</p>
+          <ErrorParagraph message = {errors.lastName}/>
         ) : null}
         <InputField
           label="password"
@@ -125,7 +127,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.password ? (
-          <p className={styles.errors}>{errors.password}</p>
+         <ErrorParagraph message = {errors.password}/>
         ) : null}
         <InputField
           label="repeatPassword"
@@ -138,7 +140,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.repeatPassword ? (
-          <p className={styles.errors}>{errors.repeatPassword}</p>
+          <ErrorParagraph message = {errors.repeatPassword}/>
         ) : null}
         <InputField
           label="userAvatar"
@@ -151,11 +153,9 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.userAvatar ? (
-          <p className={styles.errors}>{errors.userAvatar}</p>
+          <ErrorParagraph message = {errors.userAvatar}/>
         ) : null}
-        <button type="submit" className={styles.button}>
-          Register
-        </button>
+        <SubmitBtn name = 'Register'/>
       </form>
     </>
   );

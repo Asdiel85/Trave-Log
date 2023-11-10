@@ -8,16 +8,6 @@
     align-items: center;
     justify-content: center;
   }
-  
-  button {
-    width: 40%;
-    padding: 10px;
-    background-color: lightseagreen;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
 
   .errors {
     color: red;
