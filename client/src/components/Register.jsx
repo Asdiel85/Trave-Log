@@ -44,7 +44,7 @@ export default function Register() {
   };
 
   const handleChange = (e) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+    setInputFields(inputFields => ({ ...inputFields, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (event) => {
@@ -56,11 +56,11 @@ export default function Register() {
   const finishSubmit = async () => {
     try {
       const response = await userService.register(inputFields);
-      if (response) {
-        errors.apiCall = response;
+      if (!response ||!response.ok) {
+        throw new Error (response)
       }
     } catch (error) {
-      console.log(error);
+      errors.apiCall = error.message;
     }
   };
 
