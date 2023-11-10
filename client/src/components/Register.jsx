@@ -1,7 +1,10 @@
 import styles from './Register.module.css';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as userService from '../service/userService';
+import {handleResponse} from '../utils/handleResponse';
 import InputField from './InputField.jsx';
+import ErrorParagraph from './ErrorParagraph.jsx';
+import SubmitBtn from './SubmitBtn.jsx';
 
 export default function Register() {
   const emailPattern =
@@ -18,7 +21,8 @@ export default function Register() {
   });
 
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
+  const [apiError, setApiError] = useState('');
+  const [submitting, setSubmitting] = useState(false)
 
   const validateValues = (inputValues) => {
     let errors = {};
@@ -44,39 +48,31 @@ export default function Register() {
   };
 
   const handleChange = (e) => {
-    setInputFields(inputFields => ({ ...inputFields, [e.target.name]: e.target.value }));
+    setInputFields((inputFields) => ({
+      ...inputFields,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(validateValues(inputFields));
-    setSubmitting(true);
+    setSubmitting(true)
   };
-
-  const finishSubmit = async () => {
-    try {
-      const response = await userService.register(inputFields);
-      if (!response ||!response.ok) {
-        throw new Error (response)
-      }
-    } catch (error) {
-      errors.apiCall = error.message;
-    }
-  };
-
+  
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      finishSubmit();
+      userService.register(inputFields)
+      .then(response => handleResponse(response))
+      .catch(error => setApiError(error.message))
     }
-  }, [errors]);
+  }, [errors])
 
   return (
     <>
-      {errors.apiCall ? (
-        <p className={styles.errors}>{errors.apiCall}</p>
-      ) : null}
       <form className={styles.login} onSubmit={handleSubmit}>
         <h2>Register</h2>
+      {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
           label="email"
           title="Email"
@@ -87,7 +83,7 @@ export default function Register() {
           value={inputFields.email}
           onChange={handleChange}
         />
-        {errors.email ? <p className={styles.errors}>{errors.email}</p> : null}
+        {errors.email ? <ErrorParagraph message={errors.email} /> : null}
         <InputField
           label="firstName"
           title="First name"
@@ -99,7 +95,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.firstName ? (
-          <p className={styles.errors}>{errors.firstName}</p>
+          <ErrorParagraph message={errors.firstName} />
         ) : null}
         <InputField
           label="lastName"
@@ -111,9 +107,7 @@ export default function Register() {
           value={inputFields.lastName}
           onChange={handleChange}
         />
-        {errors.lastName ? (
-          <p className={styles.errors}>{errors.lastName}</p>
-        ) : null}
+        {errors.lastName ? <ErrorParagraph message={errors.lastName} /> : null}
         <InputField
           label="password"
           title="Password"
@@ -124,9 +118,7 @@ export default function Register() {
           value={inputFields.password}
           onChange={handleChange}
         />
-        {errors.password ? (
-          <p className={styles.errors}>{errors.password}</p>
-        ) : null}
+        {errors.password ? <ErrorParagraph message={errors.password} /> : null}
         <InputField
           label="repeatPassword"
           title="Repeat password"
@@ -138,7 +130,7 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.repeatPassword ? (
-          <p className={styles.errors}>{errors.repeatPassword}</p>
+          <ErrorParagraph message={errors.repeatPassword} />
         ) : null}
         <InputField
           label="userAvatar"
@@ -151,11 +143,9 @@ export default function Register() {
           onChange={handleChange}
         />
         {errors.userAvatar ? (
-          <p className={styles.errors}>{errors.userAvatar}</p>
+          <ErrorParagraph message={errors.userAvatar} />
         ) : null}
-        <button type="submit" className={styles.button}>
-          Register
-        </button>
+        <SubmitBtn name="Register" />
       </form>
     </>
   );

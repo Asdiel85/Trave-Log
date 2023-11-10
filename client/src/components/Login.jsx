@@ -1,5 +1,7 @@
 import styles from './Register.module.css';
 import InputField from './InputField';
+import ErrorParagraph from './ErrorParagraph.jsx';
+import SubmitBtn from './SubmitBtn.jsx';
 import * as userService from '../service/userService'
 import { handleResponse } from '../utils/handleResponse.js';
 import { useState } from 'react';
@@ -51,11 +53,9 @@ export default function Login() {
           onChange={handleChange}
         />
          {error ? (
-        <p>{error}</p>
+        <ErrorParagraph message = {error}/>
       ) : null}
-        <button type="submit" className={styles.button}>
-          Login
-        </button>
+      <SubmitBtn name = 'Login' />
       </form>
     </>
   );

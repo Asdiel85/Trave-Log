@@ -8,8 +8,7 @@ export const register = async (userData) => {
         },
         body: JSON.stringify(userData)
     })
-    const result = await response.json();
-    return result;
+  return response.json();
 }
 
 export const login = async (email, password) => {
