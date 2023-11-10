@@ -1,5 +1,5 @@
 import styles from './Register.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as userService from '../service/userService';
 import {handleResponse} from '../utils/handleResponse';
 import InputField from './InputField.jsx';
@@ -22,6 +22,7 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
+  const [submitting, setSubmitting] = useState(false)
 
   const validateValues = (inputValues) => {
     let errors = {};
@@ -56,17 +57,16 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(validateValues(inputFields));
-    
-    if (Object.keys(errors).length === 0) {
-      try {
-        console.log('try');
-        const response = await userService.register(inputFields);
-        handleResponse(response); 
-      } catch (error) {
-        setApiError(error.message);
-      }
-    }
+    setSubmitting(true)
   };
+  
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitting) {
+      userService.register(inputFields)
+      .then(response => handleResponse(response))
+      .catch(error => setApiError(error.message))
+    }
+  }, [errors])
 
   return (
     <>
