@@ -1,13 +1,8 @@
 const router = require('express').Router();
-const { json } = require('express');
 const userManager = require('../managers/userManager');
 
-router.get('/register', (req, res) => {
-  res.send('Register Page');
-});
-
 router.post('/register', async (req, res) => {
-  const { firstName, lastName, email, password, repeatPassword } = req.body;
+  const { firstName, lastName, email, password, repeatPassword, userAvatar } = req.body;
   try {
     await userManager.register({
       firstName,
@@ -15,6 +10,7 @@ router.post('/register', async (req, res) => {
       email,
       password,
       repeatPassword,
+      userAvatar,
       isAdmin: false,
     });
 
@@ -24,9 +20,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
-  res.send('Login page');
-});
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;

@@ -30,13 +30,11 @@ export default function PostDetails() {
       <Card.Img variant="top" src={post.imageUrl} />
       <Card.Body>
         <Card.Title>Country: {post.country}</Card.Title>
-        <Card.Text>
-         {post.description}
-        </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>City: {post.city}</ListGroup.Item>
         <ListGroup.Item>Cost: {post.cost} Euro</ListGroup.Item>
+        <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
         <Card.Link href="#">Like</Card.Link>

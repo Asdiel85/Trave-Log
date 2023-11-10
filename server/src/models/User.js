@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
+  userAvatar: {
+    type: String,
+    required: [true, 'Avatar is required'],
+    match: [/^(http|https):\/\//, 'Invalid image url!']
+  },
   firstName: {
     type: String,
     required: [true, 'First name is required!'],

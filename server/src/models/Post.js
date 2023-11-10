@@ -13,6 +13,7 @@ const postSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
       required: [true, 'Please enter picture'],
+      match: [/^(http|https):\/\//, 'Invalid image url!']
     },
     cost: {
       type: Number,
