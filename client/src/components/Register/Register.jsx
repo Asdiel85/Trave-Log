@@ -1,7 +1,7 @@
 import styles from './Register.module.css';
 import { useEffect, useState } from 'react';
 import * as userService from '../../service/userService.js';
-import {handleResponse} from '../../utils/handleResponse.js';
+import { handleResponse } from '../../utils/handleResponse.js';
 import InputField from '../InputField/InputField.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
@@ -22,7 +22,7 @@ export default function Register() {
 
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
-  const [submitting, setSubmitting] = useState(false)
+  const [submitting, setSubmitting] = useState(false);
 
   const validateValues = (inputValues) => {
     let errors = {};
@@ -37,9 +37,13 @@ export default function Register() {
     }
     if (!inputValues.firstName) {
       errors.firstName = 'Please enter First name';
+    } else if (inputValues.firstName.length < 3) {
+      errors.firstName = 'First Name should be atleast 3 characters';
     }
     if (!inputValues.lastName) {
       errors.lastName = 'Please enter Last name';
+    } else if (inputValues.lastName.length < 3) {
+      errors.lastName = 'Last Name should be atleast 3 characters';
     }
     if (!inputValues.userAvatar.match(avatarPattern)) {
       errors.userAvatar = 'Invalid image url';
@@ -57,22 +61,23 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(validateValues(inputFields));
-    setSubmitting(true)
+    setSubmitting(true);
   };
-  
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      userService.register(inputFields)
-      .then(response => handleResponse(response))
-      .catch(error => setApiError(error.message))
+      userService
+        .register(inputFields)
+        .then((response) => handleResponse(response))
+        .catch((error) => setApiError(error.message));
     }
-  }, [errors])
+  }, [errors]);
 
   return (
     <>
       <form className={styles.login} onSubmit={handleSubmit}>
         <h2>Register</h2>
-      {apiError ? <ErrorParagraph message={apiError} /> : null}
+        {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
           label="email"
           title="Email"
@@ -113,7 +118,7 @@ export default function Register() {
           title="Password"
           type="password"
           name="password"
-          placeholder="Password is required"
+          placeholder="Minimum 5 characters"
           id="password"
           value={inputFields.password}
           onChange={handleChange}
