@@ -1,5 +1,5 @@
-import PostCard from './PostCard';
-import * as postService from '../service/postService';
+import PostCard from '../PostCard/PostCard';
+import * as postService from '../../service/postService';
 import { useState, useEffect } from 'react';
 
 export default function Feed() {
