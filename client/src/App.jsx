@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './components/Navigation.jsx';
-import Feed from './components/Feed.jsx';
-import Register from './components/Register.jsx';
-import Login from './components/Login.jsx';
-import CreatePost from './components/CreatePost.jsx';
-import ErrorPage from './components/ErrorPage.jsx';
 import styles from './App.module.css';
-import Footer from './components/Footer.jsx';
-import PostDetails from './components/PostDetails.jsx';
+import Navigation from './components/Navigation/Navigation.jsx';
+import Feed from './components/Feed/Feed.jsx';
+import Register from './components/Register/Register.jsx';
+import Login from './components/Login/Login.jsx';
+import CreatePost from './components/CreatePost/CreatePost.jsx';
+import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
+import Footer from './components/Footer/Footer.jsx';
+import PostDetails from './components/PostDetails/PostDetails.jsx';
 
 function App() {
   return (

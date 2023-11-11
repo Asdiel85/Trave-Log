@@ -1,7 +1,7 @@
-import styles from './Register.module.css';
-import InputField from './InputField';
-import SubmitBtn from './SubmitBtn.jsx';
-import * as postService from '../service/postService';
+import styles from './CreatePost.module.css';
+import InputField from '../InputField/InputField.jsx';
+import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
+import * as postService from '../../service/postService.js';
 import { useState } from 'react';
 
 export default function CreatePost() {

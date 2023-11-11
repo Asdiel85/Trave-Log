@@ -1,10 +1,10 @@
 import styles from './Register.module.css';
 import { useEffect, useState } from 'react';
-import * as userService from '../service/userService';
-import {handleResponse} from '../utils/handleResponse';
-import InputField from './InputField.jsx';
-import ErrorParagraph from './ErrorParagraph.jsx';
-import SubmitBtn from './SubmitBtn.jsx';
+import * as userService from '../../service/userService.js';
+import {handleResponse} from '../../utils/handleResponse.js';
+import InputField from '../InputField/InputField.jsx';
+import ErrorParagraph from '../ErrorParagraph/ErrorParagraph';
+import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 
 export default function Register() {
   const emailPattern =

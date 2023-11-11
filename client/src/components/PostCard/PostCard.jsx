@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './PostCard.module.css'
-import heart from '../img/heart.svg'
+import heart from '../../img/heart.svg'
 export default function Post ({userImg, country, imageUrl, _id}) {
     return (
         <article className={styles.card}>

@@ -1,4 +1,4 @@
-import errorPage from '../img/errorPage.png'
+import errorPage from '../../img/errorPage.png'
 import styles from './ErrorPage.module.css'
 
 export default function ErrorPage() {
