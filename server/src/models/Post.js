@@ -18,6 +18,7 @@ const postSchema = new mongoose.Schema(
     cost: {
       type: Number,
       required: [true, 'Please enter cost'],
+      min: [0, 'Cost should be a positive number']
     },
     description: {
       type: String,
