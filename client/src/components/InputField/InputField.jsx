@@ -6,6 +6,7 @@ export default function InputField({
   name,
   placeholder,
   id,
+  error,
   value,
   onChange,
 }) {
@@ -13,7 +14,7 @@ export default function InputField({
     <>
       <label htmlFor={label}>{title}</label>
       <input
-        className={styles.input}
+        className={error ? styles.error : styles.input}
         type={type}
         name={name}
         placeholder={placeholder}
