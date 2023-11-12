@@ -64,12 +64,18 @@ export default function Register() {
     setSubmitting(true);
   };
 
+  async function finnishSubmit() {
+    try {
+      const response = await userService.register(inputFields);
+      await handleResponse(response);
+    } catch (error) {
+      setApiError(error.message);
+    }
+  }
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      userService
-        .register(inputFields)
-        .then((response) => handleResponse(response))
-        .catch((error) => setApiError(error.message));
+      finnishSubmit();
     }
   }, [errors]);
 
@@ -87,7 +93,7 @@ export default function Register() {
           id="email"
           value={inputFields.email}
           onChange={handleChange}
-          error = {errors.email}
+          error={errors.email}
         />
         {errors.email ? <ErrorParagraph message={errors.email} /> : null}
         <InputField
@@ -99,7 +105,7 @@ export default function Register() {
           id="firstName"
           value={inputFields.firstName}
           onChange={handleChange}
-          error = {errors.firstName}
+          error={errors.firstName}
         />
         {errors.firstName ? (
           <ErrorParagraph message={errors.firstName} />
@@ -113,7 +119,7 @@ export default function Register() {
           id="lastName"
           value={inputFields.lastName}
           onChange={handleChange}
-          error = {errors.lastName}
+          error={errors.lastName}
         />
         {errors.lastName ? <ErrorParagraph message={errors.lastName} /> : null}
         <InputField
@@ -125,7 +131,7 @@ export default function Register() {
           id="password"
           value={inputFields.password}
           onChange={handleChange}
-          error = {errors.password}
+          error={errors.password}
         />
         {errors.password ? <ErrorParagraph message={errors.password} /> : null}
         <InputField
@@ -137,7 +143,7 @@ export default function Register() {
           id="repeatPassword"
           value={inputFields.repeatPassword}
           onChange={handleChange}
-          error = {errors.repeatPassword}
+          error={errors.repeatPassword}
         />
         {errors.repeatPassword ? (
           <ErrorParagraph message={errors.repeatPassword} />
@@ -151,7 +157,7 @@ export default function Register() {
           id="userAvatar"
           value={inputFields.userAvatar}
           onChange={handleChange}
-          error = {errors.userAvatar}
+          error={errors.userAvatar}
         />
         {errors.userAvatar ? (
           <ErrorParagraph message={errors.userAvatar} />
