@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
       isAdmin: false,
     });
 
-    res.status(200)
+    res.status(200).json('User registered')
   } catch (error) {
     res.status(400).json(error.message);
   }
