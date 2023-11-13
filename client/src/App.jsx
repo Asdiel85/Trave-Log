@@ -9,10 +9,14 @@ import CreatePost from './components/CreatePost/CreatePost.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
+import { UserContext } from './contexts/AuthContext.js';
+import { useState } from 'react';
 
 function App() {
+  const [loggedUser, setLoggedUser] = useState(null)
   return (
     <>
+    <UserContext.Provider value={[loggedUser, setLoggedUser]}>
       <Navigation />
       <main className={styles.container}>
         <Routes>
@@ -25,6 +29,7 @@ function App() {
         </Routes>
         <Footer />
       </main>
+      </UserContext.Provider>
     </>
   );
 }
