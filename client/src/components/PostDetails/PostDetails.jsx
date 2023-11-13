@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as postService from '../../service/postService';
+import styles from './PostDetails.module.css'
+import heart from '../../img/heart.svg'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -26,7 +28,7 @@ export default function PostDetails() {
   }, [id]);
 
   return (
-    <Card style={{ width: '60%', margin: '0 auto' } }>
+    <Card style={{ width: '60%', margin: '30px auto' } }>
       <Card.Img variant="top" src={post.imageUrl} />
       <Card.Body>
         <Card.Title>Country: {post.country}</Card.Title>
@@ -37,7 +39,7 @@ export default function PostDetails() {
         <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Card.Link href="#">Like</Card.Link>
+      <span>0</span> <img className={styles.cardIcon} src={heart} alt="Heart" />
       </Card.Body>
     </Card>
   );
