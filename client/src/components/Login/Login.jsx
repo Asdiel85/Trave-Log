@@ -2,10 +2,12 @@ import styles from './Login.module.css';
 import InputField from '../InputField/InputField';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
-import * as userService from '../../service/userService.js'
+import * as userService from '../../service/userService.js';
+import { UserContext } from '../../contexts/AuthContext.js';
+import { useContext } from 'react';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [inputFields, setInputFields] = useState({
@@ -13,7 +15,7 @@ export default function Login() {
     password: '',
   });
   const navigate = useNavigate();
-
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [errors, setErrors] = useState('');
   const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState('');
@@ -29,8 +31,8 @@ export default function Login() {
     if (!inputValues.password) {
       errors.password = 'Password is required';
     }
-    return errors
-  }
+    return errors;
+  };
 
   const handleChange = (e) => {
     setInputFields((inputFields) => ({
@@ -38,7 +40,7 @@ export default function Login() {
       [e.target.name]: e.target.value,
     }));
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(validateValues(inputFields));
@@ -47,19 +49,21 @@ export default function Login() {
 
   async function finnishSubmit() {
     try {
-    const response = await userService.login(inputFields)
-     await handleResponse(response)
-     navigate('/')    
+      const response = await userService.login(inputFields);
+      const { userData, token } = await handleResponse(response);
+      setLoggedUser(userData);
+      localStorage.setItem('token', token);
+      navigate('/');
     } catch (error) {
-      setApiError(error.message)
+      setApiError(error.message);
     }
   }
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-     finnishSubmit()
+      finnishSubmit();
     }
-  }, [errors])
+  }, [errors]);
 
   return (
     <>
@@ -75,7 +79,7 @@ export default function Login() {
           id="email"
           value={inputFields.email}
           onChange={handleChange}
-          error = {errors.email}
+          error={errors.email}
         />
         {errors.email ? <ErrorParagraph message={errors.email} /> : null}
         <InputField
@@ -87,10 +91,10 @@ export default function Login() {
           id="password"
           value={inputFields.password}
           onChange={handleChange}
-          error = {errors.password}
+          error={errors.password}
         />
         {errors.password ? <ErrorParagraph message={errors.password} /> : null}
-      <SubmitBtn name = 'Login' />
+        <SubmitBtn name="Login" />
       </form>
     </>
   );
