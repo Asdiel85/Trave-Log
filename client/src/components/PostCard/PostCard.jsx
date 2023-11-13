@@ -13,7 +13,7 @@ export default function Post ({userImg, country, imageUrl, _id}) {
         <img src={imageUrl} alt="Post image" className={styles.postImg} />
         </Link>
        <div className={styles.interaction}>
-        <img className={styles.cardIcon} src={heart} alt="Heart" />
+       <span>0</span> <img className={styles.cardIcon} src={heart} alt="Heart" />
        </div>
         </article>
     )
