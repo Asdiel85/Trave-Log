@@ -31,11 +31,11 @@ New users can register by providing basic information, and existing users can lo
 Travel Experience Sharing
 Users can share their travel experiences by filling out a comprehensive form that includes details such as location, photo, cost and desciption.
 
-SERVER DOCUMENTATION
+# SERVER DOCUMENTATION
 Authentication Controller Documentation
 
-Register User
-POST /auth/register
+# Register User
+# POST /auth/register
 Register a new user with the provided information.
 
 Request
@@ -59,8 +59,8 @@ Success (200):
 Error (400):
 "Error message describing the issue"
 
-Login User
-POST /auth/login
+# Login User
+# POST /auth/login
 Authenticate and log in an existing user with the provided credentials.
 
 Request
@@ -79,9 +79,9 @@ Success (200):
 Error (400):
 "Error message describing the issue"
 
-HOME END POINT
-Get All Posts
-GET /
+# HOME END POINT
+# Get All Posts
+# GET /
 Retrieve all posts available in the system.
 
 Request
