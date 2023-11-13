@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <div className={styles.container}>
+      <main className={styles.container}>
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/register" element={<Register />} />
@@ -24,7 +24,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

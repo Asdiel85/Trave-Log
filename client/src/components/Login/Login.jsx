@@ -5,12 +5,14 @@ import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import * as userService from '../../service/userService.js'
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 export default function Login() {
   const [inputFields, setInputFields] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState('');
   const [apiError, setApiError] = useState('');
@@ -47,6 +49,7 @@ export default function Login() {
     try {
     const response = await userService.login(inputFields)
      await handleResponse(response)
+     navigate('/')    
     } catch (error) {
       setApiError(error.message)
     }
@@ -54,7 +57,7 @@ export default function Login() {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-     finnishSubmit()    
+     finnishSubmit()
     }
   }, [errors])
 

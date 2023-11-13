@@ -4,7 +4,7 @@
     background-color: white;
     max-width: 600px;
     width: 100%;
-    margin: 0 auto 30px;
+    margin: 30px auto;
   }
   a {
     margin: 0;
@@ -16,15 +16,6 @@
     padding: 5px;
     font-weight: 500;
     font-size: 14px;
-  }
-  
-  .userImg {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    cursor: pointer;
   }
   
   .postImg{

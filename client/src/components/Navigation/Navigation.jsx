@@ -1,51 +1,38 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import { Link } from 'react-router-dom';
-import styles from './Navigation.module.css';
 
 export default function Navigation() {
   return (
-    <nav className={styles.navigation}>
-      <ul className={styles.links}>
-          <Link to={'/'}>
-            <div className={styles.title}>Travel Log</div>
-          </Link>
-        <div className={styles.icons}>
-          <Link to={'/'}>
-            <li>
-              <span>Dashboard</span>
-            </li>
-          </Link>
-          <Link to={'/create'}>
-            <li>
-              <span>Create Post</span>
-            </li>
-          </Link>
-          <Link>
-            <li>
-              <span>Profile</span>
-            </li>
-          </Link>
-          <Link to={'/login'}>
-            <li>
-              <span>Login</span>
-            </li>
-          </Link>
-          <Link to={'/logout'}>
-            <li>
-              <span>Logout</span>
-            </li>
-          </Link>
-          <Link to={'/register'}>
-            <li>
-              <span>Register</span>
-            </li>
-          </Link>
-          <li>
-            <Link>
-              <span>account_circle</span>
-            </Link>
-          </li>
-        </div>
-      </ul>
-    </nav>
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+      <Container>
+        <Navbar.Brand as={Link} to={'/'}>
+          Travel Log
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto"></Nav>
+          <Nav>
+            <Nav.Link as={Link} to={'/login'}>
+              Login
+            </Nav.Link>
+            <Nav.Link as={Link} to={'/register'}>
+              Register
+            </Nav.Link>
+            <NavDropdown title ={<UserAvatar userAvatar = {"https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"}/>} id="collapsible-nav-dropdown">
+              <NavDropdown.Item as={Link} to={'/create'}>
+                Create Post
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to={'/logout'}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }

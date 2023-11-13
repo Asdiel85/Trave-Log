@@ -1,5 +1,6 @@
 import styles from './Register.module.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import InputField from '../InputField/InputField.jsx';
@@ -19,6 +20,7 @@ export default function Register() {
     repeatPassword: '',
     userAvatar: '',
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
@@ -68,11 +70,12 @@ export default function Register() {
     try {
       const response = await userService.register(inputFields);
       await handleResponse(response);
+      navigate('/login')
     } catch (error) {
       setApiError(error.message);
     }
   }
-
+  
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finnishSubmit();
