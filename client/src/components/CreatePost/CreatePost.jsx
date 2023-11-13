@@ -5,6 +5,7 @@ import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom'
 
 export default function CreatePost() {
   const imagePattern = /^(http|https):\/\//;
@@ -16,6 +17,7 @@ export default function CreatePost() {
     description: '',
   });
 
+  const navigate = useNavigate()
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -64,6 +66,7 @@ export default function CreatePost() {
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finnishSubmit();
+      navigate('/')
     }
   }, [errors]);
 
