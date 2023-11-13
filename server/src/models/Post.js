@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema(
   {
+    userAvatar: {
+      type: String,
+    },
     country: {
       type: String,
       required: [true, 'Please enter country'],

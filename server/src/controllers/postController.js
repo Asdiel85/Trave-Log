@@ -14,6 +14,7 @@ router.post('/create', routeGuard, async (req, res) => {
       cost,
       description,
       owner: req.user._id,
+      userAvatar: req.user.userAvatar
     });
     res.status(201).json(post);
   } catch (error) {
