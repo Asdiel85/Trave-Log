@@ -6,16 +6,22 @@ export const getAllPosts = async () => {
     return result;
 }
 
+function getToken() {
+    return 'Bearer '  + localStorage.getItem('token')
+}
+
 export const getPostDetails = async (id) => {
     const response = await fetch(`${BASE_URL}${POSTS}/${id}`)
    return response;
 }
 
 export const createPost  = async (postData) => {
+    const token = getToken()
     const response = await fetch(`${BASE_URL}${CREATE_POST}`, {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            'Authorization': getToken()
         },
         body: JSON.stringify(postData)
     })

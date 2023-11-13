@@ -6,9 +6,16 @@ import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import { UserContext } from '../../contexts/AuthContext.js';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
+  const navigate = useNavigate()
   const [loggedUser, setLoggedUser] = useContext(UserContext);
+  
+  const onLogout  = () => {
+    setLoggedUser(null)
+    navigate('/')
+  }
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
@@ -37,7 +44,7 @@ export default function Navigation() {
                 <NavDropdown.Item as={Link} to={'/create'}>
                   Create Post
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={'/logout'}>
+                <NavDropdown.Item onClick={onLogout}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
