@@ -54,9 +54,9 @@ Body:
   "isAdmin": false
 }
 Response
-Success (200):
+# Success (200):
 "User registered"
-Error (400):
+# Error (400):
 "Error message describing the issue"
 
 # Login User
@@ -74,9 +74,9 @@ Body:
   "password": "securePassword123"
 }
 Response
-Success (200):
+# Success (200):
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-Error (400):
+# Error (400):
 "Error message describing the issue"
 
 # HOME END POINT
@@ -90,7 +90,7 @@ Endpoint: /posts
 Headers:
 Content-Type: application/json
 Response
-Success (200):
+# Success (200):
 [
   {
     "postId": "1",
@@ -117,6 +117,6 @@ Success (200):
   // ... more posts
 ]
 
-Error (400):
+# Error (400):
 "Error message describing the issue"
 
