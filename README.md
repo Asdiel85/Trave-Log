@@ -1,7 +1,12 @@
-
 # Welcome to Travel Log Web App!
 
 This platform allows users to register and share their travel experiences. Whether you're a seasoned globetrotter or a weekend explorer, this app provides a space to document and discover amazing journeys.
+
+## Quick Links
+
+- [Authentication Controller Documentation](#authentication-controller-documentation)
+- [Posts Controller Documentation](#posts-controller-documentation)
+- [User Controller Documentation](#user-controller-documentation)
 
 ## Getting Started
 
@@ -23,11 +28,6 @@ To get started with Travel Log Web App, follow these simple steps:
   - `cd client`
   - `npm run dev`
 
-Quick Links
-Authentication Controller Documentation
-Posts Controller Documentation
-User Controller Documentation
-
 ## User Registration/Login
 
 - Easily create an account or log in using existing credentials.
@@ -46,7 +46,7 @@ Users can share their travel experiences by filling out a comprehensive form tha
 
 # SERVER DOCUMENTATION
 
-## [Authentication Controller Documentation](#authentication-controller-documentation)
+## Authentication Controller Documentation
 
 ### Register User
 
@@ -99,7 +99,7 @@ Retrieve all posts available in the system.
 
 # Travel Experience Sharing Web App
 
-## [Posts Controller](#posts-controller)
+## Posts Controller Documentation
 
 The Posts Controller provides endpoints for managing travel posts on the platform.
 
@@ -164,7 +164,7 @@ Edit an existing travel post.
 - Success (200): Updated post object
 - Error (401): "Error message describing the issue"
 
-# [User Controller Documentation](#user-controller-documentation)
+## User Controller Documentation
 
 The User Controller provides endpoints for managing user information on the platform.
 
@@ -228,7 +228,3 @@ Delete a user.
 **Response:**
 - Success (200): "User Deleted"
 - Error (401): "Error message describing the issue"
-
----
-
-Now you can use the quick links to navigate directly to the documentation for each controller.
