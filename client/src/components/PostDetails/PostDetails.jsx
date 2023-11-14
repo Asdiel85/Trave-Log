@@ -7,6 +7,7 @@ import styles from './PostDetails.module.css';
 import heart from '../../img/heart.svg';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -42,13 +43,17 @@ export default function PostDetails() {
         <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        {loggedUser ? (
-          <>
-            {' '}
-            <span>0</span>{' '}
-            <img className={styles.cardIcon} src={heart} alt="Heart" />
-          </>
-        ) : null}
+      {loggedUser ? (
+        <div className={styles.interaction}>
+          <span>0</span>
+          {loggedUser.id !== post.owner ? (
+            <>
+              <img className={styles.cardIcon} src={heart} alt="Heart" />
+            </>
+          ) : null}
+          {loggedUser.id === post.owner ? <EditDeleteBtns /> : null}
+        </div>
+      ) : null}
       </Card.Body>
     </Card>
   );
