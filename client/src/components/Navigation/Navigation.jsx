@@ -45,6 +45,9 @@ export default function Navigation() {
                 <NavDropdown.Item as={Link} to={'/create'}>
                   Create Post
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={`/users/${loggedUser.id}/details`}>
+                  Profile
+                </NavDropdown.Item>
                 <NavDropdown.Item onClick={onLogout}>
                   Logout
                 </NavDropdown.Item>
