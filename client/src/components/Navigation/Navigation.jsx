@@ -18,7 +18,7 @@ export default function Navigation() {
     navigate('/')
   }
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar sticky="top" collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand as={Link} to={'/'}>
           Travel Log
