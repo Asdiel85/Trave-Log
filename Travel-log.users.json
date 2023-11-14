@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "65522c9e079bdf891b11fb5b"
+  },
+  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "mghristov85@gmail.com",
+  "password": "$2b$10$P7nqAzUsEKj3aHLEtNuwyuAfRGkdGVdfJB8H8ApMUsZHPnOd1QFhy",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-13T14:03:10.232Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-13T14:03:10.232Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65537839d3f3d848b2f14dd9"
+  },
+  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
+  "firstName": "Martin2",
+  "lastName": "Hristov2",
+  "email": "mghristov851@gmail.com",
+  "password": "$2b$10$sWNgDzEjPoDH4SmGT.hyd.DiaGC83t2uwfQi3xTq0GhsYBswf.pka",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-14T13:38:01.988Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-14T13:38:01.988Z"
+  },
+  "__v": 0
+}]
