@@ -23,6 +23,7 @@ export default function Navigation() {
         <Navbar.Brand as={Link} to={'/'}>
           Travel Log
         </Navbar.Brand>
+        <Nav.Link as={Link} to={'/'}>Dashboard</Nav.Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
