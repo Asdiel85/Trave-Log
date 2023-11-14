@@ -23,6 +23,11 @@ To get started with Travel Log Web App, follow these simple steps:
   - `cd client`
   - `npm run dev`
 
+Quick Links
+Authentication Controller Documentation
+Posts Controller Documentation
+User Controller Documentation
+
 ## User Registration/Login
 
 - Easily create an account or log in using existing credentials.
