@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "655361ccd3f3d848b2f14d4e"
+  },
+  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
+  "country": "Thailand",
+  "city": "Bangkok",
+  "imageUrl": "https://a.cdn-hotels.com/gdcs/production172/d459/3af9262b-3d8b-40c6-b61d-e37ae1aa90aa.jpg",
+  "cost": 5000,
+  "description": "Great country with many places to visit",
+  "owner": {
+    "$oid": "65522c9e079bdf891b11fb5b"
+  },
+  "createdAt": {
+    "$date": "2023-11-14T12:02:20.919Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-14T12:02:20.919Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655376e8d3f3d848b2f14dd0"
+  },
+  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
+  "country": "Bulgaria",
+  "city": "Burgas",
+  "imageUrl": "https://static.blitz.bg/documents/thumbnails/730/201801/1515958573-1.jpg",
+  "cost": 22222,
+  "description": "The best place in the country",
+  "owner": {
+    "$oid": "65522c9e079bdf891b11fb5b"
+  },
+  "createdAt": {
+    "$date": "2023-11-14T13:32:24.463Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-14T13:32:24.463Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65537888d3f3d848b2f14ddf"
+  },
+  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
+  "country": "Azeroth",
+  "city": "Storwind",
+  "imageUrl": "https://dotesports.com/wp-content/uploads/2023/04/WoW-StormwindOverhead.png",
+  "cost": 20000,
+  "description": "The best place to be in Azeroth",
+  "owner": {
+    "$oid": "65537839d3f3d848b2f14dd9"
+  },
+  "createdAt": {
+    "$date": "2023-11-14T13:39:20.228Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-14T13:39:20.228Z"
+  },
+  "__v": 0
+}]

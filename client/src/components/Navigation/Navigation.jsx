@@ -18,11 +18,12 @@ export default function Navigation() {
     navigate('/')
   }
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar sticky="top" collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand as={Link} to={'/'}>
           Travel Log
         </Navbar.Brand>
+        <Nav.Link as={Link} to={'/'}>Dashboard</Nav.Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
@@ -44,6 +45,9 @@ export default function Navigation() {
               >
                 <NavDropdown.Item as={Link} to={'/create'}>
                   Create Post
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={`/users/${loggedUser.id}/details`}>
+                  Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={onLogout}>
                   Logout
