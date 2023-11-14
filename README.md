@@ -1,6 +1,11 @@
 # Welcome to Travel Log Web App!
 
 This platform allows users to register and share their travel experiences. Whether you're a seasoned globetrotter or a weekend explorer, this app provides a space to document and discover amazing journeys.
+Guest users have access to Dashboard and posts details but cannot interact with them, they can login or register.
+Logged in users can create,edit and delete posts(only if they are owners).
+Not owners will be albe to like and dislike(only if it's been liked before) post.(It is not implemented yet)
+There are two json files extracted from MongoDBCompas with users and posts for testing.
+The password for all the users is: 11111
 
 ## Quick Links
 
