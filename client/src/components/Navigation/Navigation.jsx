@@ -27,6 +27,7 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
+          {loggedUser ? <UserAvatar userAvatar={loggedUser.avatar} id={loggedUser.id} /> : null}
           <Nav>
             {loggedUser ? null : (
               <>
@@ -39,10 +40,7 @@ export default function Navigation() {
               </>
             )}
             {loggedUser ? (
-              <NavDropdown
-                title={<UserAvatar userAvatar={loggedUser.avatar} />}
-                id="collapsible-nav-dropdown"
-              >
+              <NavDropdown>
                 <NavDropdown.Item as={Link} to={'/create'}>
                   Create Post
                 </NavDropdown.Item>

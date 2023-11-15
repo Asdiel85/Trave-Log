@@ -1,10 +1,11 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as userService from '../../service/userService';
 import { handleResponse } from '../../utils/handleResponse';
+import Interaction from '../Interaction/Interaction.jsx';
+
 
 export default function UserProfile() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ useEffect(() => {
 },[id])
    
   return (
-    <Card style={{'max-width':'500px', width: '100%', margin: '30px auto' }}>
+    <Card style={{'maxWidth':'500px', width: '100%', margin: '30px auto' }}>
     <Card.Img variant="top" src={user.userAvatar} />
     <Card.Body>
       <Card.Title>{user.firstName} {user.lastName}</Card.Title>
@@ -29,10 +30,8 @@ useEffect(() => {
     <ListGroup className="list-group-flush">
       <ListGroup.Item>Email: {user.email}</ListGroup.Item>
       <ListGroup.Item>Posts: </ListGroup.Item>
-    </ListGroup>
-    <Card.Body style={{display: 'flex', 'justify-content': 'space-between'}}>
-      <EditDeleteBtns />
-    </Card.Body>
+    </ListGroup>  
+        <Interaction id={user._id} />
   </Card>
   );
 }
