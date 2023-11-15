@@ -9,6 +9,7 @@ import CreatePost from './components/CreatePost/CreatePost.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
+import UserProfile from './components/UserProfile/UserProfile.jsx'
 import { UserContext } from './contexts/AuthContext.js';
 import { useState } from 'react';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Feed />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path ="/user/:id/details" element = {<UserProfile/>} />
           <Route path="/create" element={<CreatePost />} />
           <Route path="/post-details/:id" element={<PostDetails />} />
           <Route path="*" element={<ErrorPage />} />

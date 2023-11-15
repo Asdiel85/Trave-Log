@@ -12,6 +12,11 @@ exports.getPosts = () => {
   return result;
 };
 
+exports.getUserPosts = (userId) => {
+ const posts = Post.find({owner: userId})
+ return posts;
+}
+
 exports.getById = (postId) => Post.findById(postId);
 
 exports.updatePost = (postId, data) =>
