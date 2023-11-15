@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { adminGuard, routeGuard } = require('../middlewares/authMiddleware');
 const userManager = require('../managers/userManager');
+const postManager = require('../managers/postManager')
 
 router.get('/', adminGuard, async (req, res) => {
   try {
@@ -19,6 +20,15 @@ router.get('/:userId', routeGuard, async (req, res) => {
     res.status(401).json(error.message);
   }
 });
+
+router.get('/:userId/posts', routeGuard, async (req, res) => {
+  try {
+    const posts = await postManager.getUserPosts(req.user.id)
+    res.status(200).json(posts)
+  } catch (error) {
+    res.status(401).json(error.message);
+  }
+})
 
 router.put('/:userId/edit', routeGuard, async (req, res) => {
   try {
