@@ -1,6 +1,10 @@
 import styles from './UserAvatar.module.css'
-export default function UserAvatar({userAvatar}) {
+import { Link } from 'react-router-dom'
+
+export default function UserAvatar({userAvatar, id}) {
     return (
+       <Link to={`/users/${id}/details`}>
         <img src={userAvatar} alt="User Avatar" className={styles.userAvatar} />
+        </Link>
     )
 }

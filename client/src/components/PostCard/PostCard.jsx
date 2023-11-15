@@ -10,7 +10,7 @@ export default function Post({ userAvatar, country, imageUrl, _id, owner }) {
   return (
     <article className={styles.card}>
       <div className={styles.info}>
-        <UserAvatar userAvatar={userAvatar} />
+        <UserAvatar id={owner} userAvatar={userAvatar} />
         <span>{country}</span>
       </div>
       <Link to={`/post-details/${_id}`}>

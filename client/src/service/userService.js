@@ -1,4 +1,5 @@
-import {BASE_URL, LOGIN, REGISTER} from '../utils/constants'
+import {BASE_URL, LOGIN, REGISTER, USERS} from '../utils/constants'
+import getToken from '../utils/token';
 
 export const register = async (userData) => {
     const response = await fetch(`${BASE_URL}${REGISTER}`, {
@@ -20,4 +21,15 @@ export const login = async (email, password) => {
         body: JSON.stringify(email, password)
     })
    return response;
+}
+
+export const getOne = async (id) => {
+    const response = await fetch(`${BASE_URL}${USERS}/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getToken()
+
+        }
+    })
+    return response;
 }

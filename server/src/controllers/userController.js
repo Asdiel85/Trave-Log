@@ -12,13 +12,9 @@ router.get('/', adminGuard, async (req, res) => {
 });
 
 router.get('/:userId', routeGuard, async (req, res) => {
-  try {
-    if (req.user.id === req.params.userId || req.user.isAdmin) {
+  try {   
       const user = await userManager.getById(req.params.userId);
       res.status(200).json(user);
-    } else {
-      throw new Error('You are not authorized');
-    }
   } catch (error) {
     res.status(401).json(error.message);
   }
