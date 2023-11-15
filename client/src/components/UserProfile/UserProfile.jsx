@@ -22,7 +22,7 @@ useEffect(() => {
 },[id])
    
   return (
-    <Card style={{'max-width':'500px', width: '100%', margin: '30px auto' }}>
+    <Card style={{'maxWidth':'500px', width: '100%', margin: '30px auto' }}>
     <Card.Img variant="top" src={user.userAvatar} />
     <Card.Body>
       <Card.Title>{user.firstName} {user.lastName}</Card.Title>
