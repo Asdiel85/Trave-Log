@@ -24,3 +24,14 @@ export const createPost  = async (postData) => {
     })
     return response;
 }
+
+export const deletePost = async (postId) => {
+    const token = getToken();
+    await fetch(`${BASE_URL}${POSTS}/${postId}`,{
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+    })
+}

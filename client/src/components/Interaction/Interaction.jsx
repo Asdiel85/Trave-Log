@@ -4,7 +4,7 @@ import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 import heart from '../../img/heart.svg';
 import styles from './Interaction.module.css'
 
-export default function Interaction({id}) {
+export default function Interaction({id, item, confirmTask}) {
     const [loggedUser, setLoggedUser] = useContext(UserContext)
     return (
         <>
@@ -18,7 +18,7 @@ export default function Interaction({id}) {
                 </>
               ) : null}
               </div>
-              {loggedUser.id === id ? <EditDeleteBtns /> : null}
+              {loggedUser.id === id ? <EditDeleteBtns item={item} confirmTask={confirmTask} /> : null}
             </div>
           ) : null}
           </>

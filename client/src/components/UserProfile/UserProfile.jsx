@@ -40,7 +40,7 @@ useEffect(() => {
       <ListGroup.Item>Email: {user.email}</ListGroup.Item>
       <ListGroup.Item as={Button} onClick={hadnleShowPostsClick}>Show Posts</ListGroup.Item>
     </ListGroup>  
-        <Interaction id={user._id} />
+        <Interaction id={user._id} item= "user" />
   </Card>
     {showPosts && <UserPosts id ={user._id}/>}
     </>

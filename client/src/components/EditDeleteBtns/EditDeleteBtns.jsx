@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import ConfirmModal from '../ConfirmModal/ConfirmModal.jsx';
 import { useState } from 'react';
 
-export default function EditDeleteBtns({edit, remove}) {
+export default function EditDeleteBtns({edit, remove, item, confirmTask}) {
   const [showModal, setShowModal] = useState(false)
   const handleShowModalClick = (e) => {
     e.preventDefault()
@@ -16,7 +16,7 @@ export default function EditDeleteBtns({edit, remove}) {
         <> 
           <Button onClick={edit} variant="warning" size='sm'>Edit</Button>
           <Button onClick={handleShowModalClick} variant="danger" size='sm'>Delete</Button> 
-          {showModal && (<ConfirmModal show = {showModal} handleClose = {closeModal}/>)}
+          {showModal && (<ConfirmModal item={item} show = {showModal} confirmTask={confirmTask} handleClose = {closeModal}/>)}
         </>
       );
 }
