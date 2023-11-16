@@ -27,7 +27,7 @@ export const getOne = async (id) => {
   const response = await fetch(`${BASE_URL}${USERS}/${id}`, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: getToken(),
+      'Authorization': getToken(),
     },
   });
   return response;
@@ -37,7 +37,7 @@ export const getUserPosts = async (id) => {
   const response = await fetch(`${BASE_URL}${USERS}/${id}/${POSTS}`, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: getToken(),
+      'Authorization': getToken(),
     },
   });
   return response;

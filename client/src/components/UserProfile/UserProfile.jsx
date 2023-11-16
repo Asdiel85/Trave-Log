@@ -17,7 +17,7 @@ useEffect(() => {
    .then(response => handleResponse(response))
    .then(setUser)
    .catch(error => {
-    navigate('*')
+    navigate('/login')
    })
 },[id])
    
