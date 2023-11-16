@@ -1,8 +1,9 @@
 import * as userService from '../../service/userService.js';
-import handleResponse from '../../utils/handleResponse.js';
+import {handleResponse} from '../../utils/handleResponse.js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PostCard from './PostCard/PostCard';
+import PostCard from '../PostCard/PostCard.jsx';
+
 export default function UserPosts(id) {
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
