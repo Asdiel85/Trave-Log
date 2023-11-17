@@ -1,4 +1,4 @@
-import {BASE_URL, CREATE_POST, POSTS} from '../utils/constants'
+import {BASE_URL, CREATE_POST, POSTS, LIKES} from '../utils/constants'
 import getToken from '../utils/token';
 
 export const getAllPosts = async () => {
@@ -25,8 +25,20 @@ export const createPost  = async (postData) => {
 }
 
 export const likePost = async (postId, userId) => {
-    const response = await fetch(`${BASE_URL}${POSTS}/${postId}`, {
+    const response = await fetch(`${BASE_URL}${POSTS}/${postId}/${LIKES}`, {
         method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+        body: JSON.stringify({userId})
+    })
+    return response;
+}
+
+export const unLikePost = async (postId, userId) => {
+    const response = await fetch(`${BASE_URL}${POSTS}/${postId}/${LIKES}`, {
+        method: 'DELETE',
         headers: {
             'Content-type': 'application/json',
             'Authorization': getToken()

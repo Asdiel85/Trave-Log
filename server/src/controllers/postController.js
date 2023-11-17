@@ -30,11 +30,22 @@ router.get('/:postId', async (req, res) => {
   }
 });
 
-router.post('/:postId', routeGuard, async (req, res) => {
+router.post('/:postId/likes', routeGuard, async (req, res) => {
   try {
     const userId = req.user.id;
     const postId = req.params.postId;
    const post = await postManager.likePost(postId, userId);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(401).json(error.message);
+  }
+});
+
+router.delete('/:postId/likes', routeGuard, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const postId = req.params.postId;
+   const post = await postManager.unLikePost(postId, userId);
     res.status(200).json(post);
   } catch (error) {
     res.status(401).json(error.message);

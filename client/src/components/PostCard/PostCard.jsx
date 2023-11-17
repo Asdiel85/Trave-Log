@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 import styles from './PostCard.module.css';
 import * as postService from '../../service/postService.js';
 import heart from '../../img/heart.svg';
@@ -18,19 +19,31 @@ export default function Post({
   likes,
   liked,
 }) {
+  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [likePost, setLikePost] = useState(liked);
-  const [likesCount, setLikesCount] = useState(likes.length)
+  const [likesCount, setLikesCount] = useState(likes.length);
 
   const handleLikePostClick = async () => {
     try {
       await postService.likePost(_id, loggedUser.id);
       setLikePost(true);
-      setLikesCount(prev => prev + 1)
+      setLikesCount((prev) => prev + 1);
     } catch (error) {
-      console.log(error);
+      navigate('*');
     }
   };
+
+  const handleUnlikeClick = async () => {
+    try {
+      await postService.unLikePost(_id, loggedUser.id);
+      setLikePost(false);
+      setLikesCount((prev) => prev - 1);
+    } catch (error) {
+      navigate('*');
+    }
+  };
+
   return (
     <article className={styles.card}>
       <div className={styles.info}>
@@ -47,7 +60,12 @@ export default function Post({
             {loggedUser.id !== owner ? (
               <>
                 {likePost ? (
-                  <img src={heartFilled} alt="Filled Heart" />
+                  <img
+                    onClick={handleUnlikeClick}
+                    className={styles.cardIcon}
+                    src={heartFilled}
+                    alt="Filled Heart"
+                  />
                 ) : (
                   <img
                     onClick={handleLikePostClick}
