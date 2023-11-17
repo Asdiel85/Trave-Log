@@ -1,63 +1,264 @@
 [{
   "_id": {
-    "$oid": "655361ccd3f3d848b2f14d4e"
-  },
-  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
-  "country": "Thailand",
-  "city": "Bangkok",
-  "imageUrl": "https://a.cdn-hotels.com/gdcs/production172/d459/3af9262b-3d8b-40c6-b61d-e37ae1aa90aa.jpg",
-  "cost": 5000,
-  "description": "Great country with many places to visit",
-  "owner": {
-    "$oid": "65522c9e079bdf891b11fb5b"
-  },
-  "createdAt": {
-    "$date": "2023-11-14T12:02:20.919Z"
-  },
-  "updatedAt": {
-    "$date": "2023-11-14T12:02:20.919Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "655376e8d3f3d848b2f14dd0"
-  },
-  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
-  "country": "Bulgaria",
-  "city": "Burgas",
-  "imageUrl": "https://static.blitz.bg/documents/thumbnails/730/201801/1515958573-1.jpg",
-  "cost": 22222,
-  "description": "The best place in the country",
-  "owner": {
-    "$oid": "65522c9e079bdf891b11fb5b"
-  },
-  "createdAt": {
-    "$date": "2023-11-14T13:32:24.463Z"
-  },
-  "updatedAt": {
-    "$date": "2023-11-14T13:32:24.463Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65537888d3f3d848b2f14ddf"
+    "$oid": "65579776286ee71f5cbf1021"
   },
   "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
-  "country": "Azeroth",
-  "city": "Storwind",
-  "imageUrl": "https://dotesports.com/wp-content/uploads/2023/04/WoW-StormwindOverhead.png",
-  "cost": 20000,
-  "description": "The best place to be in Azeroth",
+  "country": "Usa",
+  "city": "Portland",
+  "imageUrl": "https://media.timeout.com/images/105937857/750/562/image.jpg",
+  "cost": 6983,
+  "description": "Portland is known for many things: its eccentric culture, its incredibly creative restaurants its theater and arts scene, and its outdoor beauty top the list of reasons to visit.",
+  "likes": [],
   "owner": {
-    "$oid": "65537839d3f3d848b2f14dd9"
+    "$oid": "65579551286ee71f5cbf0fff"
   },
   "createdAt": {
-    "$date": "2023-11-14T13:39:20.228Z"
+    "$date": "2023-11-17T16:40:22.748Z"
   },
   "updatedAt": {
-    "$date": "2023-11-14T13:39:20.228Z"
+    "$date": "2023-11-17T16:40:22.748Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655797f0286ee71f5cbf1031"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkD0mtfLvOHjjnce6_tqQ9uvs-3ZZ1shUs3Nkr3OkQ&s",
+  "country": "Usa",
+  "city": "Boston",
+  "imageUrl": "https://media.timeout.com/images/105483072/750/562/image.jpg",
+  "cost": 7534,
+  "description": "History and modernity are joined at the hip in Boston, one of America’s first big cities and still one of its best.",
+  "likes": [],
+  "owner": {
+    "$oid": "65579582286ee71f5cbf100b"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:42:24.080Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:42:24.080Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6557982f286ee71f5cbf1039"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLDAcdzLQul2HdnF9ZUYKN9ctlbAXqxIfstcgQk3Fk0g&s",
+  "country": "Usa",
+  "city": "San Francisco",
+  "imageUrl": "https://media.timeout.com/images/106030303/750/562/image.jpg",
+  "cost": 8965,
+  "description": "San Francisco, a beautiful city built on massive hills and surrounded by water, is a place that marches to the beat of its own drum.",
+  "likes": [],
+  "owner": {
+    "$oid": "655795a5286ee71f5cbf100e"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:43:27.038Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:43:27.038Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6557985c286ee71f5cbf1041"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHbHzxoFS1A07fherzlWV9hns9YzHOw&s",
+  "country": "Usa",
+  "city": "Seatle",
+  "imageUrl": "https://media.timeout.com/images/106030305/750/562/image.jpg",
+  "cost": 5678,
+  "description": "From its emerald parks to the endless views of Puget Sound, Seattle is the crowning jewel of the Pacific Northwest.",
+  "likes": [],
+  "owner": {
+    "$oid": "655795e0286ee71f5cbf1014"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:44:12.834Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:44:12.834Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655798ac286ee71f5cbf104f"
+  },
+  "userAvatar": "https://cdn3.vectorstock.com/i/1000x1000/71/17/cool-girl-avatar-vector-30657117.jpg",
+  "country": "Usa",
+  "city": "Charleston",
+  "imageUrl": "https://media.timeout.com/images/105483065/750/562/image.jpg",
+  "cost": 5678,
+  "description": "Charleston is truly one of America’s great metropolises, steeped in the history of the nation",
+  "likes": [],
+  "owner": {
+    "$oid": "655795fb286ee71f5cbf1017"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:45:32.487Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:45:32.487Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655798e2286ee71f5cbf1057"
+  },
+  "userAvatar": "https://pub-static.fotor.com/assets/projects/pages/6e4ddb5c7be54c0da24d5366f5fa2012/fotor-af3569a3f1a343a59dc4b0a263091b45.jpg",
+  "country": "Usa",
+  "city": "New Orleans",
+  "imageUrl": "https://media.timeout.com/images/105483062/750/562/image.jpg",
+  "cost": 5323,
+  "description": "After 300 years of existence, New Orleans is in the midst of a renaissance—except for the streets, which are the bumpiest you've ever encountered in a major metropolis.",
+  "likes": [],
+  "owner": {
+    "$oid": "6557963c286ee71f5cbf101a"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:46:26.468Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:46:26.468Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579951286ee71f5cbf1073"
+  },
+  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
+  "country": "Usa",
+  "city": "Milwaukee",
+  "imageUrl": "https://media.timeout.com/images/105483071/750/562/image.jpg",
+  "cost": 32423,
+  "description": "You probably didn’t know that Milwaukee holds the world’s largest music festival, Summerfest, over three consecutive weekends in June and July. ",
+  "likes": [],
+  "owner": {
+    "$oid": "65579551286ee71f5cbf0fff"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:48:17.892Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:48:17.892Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6557998d286ee71f5cbf107b"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLDAcdzLQul2HdnF9ZUYKN9ctlbAXqxIfstcgQk3Fk0g&s",
+  "country": "Usa",
+  "city": "Salt Lake City",
+  "imageUrl": "https://media.timeout.com/images/106030301/750/562/image.jpg",
+  "cost": 5453,
+  "description": "No matter where you are in Salt Lake City, the snowcapped Rocky Mountains are never out of sight. ",
+  "likes": [],
+  "owner": {
+    "$oid": "655795a5286ee71f5cbf100e"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:49:17.406Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:49:17.406Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655799fb286ee71f5cbf1089"
+  },
+  "userAvatar": "https://www.shutterstock.com/image-vector/african-bearded-man-wearing-tshirt-260nw-1476685571.jpg",
+  "country": "Usa",
+  "city": "Chicago",
+  "imageUrl": "https://media.timeout.com/images/105483069/750/562/image.jpg",
+  "cost": 4533,
+  "description": "Frank Lloyd Wright buildings, deep-dish pizza, and the Cubbies: just three of the wonderful things that put Chicago on the world’s radar.",
+  "likes": [],
+  "owner": {
+    "$oid": "655795c6286ee71f5cbf1011"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:51:07.560Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:51:07.560Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579a33286ee71f5cbf109c"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHbHzxoFS1A07fherzlWV9hns9YzHOw&s",
+  "country": "Usa",
+  "city": "Los Angeles",
+  "imageUrl": "https://media.timeout.com/images/105483063/750/562/image.jpg",
+  "cost": 8876,
+  "description": "Sun, sand, and movies (in which the city is often the star) make Los Angeles a place the world wants to see in real life. ",
+  "likes": [],
+  "owner": {
+    "$oid": "655795e0286ee71f5cbf1014"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:52:03.129Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:52:03.129Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579a9e286ee71f5cbf10aa"
+  },
+  "userAvatar": "https://cdn3.vectorstock.com/i/1000x1000/71/17/cool-girl-avatar-vector-30657117.jpg",
+  "country": "Usa",
+  "city": "Nashville ",
+  "imageUrl": "https://media.timeout.com/images/105483074/750/562/image.jpg",
+  "cost": 4532,
+  "description": "Honky-tonks and museums might not seem to go together, but their marriage in Nashville is a strong one indeed.",
+  "likes": [],
+  "owner": {
+    "$oid": "655795fb286ee71f5cbf1017"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:53:50.525Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:53:50.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579ad6286ee71f5cbf10b8"
+  },
+  "userAvatar": "https://pub-static.fotor.com/assets/projects/pages/6e4ddb5c7be54c0da24d5366f5fa2012/fotor-af3569a3f1a343a59dc4b0a263091b45.jpg",
+  "country": "Usa",
+  "city": "Washington",
+  "imageUrl": "https://media.timeout.com/images/105483064/750/562/image.jpg",
+  "cost": 7689,
+  "description": "One of America’s most beautiful cities, stately Washington, D.C. just keeps getting better. ",
+  "likes": [],
+  "owner": {
+    "$oid": "6557963c286ee71f5cbf101a"
+  },
+  "createdAt": {
+    "$date": "2023-11-17T16:54:46.003Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:54:46.003Z"
   },
   "__v": 0
 }]

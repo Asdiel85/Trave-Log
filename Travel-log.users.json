@@ -1,36 +1,126 @@
 [{
   "_id": {
-    "$oid": "65522c9e079bdf891b11fb5b"
+    "$oid": "65579551286ee71f5cbf0fff"
   },
-  "userAvatar": "https://t4.ftcdn.net/jpg/01/66/10/03/360_F_166100342_KbTGIRrnrlwGDZSXSMpH3zfn2dxyTKae.jpg",
+  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
   "firstName": "Martin",
   "lastName": "Hristov",
-  "email": "mghristov85@gmail.com",
-  "password": "$2b$10$P7nqAzUsEKj3aHLEtNuwyuAfRGkdGVdfJB8H8ApMUsZHPnOd1QFhy",
+  "email": "asdiel@abv.bg",
+  "password": "$2b$10$.Gi8OEKUOC4iKbfk86xqZe0rxWVDh7xVuftHTk1bh.eS4e6vAml5O",
   "isAdmin": false,
   "createdAt": {
-    "$date": "2023-11-13T14:03:10.232Z"
+    "$date": "2023-11-17T16:31:13.131Z"
   },
   "updatedAt": {
-    "$date": "2023-11-13T14:03:10.232Z"
+    "$date": "2023-11-17T16:31:13.131Z"
   },
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "65537839d3f3d848b2f14dd9"
+    "$oid": "65579582286ee71f5cbf100b"
   },
-  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
-  "firstName": "Martin2",
-  "lastName": "Hristov2",
-  "email": "mghristov851@gmail.com",
-  "password": "$2b$10$sWNgDzEjPoDH4SmGT.hyd.DiaGC83t2uwfQi3xTq0GhsYBswf.pka",
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkD0mtfLvOHjjnce6_tqQ9uvs-3ZZ1shUs3Nkr3OkQ&s",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel1@abv.bg",
+  "password": "$2b$10$X2AaOWKahXK2UzB35VttGupr5Rv02XTcApyOMeDsNrl2yE2Fat7YC",
   "isAdmin": false,
   "createdAt": {
-    "$date": "2023-11-14T13:38:01.988Z"
+    "$date": "2023-11-17T16:32:02.645Z"
   },
   "updatedAt": {
-    "$date": "2023-11-14T13:38:01.988Z"
+    "$date": "2023-11-17T16:32:02.645Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655795a5286ee71f5cbf100e"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLDAcdzLQul2HdnF9ZUYKN9ctlbAXqxIfstcgQk3Fk0g&s",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel2@abv.bg",
+  "password": "$2b$10$TAexR3WkHAumxK2uJn7Vn.7RLuSL55oZix3ouEOySo9ySUmaRh81i",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:32:37.501Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:32:37.501Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655795c6286ee71f5cbf1011"
+  },
+  "userAvatar": "https://www.shutterstock.com/image-vector/african-bearded-man-wearing-tshirt-260nw-1476685571.jpg",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel3@abv.bg",
+  "password": "$2b$10$BPkYSwvEoy2hyPctopJDi.9SoIoCiXtlaQiMciKmTCXBop2ASJBgO",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:33:10.064Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:33:10.064Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655795e0286ee71f5cbf1014"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHbHzxoFS1A07fherzlWV9hns9YzHOw&s",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel4@abv.bg",
+  "password": "$2b$10$T0lL5K.4HGj7R5ar5BNjQOtho/Kb8HRSjqmA6Z5AqMZ/DdHmqWh1S",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:33:36.929Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:33:36.929Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655795fb286ee71f5cbf1017"
+  },
+  "userAvatar": "https://cdn3.vectorstock.com/i/1000x1000/71/17/cool-girl-avatar-vector-30657117.jpg",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel5@abv.bg",
+  "password": "$2b$10$oiz0W9P6gW.c4shI.1fvTugJPHitW4ZmIASxJHOy9vdodwzImZ4su",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:34:03.385Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:34:03.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6557963c286ee71f5cbf101a"
+  },
+  "userAvatar": "https://pub-static.fotor.com/assets/projects/pages/6e4ddb5c7be54c0da24d5366f5fa2012/fotor-af3569a3f1a343a59dc4b0a263091b45.jpg",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel6@abv.bg",
+  "password": "$2b$10$VLNAcd85whUarQCPO6FsDurfp8MXcFbvnD1vGhsi2soSEzqnFJw0O",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:35:08.503Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:35:08.503Z"
   },
   "__v": 0
 }]
