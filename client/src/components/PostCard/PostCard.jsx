@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/AuthContext.js';
 import styles from './PostCard.module.css';
+import * as postService from '../../service/postService.js';
 import heart from '../../img/heart.svg';
+import heartFilled from '../../img/heartFilled.svg';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 
@@ -13,8 +15,22 @@ export default function Post({
   _id,
   owner,
   confirmTask,
+  likes,
+  liked,
 }) {
   const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [likePost, setLikePost] = useState(liked);
+  const [likesCount, setLikesCount] = useState(likes.length)
+
+  const handleLikePostClick = async () => {
+    try {
+      await postService.likePost(_id, loggedUser.id);
+      setLikePost(true);
+      setLikesCount(prev => prev + 1)
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <article className={styles.card}>
       <div className={styles.info}>
@@ -27,10 +43,19 @@ export default function Post({
       {loggedUser ? (
         <div className={styles.interaction}>
           <div>
-            <span>0</span>
+            <span>Likes {likesCount}</span>
             {loggedUser.id !== owner ? (
               <>
-                <img className={styles.cardIcon} src={heart} alt="Heart" />
+                {likePost ? (
+                  <img src={heartFilled} alt="Filled Heart" />
+                ) : (
+                  <img
+                    onClick={handleLikePostClick}
+                    className={styles.cardIcon}
+                    src={heart}
+                    alt="Heart"
+                  />
+                )}
               </>
             ) : null}
           </div>

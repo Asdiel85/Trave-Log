@@ -22,4 +22,6 @@ exports.getById = (postId) => Post.findById(postId);
 exports.updatePost = (postId, data) =>
   Post.findByIdAndUpdate(postId, data, { runValidators: true, new: true });
 
+  exports.likePost = (postId, userId) => Post.findByIdAndUpdate(postId, {$push : {likes: userId}}, {new: true}) 
+
 exports.deletePost = (postId) => Post.findByIdAndDelete(postId);

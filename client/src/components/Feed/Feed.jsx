@@ -1,10 +1,12 @@
 import PostCard from '../PostCard/PostCard';
 import * as postService from '../../service/postService';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/AuthContext.js';
 
-export default function Feed(confirmTask) {
+export default function Feed() {
   const [posts, setPosts] = useState([]);
+  const [loggedUser, setLoggedUser] = useContext(UserContext)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function Feed(confirmTask) {
         <PostCard
           key={post._id}
           {...post}
+          liked={post.likes.includes(loggedUser?.id)}
           confirmTask={() => deletePost(post._id)}
         />
       ))}

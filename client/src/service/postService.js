@@ -13,7 +13,6 @@ export const getPostDetails = async (id) => {
 }
 
 export const createPost  = async (postData) => {
-    const token = getToken()
     const response = await fetch(`${BASE_URL}${CREATE_POST}`, {
         method: 'POST',
         headers: {
@@ -25,8 +24,19 @@ export const createPost  = async (postData) => {
     return response;
 }
 
+export const likePost = async (postId, userId) => {
+    const response = await fetch(`${BASE_URL}${POSTS}/${postId}`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+        body: JSON.stringify({userId})
+    })
+    return response;
+}
+
 export const deletePost = async (postId) => {
-    const token = getToken();
     await fetch(`${BASE_URL}${POSTS}/${postId}`,{
         method: 'DELETE',
         headers: {
