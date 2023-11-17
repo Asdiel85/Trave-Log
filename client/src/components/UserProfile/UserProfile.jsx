@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as userService from '../../service/userService';
 import { handleResponse } from '../../utils/handleResponse.js';
-import Interaction from '../Interaction/Interaction.jsx';
 import Button from 'react-bootstrap/esm/Button.js';
 import UserPosts from '../UserPosts/UserPosts.jsx';
+import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 
 
 export default function UserProfile() {
@@ -40,7 +40,7 @@ useEffect(() => {
       <ListGroup.Item>Email: {user.email}</ListGroup.Item>
       <ListGroup.Item as={Button} onClick={hadnleShowPostsClick}>Show Posts</ListGroup.Item>
     </ListGroup>  
-        <Interaction id={user._id} item= "user" />
+       <EditDeleteBtns id={user._id} item= "user" />
   </Card>
     {showPosts && <UserPosts id ={user._id}/>}
     </>

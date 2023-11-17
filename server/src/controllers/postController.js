@@ -2,7 +2,6 @@ const router = require('express').Router();
 const postManager = require('../managers/postManager');
 const { routeGuard } = require('../middlewares/authMiddleware');
 
-
 router.post('/create', routeGuard, async (req, res) => {
   const { country, city, imageUrl, cost, description } = req.body;
 
@@ -14,7 +13,7 @@ router.post('/create', routeGuard, async (req, res) => {
       cost,
       description,
       owner: req.user._id,
-      userAvatar: req.user.userAvatar
+      userAvatar: req.user.userAvatar,
     });
     res.status(201).json(post);
   } catch (error) {
@@ -28,6 +27,28 @@ router.get('/:postId', async (req, res) => {
     res.status(200).json(post);
   } catch (error) {
     res.status(400).json(error.message);
+  }
+});
+
+router.post('/:postId/likes', routeGuard, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const postId = req.params.postId;
+   const post = await postManager.likePost(postId, userId);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(401).json(error.message);
+  }
+});
+
+router.delete('/:postId/likes', routeGuard, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const postId = req.params.postId;
+   const post = await postManager.unLikePost(postId, userId);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(401).json(error.message);
   }
 });
 

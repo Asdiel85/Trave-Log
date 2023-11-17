@@ -1,4 +1,4 @@
-import {BASE_URL, CREATE_POST, POSTS} from '../utils/constants'
+import {BASE_URL, CREATE_POST, POSTS, LIKES} from '../utils/constants'
 import getToken from '../utils/token';
 
 export const getAllPosts = async () => {
@@ -13,7 +13,6 @@ export const getPostDetails = async (id) => {
 }
 
 export const createPost  = async (postData) => {
-    const token = getToken()
     const response = await fetch(`${BASE_URL}${CREATE_POST}`, {
         method: 'POST',
         headers: {
@@ -25,8 +24,31 @@ export const createPost  = async (postData) => {
     return response;
 }
 
+export const likePost = async (postId, userId) => {
+    const response = await fetch(`${BASE_URL}${POSTS}/${postId}/${LIKES}`, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+        body: JSON.stringify({userId})
+    })
+    return response;
+}
+
+export const unLikePost = async (postId, userId) => {
+    const response = await fetch(`${BASE_URL}${POSTS}/${postId}/${LIKES}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+        body: JSON.stringify({userId})
+    })
+    return response;
+}
+
 export const deletePost = async (postId) => {
-    const token = getToken();
     await fetch(`${BASE_URL}${POSTS}/${postId}`,{
         method: 'DELETE',
         headers: {

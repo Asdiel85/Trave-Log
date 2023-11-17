@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
 import * as postService from '../../service/postService';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
-import Interaction from '../Interaction/Interaction.jsx';
+import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 
 export default function PostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [post, setPost] = useState({});
 
   useEffect(() => {
@@ -47,7 +44,7 @@ export default function PostDetails() {
         <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <Interaction id={post.owner} />
+        <EditDeleteBtns id={post.owner} />
       </Card.Body>
     </Card>
   );

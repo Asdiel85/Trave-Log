@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema(
       minLength: [20, 'Please enter more than 20 characters'],
       maxLength: [1000, 'Description max length is 1000 characters'],
     },
+    likes: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'User'
+    }],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'

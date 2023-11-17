@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import ConfirmModal from '../ConfirmModal/ConfirmModal.jsx';
 import { useState } from 'react';
 
-export default function EditDeleteBtns({edit, remove, item, confirmTask}) {
+export default function EditDeleteBtns({edit, item, confirmTask}) {
   const [showModal, setShowModal] = useState(false)
   const handleShowModalClick = (e) => {
     e.preventDefault()
