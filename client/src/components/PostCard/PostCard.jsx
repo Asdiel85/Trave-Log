@@ -2,9 +2,18 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/AuthContext.js';
 import styles from './PostCard.module.css';
+import heart from '../../img/heart.svg';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
-import Interaction from '../Interaction/Interaction.jsx';
-export default function Post({ userAvatar, country, imageUrl, _id, owner, confirmTask }) {
+import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
+
+export default function Post({
+  userAvatar,
+  country,
+  imageUrl,
+  _id,
+  owner,
+  confirmTask,
+}) {
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   return (
     <article className={styles.card}>
@@ -15,7 +24,21 @@ export default function Post({ userAvatar, country, imageUrl, _id, owner, confir
       <Link to={`/post-details/${_id}`}>
         <img src={imageUrl} alt="Post image" className={styles.postImg} />
       </Link>
-     <Interaction id={owner} item= "post" confirmTask={confirmTask}/>
+      {loggedUser ? (
+        <div className={styles.interaction}>
+          <div>
+            <span>0</span>
+            {loggedUser.id !== owner ? (
+              <>
+                <img className={styles.cardIcon} src={heart} alt="Heart" />
+              </>
+            ) : null}
+          </div>
+          {loggedUser.id === owner ? (
+            <EditDeleteBtns item="post" confirmTask={confirmTask} />
+          ) : null}
+        </div>
+      ) : null}
     </article>
   );
 }

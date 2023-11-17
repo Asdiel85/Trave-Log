@@ -11,7 +11,7 @@ export default function Feed(confirmTask) {
     postService
       .getAllPosts()
       .then((result) => setPosts(result))
-      .catch((err) => console.log(err));
+      .catch((err) => navigate('*'));
   }, []);
 
   const deletePost = async (id) => {
