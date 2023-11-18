@@ -9,28 +9,31 @@ import CreatePost from './components/CreatePost/CreatePost.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
-import UserProfile from './components/UserProfile/UserProfile.jsx'
+import UserProfile from './components/UserProfile/UserProfile.jsx';
+import AuthGuard from './components/AuthGuard/AuthGuard.jsx';
 import { UserContext } from './contexts/AuthContext.js';
 import { useState } from 'react';
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState(null)
+  const [loggedUser, setLoggedUser] = useState(null);
   return (
     <>
-    <UserContext.Provider value={[loggedUser, setLoggedUser]}>
-      <Navigation />
-      <main className={styles.container}>
-        <Routes>
-          <Route path="/" element={<Feed />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path ="/user/:id/details" element = {<UserProfile/>} />
-          <Route path="/create" element={<CreatePost />} />
-          <Route path="/post-details/:id" element={<PostDetails />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-        <Footer />
-      </main>
+      <UserContext.Provider value={[loggedUser, setLoggedUser]}>
+        <Navigation />
+        <main className={styles.container}>
+          <Routes>
+            <Route path="/" element={<Feed />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/post-details/:id" element={<PostDetails />} />
+            <Route element={<AuthGuard />}>
+              <Route path="/user/:id/details" element={<UserProfile />} />
+              <Route path="/create" element={<CreatePost />} />
+            </Route>
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+          <Footer />
+        </main>
       </UserContext.Provider>
     </>
   );
