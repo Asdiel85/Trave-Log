@@ -35,7 +35,8 @@ exports.login = async (email, password) => {
 
   const userData = {
     id: user._id,
-    avatar: user.userAvatar
+    avatar: user.userAvatar,
+    isAdmin: user.isAdmin
   }
   const token = await jwt.sign(payload, SECRET, { expiresIn: '2d' });
 

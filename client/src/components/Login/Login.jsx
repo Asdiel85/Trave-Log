@@ -56,6 +56,7 @@ export default function Login() {
       const { userData, token } = await handleResponse(response);
       setLoggedUser(userData);
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData))
       navigate(from, { replace: true });
     } catch (error) {
       setApiError(error.message);

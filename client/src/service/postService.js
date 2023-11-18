@@ -1,5 +1,5 @@
 import {BASE_URL, CREATE_POST, POSTS, LIKES} from '../utils/constants'
-import getToken from '../utils/token';
+import {getToken} from '../utils/auth';
 
 export const getAllPosts = async () => {
     const posts = await fetch(BASE_URL);

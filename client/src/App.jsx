@@ -12,10 +12,18 @@ import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import AuthGuard from './components/AuthGuard/AuthGuard.jsx';
 import { UserContext } from './contexts/AuthContext.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getLoggedUser } from './utils/auth.js';
+
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
+  useEffect(() => {
+    const user = getLoggedUser()
+    if(user) {
+      setLoggedUser(user)
+    }
+  },[])
   return (
     <>
       <UserContext.Provider value={[loggedUser, setLoggedUser]}>

@@ -1,5 +1,5 @@
 import { BASE_URL, LOGIN, POSTS, REGISTER, USERS } from '../utils/constants';
-import getToken from '../utils/token';
+import {getToken} from '../utils/auth';
 
 export const register = async (userData) => {
   const response = await fetch(`${BASE_URL}${REGISTER}`, {
