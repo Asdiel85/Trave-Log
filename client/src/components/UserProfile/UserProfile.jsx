@@ -28,10 +28,10 @@ useEffect(() => {
    .then(response => handleResponse(response))
    .then(setUser)
    .catch(error => {
-    navigate('/login')
-   })
-},[id])
-   
+     navigate('/login')
+    })
+  },[id])
+  
   return (
     <>
     <Card style={{'maxWidth':'500px', width: '100%', margin: '30px auto' }}>
