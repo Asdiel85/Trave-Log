@@ -9,45 +9,58 @@ import { handleResponse } from '../../utils/handleResponse.js';
 import Button from 'react-bootstrap/esm/Button.js';
 import UserPosts from '../UserPosts/UserPosts.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
-
-
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 
 export default function UserProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
-  const [showPosts, setShowPosts] = useState(false)
+  const [showPosts, setShowPosts] = useState(false);
 
   const hadnleShowPostsClick = (e) => {
     e.preventDefault();
-    setShowPosts(!showPosts)
-  }
+    setShowPosts(!showPosts);
+  };
 
-useEffect(() => {
-   userService.getOne(id)
-   .then(response => handleResponse(response))
-   .then(setUser)
-   .catch(error => {
-     navigate('/login')
-    })
-  },[id])
-  
+  useEffect(() => {
+    userService
+      .getOne(id)
+      .then((response) => handleResponse(response))
+      .then((user) => {
+        setUser(user);
+        setLoading(false);
+      })
+      .catch((error) => {
+        navigate('/login');
+      });
+  }, [id]);
+
   return (
     <>
-    <Card style={{'maxWidth':'500px', width: '100%', margin: '30px auto' }}>
-    <Card.Img variant="top" src={user.userAvatar} />
-    <Card.Body>
-      <Card.Title>{user.firstName} {user.lastName}</Card.Title>
-    </Card.Body>
-    <ListGroup className="list-group-flush">
-      <ListGroup.Item>Email: {user.email}</ListGroup.Item>
-      <ListGroup.Item as={Button} onClick={hadnleShowPostsClick}>Show Posts</ListGroup.Item>
-    </ListGroup>  
-    {loggedUser &&
-          loggedUser.id === user._id ? <EditDeleteBtns id={user._id} /> : null}
-  </Card>
-    {showPosts && <UserPosts id ={user._id}/>}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <Card style={{ maxWidth: '500px', width: '100%', margin: '30px auto' }}>
+          <Card.Img variant="top" src={user.userAvatar} />
+          <Card.Body>
+            <Card.Title>
+              {user.firstName} {user.lastName}
+            </Card.Title>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item>Email: {user.email}</ListGroup.Item>
+            <ListGroup.Item as={Button} onClick={hadnleShowPostsClick}>
+              Show Posts
+            </ListGroup.Item>
+          </ListGroup>
+          {loggedUser && loggedUser.id === user._id ? (
+            <EditDeleteBtns id={user._id} />
+          ) : null}
+        </Card>
+      )}
+      {showPosts && <UserPosts id={user._id} />}
     </>
   );
 }
