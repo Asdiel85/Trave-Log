@@ -7,30 +7,32 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
+import { handleResponse } from '../../utils/handleResponse.js';
 
 export default function PostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [post, setPost] = useState({});
   const [loggedUser, setLoggedUser] = useContext(UserContext);
 
   useEffect(() => {
     postService
       .getPostDetails(id)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Not found');
-        }
-
-        return res.json();
+      .then((res) => handleResponse(res))
+      .then((post) => {
+        setPost(post);
+        setLoading(false)
       })
-      .then(setPost)
       .catch((err) => {
         navigate('*');
       });
   }, [id]);
 
   return (
+    <>
+    {loading ? <LoadingSpinner /> :
     <Card style={{ width: '60%', margin: '30px auto' }}>
       <Card.Img variant="top" src={post.imageUrl} />
       <Card.Body>
@@ -47,9 +49,12 @@ export default function PostDetails() {
         <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        {loggedUser &&
-          loggedUser.id === post.owner ? <EditDeleteBtns id={post.owner} /> : null}
+        {loggedUser && loggedUser.id === post.owner ? (
+          <EditDeleteBtns id={post.owner} />
+        ) : null}
       </Card.Body>
     </Card>
+        }
+        </>
   );
 }
