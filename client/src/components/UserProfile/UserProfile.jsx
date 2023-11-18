@@ -11,6 +11,7 @@ import UserPosts from '../UserPosts/UserPosts.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 
 
+
 export default function UserProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
