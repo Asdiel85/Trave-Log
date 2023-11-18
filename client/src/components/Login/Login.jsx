@@ -7,7 +7,7 @@ import { UserContext } from '../../contexts/AuthContext.js';
 import { useContext } from 'react';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 export default function Login() {
   const [inputFields, setInputFields] = useState({
@@ -15,6 +15,9 @@ export default function Login() {
     password: '',
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [errors, setErrors] = useState('');
   const [apiError, setApiError] = useState('');
@@ -53,7 +56,7 @@ export default function Login() {
       const { userData, token } = await handleResponse(response);
       setLoggedUser(userData);
       localStorage.setItem('token', token);
-      navigate('/');
+      navigate(from, { replace: true });
     } catch (error) {
       setApiError(error.message);
     }
