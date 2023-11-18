@@ -15,6 +15,7 @@ export default function Navigation() {
   const onLogout  = () => {
     setLoggedUser(null)
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     navigate('/')
   }
   return (
