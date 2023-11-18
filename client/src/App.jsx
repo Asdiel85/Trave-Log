@@ -10,10 +10,11 @@ import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
-import AuthGuard from './components/AuthGuard/AuthGuard.jsx';
+import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
 import { UserContext } from './contexts/AuthContext.js';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from './utils/auth.js';
+import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 
 
 function App() {
@@ -31,8 +32,10 @@ function App() {
         <main className={styles.container}>
           <Routes>
             <Route path="/" element={<Feed />} />
+            <Route element = {<LoggedInGuard/>}>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            </Route>
             <Route path="/post-details/:id" element={<PostDetails />} />
             <Route element={<AuthGuard />}>
               <Route path="/user/:id/details" element={<UserProfile />} />
