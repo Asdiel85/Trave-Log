@@ -18,7 +18,7 @@ import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState(null);
+  const [loggedUser, setLoggedUser] = useState(getLoggedUser());
   useEffect(() => {
     const user = getLoggedUser()
     if(user) {
