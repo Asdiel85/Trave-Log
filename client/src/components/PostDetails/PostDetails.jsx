@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/AuthContext.js';
 import * as postService from '../../service/postService';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -10,6 +12,7 @@ export default function PostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState({});
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
 
   useEffect(() => {
     postService
@@ -44,7 +47,8 @@ export default function PostDetails() {
         <ListGroup.Item> {post.description}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <EditDeleteBtns id={post.owner} />
+        {loggedUser &&
+          loggedUser.id === post.owner ? <EditDeleteBtns id={post.owner} /> : null}
       </Card.Body>
     </Card>
   );

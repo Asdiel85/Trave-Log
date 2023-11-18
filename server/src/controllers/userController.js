@@ -23,7 +23,7 @@ router.get('/:userId', routeGuard, async (req, res) => {
 
 router.get('/:userId/posts', routeGuard, async (req, res) => {
   try {
-    const posts = await postManager.getUserPosts(req.user.id)
+    const posts = await postManager.getUserPosts(req.params.userId)
     res.status(200).json(posts)
   } catch (error) {
     res.status(401).json(error.message);
