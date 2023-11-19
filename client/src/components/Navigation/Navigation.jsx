@@ -48,6 +48,9 @@ export default function Navigation() {
                 <NavDropdown.Item as={Link} to={`/user/${loggedUser.id}/details`}>
                   Profile
                 </NavDropdown.Item>
+                {loggedUser.isAdmin ?  <NavDropdown.Item as={Link} to={'/users'}>
+                  Users
+                </NavDropdown.Item> : null} 
                 <NavDropdown.Item onClick={onLogout}>
                   Logout
                 </NavDropdown.Item>

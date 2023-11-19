@@ -11,10 +11,12 @@ import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
+import AdminGuard from './guards/AdminGuard/AdminGuard.jsx'
 import { UserContext } from './contexts/AuthContext.js';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from './utils/auth.js';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
+import Users from './components/Users/Users.jsx';
 
 
 function App() {
@@ -40,6 +42,9 @@ function App() {
             <Route element={<AuthGuard />}>
               <Route path="/user/:id/details" element={<UserProfile />} />
               <Route path="/create" element={<CreatePost />} />
+            </Route>
+            <Route element={<AdminGuard/>}>
+              <Route path='/users' element= {<Users/>} />
             </Route>
             <Route path="*" element={<ErrorPage />} />
           </Routes>
