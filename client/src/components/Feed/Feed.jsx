@@ -44,7 +44,7 @@ export default function Feed() {
           />
         ))
       ) : (
-        <h1>There are no posts yet</h1>
+        <h1 style={{textAlign: 'center', marginTop: '30px'}}>There are no posts yet</h1>
       )}
     </>
   );

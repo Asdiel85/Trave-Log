@@ -8,6 +8,6 @@ export default function AdminGuard() {
   return loggedUser?.isAdmin ? (
     <Outlet />
   ) : (
-    <Navigate to="*" state={{ from: location }} replace />
+    <Navigate to="/"/>
   );
 }

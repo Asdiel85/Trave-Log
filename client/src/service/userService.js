@@ -23,6 +23,16 @@ export const login = async (email, password) => {
   return response;
 };
 
+export const getUsers = async () => {
+  const response = await fetch(`${BASE_URL}${USERS}`,{
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getToken(),
+    }
+  })
+  return response;
+}
+
 export const getOne = async (id) => {
   const response = await fetch(`${BASE_URL}${USERS}/${id}`, {
     headers: {
@@ -42,3 +52,14 @@ export const getUserPosts = async (id) => {
   });
   return response;
 };
+
+export const deleteUser = async(id) => {
+  const response = await fetch(`${BASE_URL}${USERS}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getToken()
+    }
+  })
+  return response;
+}
