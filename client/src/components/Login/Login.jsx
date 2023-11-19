@@ -8,9 +8,11 @@ import { useContext } from 'react';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { validateValuesLogin } from '../../utils/validateUserForm.js';
+import useForm from '../../hooks/useForm.jsx';
 
 export default function Login() {
-  const [inputFields, setInputFields] = useState({
+  const { formValues, onChangeHandler } = useForm({
     email: '',
     password: '',
   });
@@ -23,40 +25,19 @@ export default function Login() {
   const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState('');
 
-  const emailPattern =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  const validateValues = (inputValues) => {
-    let errors = {};
-    if (!inputValues.email.match(emailPattern)) {
-      errors.email = 'Invalid email';
-    }
-    if (!inputValues.password) {
-      errors.password = 'Password is required';
-    }
-    return errors;
-  };
-
-  const handleChange = (e) => {
-    setInputFields((inputFields) => ({
-      ...inputFields,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrors(validateValues(inputFields));
+    setErrors(validateValuesLogin(formValues));
     setSubmitting(true);
   };
 
   async function finnishSubmit() {
     try {
-      const response = await userService.login(inputFields);
+      const response = await userService.login(formValues);
       const { userData, token } = await handleResponse(response);
       setLoggedUser(userData);
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(userData))
+      localStorage.setItem('user', JSON.stringify(userData));
       navigate(from, { replace: true });
     } catch (error) {
       setApiError(error.message);
@@ -81,8 +62,8 @@ export default function Login() {
           name="email"
           placeholder="Email"
           id="email"
-          value={inputFields.email}
-          onChange={handleChange}
+          value={formValues.email}
+          onChange={onChangeHandler}
           error={errors.email}
         />
         {errors.email ? <ErrorParagraph message={errors.email} /> : null}
@@ -93,8 +74,8 @@ export default function Login() {
           name="password"
           placeholder="Password"
           id="password"
-          value={inputFields.password}
-          onChange={handleChange}
+          value={formValues.password}
+          onChange={onChangeHandler}
           error={errors.password}
         />
         {errors.password ? <ErrorParagraph message={errors.password} /> : null}

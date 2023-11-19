@@ -28,3 +28,14 @@ export const validateValues = (inputValues) => {
     }
     return errors;
   };
+
+  export const validateValuesLogin = (inputValues) => {
+    let errors = {};
+    if (!inputValues.email.match(emailPattern)) {
+      errors.email = 'Invalid email';
+    }
+    if (!inputValues.password) {
+      errors.password = 'Password is required';
+    }
+    return errors;
+  };
