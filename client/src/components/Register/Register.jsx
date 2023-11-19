@@ -6,12 +6,11 @@ import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { validateValues } from '../../utils/validateUserForm.js';
 import InputField from '../InputField/InputField.jsx';
-import ErrorParagraph from '../ErrorParagraph/ErrorParagraph';
-import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
+import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx'
+import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 
 export default function Register() {
-
-  const {formValues, onChangeHandler} = useForm({
+  const { formValues, onChangeHandler} = useForm({
     email: '',
     firstName: '',
     lastName: '',
@@ -19,8 +18,8 @@ export default function Register() {
     repeatPassword: '',
     userAvatar: '',
   });
+  
   const navigate = useNavigate();
-
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -35,12 +34,12 @@ export default function Register() {
     try {
       const response = await userService.register(formValues);
       await handleResponse(response);
-      navigate('/login')
+      navigate('/login');
     } catch (error) {
       setApiError(error.message);
     }
   }
-  
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finnishSubmit();
@@ -49,7 +48,7 @@ export default function Register() {
 
   return (
     <>
-      <form className={styles.login} onSubmit={handleSubmit}>
+     <form className={styles.login} onSubmit={handleSubmit}>
         <h2>Register</h2>
         {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
