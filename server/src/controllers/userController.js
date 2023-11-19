@@ -47,10 +47,12 @@ router.put('/:userId/edit', routeGuard, async (req, res) => {
   }
 });
 
-router.delete('/:userId', adminGuard, async (req, res) => {
+router.delete('/:userId', routeGuard, async (req, res) => {
     try {
+      if (req.user.id === req.params.userId || req.user.isAdmin) {
         await userManager.deleteUser(req.params.userId)
         res.status(200).json('User Deleted');
+      }
     } catch (error) {
         res.status(401).json(error.message); 
     }

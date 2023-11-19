@@ -24,6 +24,20 @@ export default function UserProfile() {
     setShowPosts(!showPosts);
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const response = await userService.deleteUser(id)
+      handleResponse(response)
+      if(loggedUser.id === id) {
+        setLoggedUser(null)
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     userService
       .getOne(id)
@@ -56,7 +70,7 @@ export default function UserProfile() {
             </ListGroup.Item>
           </ListGroup>
           {loggedUser && loggedUser.id === user._id || loggedUser?.isAdmin ? (
-            <EditDeleteBtns id={user._id} />
+            <EditDeleteBtns id={user._id} item= "user" confirmTask={() =>deleteUser(user._id)}/>
           ) : null}
         </Card>
       )}

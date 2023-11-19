@@ -52,3 +52,14 @@ export const getUserPosts = async (id) => {
   });
   return response;
 };
+
+export const deleteUser = async(id) => {
+  const response = await fetch(`${BASE_URL}${USERS}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getToken()
+    }
+  })
+  return response;
+}
