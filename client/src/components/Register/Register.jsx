@@ -1,18 +1,17 @@
 import styles from './Register.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useForm from '../../hooks/useForm.jsx';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
+import { validateValues } from '../../utils/validateUserForm.js';
 import InputField from '../InputField/InputField.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 
 export default function Register() {
-  const emailPattern =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const avatarPattern = /^(http|https):\/\//;
 
-  const [inputFields, setInputFields] = useState({
+  const {formValues, onChangeHandler} = useForm({
     email: '',
     firstName: '',
     lastName: '',
@@ -26,49 +25,15 @@ export default function Register() {
   const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const validateValues = (inputValues) => {
-    let errors = {};
-    if (!inputValues.email.match(emailPattern)) {
-      errors.email = 'Invalid email';
-    }
-    if (inputValues.password.length < 5) {
-      errors.password = 'Password is too short';
-    }
-    if (inputValues.password !== inputValues.repeatPassword) {
-      errors.repeatPassword = "Passwords don't match";
-    }
-    if (!inputValues.firstName) {
-      errors.firstName = 'Please enter First name';
-    } else if (inputValues.firstName.length < 3) {
-      errors.firstName = 'First Name should be atleast 3 characters';
-    }
-    if (!inputValues.lastName) {
-      errors.lastName = 'Please enter Last name';
-    } else if (inputValues.lastName.length < 3) {
-      errors.lastName = 'Last Name should be atleast 3 characters';
-    }
-    if (!inputValues.userAvatar.match(avatarPattern)) {
-      errors.userAvatar = 'Invalid image url';
-    }
-    return errors;
-  };
-
-  const handleChange = (e) => {
-    setInputFields((inputFields) => ({
-      ...inputFields,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrors(validateValues(inputFields));
+    setErrors(validateValues(formValues));
     setSubmitting(true);
   };
 
   async function finnishSubmit() {
     try {
-      const response = await userService.register(inputFields);
+      const response = await userService.register(formValues);
       await handleResponse(response);
       navigate('/login')
     } catch (error) {
@@ -94,8 +59,8 @@ export default function Register() {
           name="email"
           placeholder="Email is required"
           id="email"
-          value={inputFields.email}
-          onChange={handleChange}
+          value={formValues.email}
+          onChange={onChangeHandler}
           error={errors.email}
         />
         {errors.email ? <ErrorParagraph message={errors.email} /> : null}
@@ -106,8 +71,8 @@ export default function Register() {
           name="firstName"
           placeholder="First name is required"
           id="firstName"
-          value={inputFields.firstName}
-          onChange={handleChange}
+          value={formValues.firstName}
+          onChange={onChangeHandler}
           error={errors.firstName}
         />
         {errors.firstName ? (
@@ -120,8 +85,8 @@ export default function Register() {
           name="lastName"
           placeholder="Last name is required"
           id="lastName"
-          value={inputFields.lastName}
-          onChange={handleChange}
+          value={formValues.lastName}
+          onChange={onChangeHandler}
           error={errors.lastName}
         />
         {errors.lastName ? <ErrorParagraph message={errors.lastName} /> : null}
@@ -132,8 +97,8 @@ export default function Register() {
           name="password"
           placeholder="Minimum 5 characters"
           id="password"
-          value={inputFields.password}
-          onChange={handleChange}
+          value={formValues.password}
+          onChange={onChangeHandler}
           error={errors.password}
         />
         {errors.password ? <ErrorParagraph message={errors.password} /> : null}
@@ -144,8 +109,8 @@ export default function Register() {
           name="repeatPassword"
           placeholder="Repeat password is required"
           id="repeatPassword"
-          value={inputFields.repeatPassword}
-          onChange={handleChange}
+          value={formValues.repeatPassword}
+          onChange={onChangeHandler}
           error={errors.repeatPassword}
         />
         {errors.repeatPassword ? (
@@ -158,8 +123,8 @@ export default function Register() {
           name="userAvatar"
           placeholder="Avatar is required"
           id="userAvatar"
-          value={inputFields.userAvatar}
-          onChange={handleChange}
+          value={formValues.userAvatar}
+          onChange={onChangeHandler}
           error={errors.userAvatar}
         />
         {errors.userAvatar ? (
