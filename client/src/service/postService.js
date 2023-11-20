@@ -1,4 +1,4 @@
-import {BASE_URL, CREATE_POST, POSTS, LIKES} from '../utils/constants'
+import {BASE_URL, CREATE_POST, POSTS, LIKES, EDIT} from '../utils/constants'
 import {getToken} from '../utils/auth';
 
 export const getAllPosts = async () => {
@@ -15,6 +15,18 @@ export const getPostDetails = async (id) => {
 export const createPost  = async (postData) => {
     const response = await fetch(`${BASE_URL}${CREATE_POST}`, {
         method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': getToken()
+        },
+        body: JSON.stringify(postData)
+    })
+    return response;
+}
+
+export const editPost  = async (id, postData) => {
+    const response = await fetch(`${BASE_URL}${POSTS}/${id}/${EDIT}`, {
+        method: 'PUT',
         headers: {
             'Content-type': 'application/json',
             'Authorization': getToken()

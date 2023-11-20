@@ -6,4 +6,5 @@ export const USERS = 'users'
 
 export const POSTS = 'posts'
 export const CREATE_POST = 'posts/create'
+export const EDIT = 'edit'
 export const LIKES = 'likes'
