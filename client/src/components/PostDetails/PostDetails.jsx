@@ -111,7 +111,7 @@ export default function PostDetails() {
             ) : null}
           </div>
           {loggedUser.id === post.owner ? (
-            <EditDeleteBtns item="post" confirmTask={() => deletePost(post._id)} />
+            <EditDeleteBtns id={post._id} item="post" confirmTask={() => deletePost(post._id)} />
           ) : null}
         </div>
       ) : null}

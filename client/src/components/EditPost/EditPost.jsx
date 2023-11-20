@@ -35,10 +35,12 @@ export default function EditPost() {
     try {
       const response = await postService.editPost(id, formValues);
       await handleResponse(response);
+      navigate(`/post-details/${id}`)
     } catch (error) {
       setApiError(error.message);
     }
   }
+
   const onChangeHandler = (e) => {
     setFormValues(state => ({...state, [e.target.name]: e.target.value}))
 }
@@ -49,8 +51,8 @@ export default function EditPost() {
       .then((response) => handleResponse(response))
       .then((post) => {
         setPost(post);
+       setFormValues(state => ({...state, ...post}))
         setLoading(false);
-        setFormValues(state => ({...state, ...post}))
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -135,7 +137,7 @@ export default function EditPost() {
           {errors.description ? (
             <ErrorParagraph message={errors.description} />
           ) : null}
-          <SubmitBtn name="Create" />
+          <SubmitBtn name="Edit" />
         </form>
       )}
     </>

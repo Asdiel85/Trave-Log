@@ -17,7 +17,8 @@ import { useEffect, useState } from 'react';
 import { getLoggedUser } from './utils/auth.js';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 import Users from './components/Users/Users.jsx';
-import EditPost from './components/editPost/EditPost.jsx';
+import EditPost from './components/EditPost/EditPost.jsx';
+import EditUser from './components/EditUser/EditUser.jsx';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(getLoggedUser());
@@ -43,6 +44,7 @@ function App() {
               <Route path="/user/:id/details" element={<UserProfile />} />
               <Route path="/post/:id/edit" element={<EditPost />} />
               <Route path="/create" element={<CreatePost />} />
+              <Route path="/user/:id/edit" element={<EditUser />} />
             </Route>
             <Route element={<AdminGuard />}>
               <Route path="/users" element={<Users />} />
