@@ -5,31 +5,18 @@ import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { validateValues } from '../../utils/validatePostForm.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import useForm from '../../hooks/useForm.jsx';
 
 export default function EditPost() {
-  const [formValues, setFormValues] = useState({
-    country: '',
-    city: '',
-    imageUrl: '',
-    cost: '',
-    description: '',
-  });
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setErrors(validateValues(formValues));
-    setSubmitting(true);
-  };
-
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
-  const [submitting, setSubmitting] = useState(false);
+
+  const {formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({...post});
 
   async function finnishSubmit() {
     try {
@@ -41,17 +28,13 @@ export default function EditPost() {
     }
   }
 
-  const onChangeHandler = (e) => {
-    setFormValues(state => ({...state, [e.target.name]: e.target.value}))
-}
-
   useEffect(() => {
     postService
       .getPostDetails(id)
       .then((response) => handleResponse(response))
       .then((post) => {
         setPost(post);
-       setFormValues(state => ({...state, ...post}))
+        Object.assign(formValues, post);
         setLoading(false);
       })
       .catch((err) => console.log(err));
