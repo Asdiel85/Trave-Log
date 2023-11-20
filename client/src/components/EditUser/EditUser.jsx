@@ -158,6 +158,7 @@ export default function Register() {
         {errors.userAvatar ? (
           <ErrorParagraph message={errors.userAvatar} />
         ) : null}
+        {loggedUser.isAdmin ? 
         <div>
           <label htmlFor="isAdmin">isAdmin</label>
           <select
@@ -170,6 +171,7 @@ export default function Register() {
             <option value="false">false</option>
           </select>
         </div>
+        : null}
         <SubmitBtn name="Register" />
       </form>
     </>
