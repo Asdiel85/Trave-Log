@@ -32,8 +32,7 @@ router.get('/:userId/posts', routeGuard, async (req, res) => {
 
 router.put('/:userId/edit', routeGuard, async (req, res) => {
   try {
-    if (req.user.id === req.params.userId || req.user.isAdmin) {
-      const user = await userManager.getById(req.params.userId);
+    if (req.user.id === req.params.userId) {
       const updatedUser = await userManager.updateUser(
         req.params.userId,
         req.body

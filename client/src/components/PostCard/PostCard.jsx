@@ -78,7 +78,7 @@ export default function Post({
             ) : null}
           </div>
           {loggedUser.id === owner ? (
-            <EditDeleteBtns item="post" confirmTask={confirmTask} />
+            <EditDeleteBtns id={_id} item="post" confirmTask={confirmTask} />
           ) : null}
         </div>
       ) : null}

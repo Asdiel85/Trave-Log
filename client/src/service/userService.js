@@ -1,4 +1,4 @@
-import { BASE_URL, LOGIN, POSTS, REGISTER, USERS } from '../utils/constants';
+import { BASE_URL, EDIT, LOGIN, POSTS, REGISTER, USERS } from '../utils/constants';
 import {getToken} from '../utils/auth';
 
 export const register = async (userData) => {
@@ -49,6 +49,18 @@ export const getUserPosts = async (id) => {
       'Content-Type': 'application/json',
       'Authorization': getToken(),
     },
+  });
+  return response;
+};
+
+export const editUser = async (id, userData) => {
+  const response = await fetch(`${BASE_URL}${USERS}/${id}/${EDIT}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': getToken(),
+    },
+    body: JSON.stringify(userData),
   });
   return response;
 };

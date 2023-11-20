@@ -51,7 +51,10 @@ exports.getUsers = () => {
 
 exports.getById = (userId) => User.findById(userId);
 
-exports.updateUser = (userId, data) => User.findByIdAndUpdate(userId, data, {runValidators:true, new: true})
+exports.updateUser = async (userId, data) => {
+ const user = await User.findByIdAndUpdate(userId, data, {runValidators:true, new: true})
+ return await user.save()
+}
 
 exports.deleteUser = async (userId) => {
  await Post.deleteMany({owner: userId})

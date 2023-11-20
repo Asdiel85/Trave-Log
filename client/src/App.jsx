@@ -11,22 +11,23 @@ import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
-import AdminGuard from './guards/AdminGuard/AdminGuard.jsx'
+import AdminGuard from './guards/AdminGuard/AdminGuard.jsx';
 import { UserContext } from './contexts/AuthContext.js';
 import { useEffect, useState } from 'react';
 import { getLoggedUser } from './utils/auth.js';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 import Users from './components/Users/Users.jsx';
-
+import EditPost from './components/EditPost/EditPost.jsx';
+import EditUser from './components/EditUser/EditUser.jsx';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(getLoggedUser());
   useEffect(() => {
-    const user = getLoggedUser()
-    if(user) {
-      setLoggedUser(user)
+    const user = getLoggedUser();
+    if (user) {
+      setLoggedUser(user);
     }
-  },[])
+  }, []);
   return (
     <>
       <UserContext.Provider value={[loggedUser, setLoggedUser]}>
@@ -34,17 +35,19 @@ function App() {
         <main className={styles.container}>
           <Routes>
             <Route path="/" element={<Feed />} />
-            <Route element = {<LoggedInGuard/>}>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route element={<LoggedInGuard />}>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
             </Route>
             <Route path="/post-details/:id" element={<PostDetails />} />
             <Route element={<AuthGuard />}>
               <Route path="/user/:id/details" element={<UserProfile />} />
+              <Route path="/post/:id/edit" element={<EditPost />} />
               <Route path="/create" element={<CreatePost />} />
+              <Route path="/user/:id/edit" element={<EditUser />} />
             </Route>
-            <Route element={<AdminGuard/>}>
-              <Route path='/users' element= {<Users/>} />
+            <Route element={<AdminGuard />}>
+              <Route path="/users" element={<Users />} />
             </Route>
             <Route path="*" element={<ErrorPage />} />
           </Routes>
