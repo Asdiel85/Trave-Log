@@ -7,8 +7,8 @@ import { UserContext } from '../../contexts/AuthContext.js';
 import { useContext } from 'react';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { validateValuesLogin } from '../../utils/validateUserForm.js';
+import { useNavigate,useLocation } from 'react-router-dom';
+import { validateValuesLogin } from '../../utils/validateForms.js';
 import useForm from '../../hooks/useForm.jsx';
 
 export default function Login() {
@@ -22,8 +22,8 @@ export default function Login() {
 
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [errors, setErrors] = useState('');
-  const [apiError, setApiError] = useState('');
   const [submitting, setSubmitting] = useState('');
+  const [apiError, setApiError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();

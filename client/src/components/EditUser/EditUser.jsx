@@ -4,15 +4,15 @@ import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { validateValues } from '../../utils/validateUserForm.js';
+import { validateUserValues } from '../../utils/validateForms.js';
 import { UserContext } from '../../contexts/AuthContext.js';
-import { getLoggedUser } from '../../utils/auth.js';
 import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
+import useForm from '../../hooks/useForm.jsx';
 
 export default function Register() {
-  const [formValues, setFormValues] = useState({
+  const {formValues, onChangeHandler} = useForm({
     email: '',
     firstName: '',
     lastName: '',
@@ -32,12 +32,8 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrors(validateValues(formValues));
+    setErrors(validateUserValues(formValues));
     setSubmitting(true);
-  };
-
-  const onChangeHandler = (e) => {
-    setFormValues((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
   async function finnishSubmit() {
@@ -63,7 +59,7 @@ export default function Register() {
       .then((response) => handleResponse(response))
       .then((user) => {
         setUser(user);
-        setFormValues((state) => ({ ...state, ...user }));
+        Object.assign(formValues, user);
         setLoading(false);
       })
       .catch((err) => console.log(err));

@@ -5,7 +5,7 @@ import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import useForm from '../../hooks/useForm.jsx';
-import { validateValues } from '../../utils/validatePostForm.js';
+import { validatePostValues } from '../../utils/validateForms.js';
 import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 
@@ -25,7 +25,7 @@ export default function CreatePost() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors(validateValues(formValues));
+    setErrors(validatePostValues(formValues));
     setSubmitting(true);
   };
 

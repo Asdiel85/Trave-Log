@@ -8,6 +8,7 @@ import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useForm from '../../hooks/useForm.jsx';
+import { validatePostValues } from '../../utils/validateForms.js';
 
 export default function EditPost() {
   const navigate = useNavigate();
@@ -15,8 +16,16 @@ export default function EditPost() {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState('');
+  const [errors, setErrors] = useState('');
+  const [submitting, setSubmitting] = useState('');
 
-  const {formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({...post});
+  const {formValues, onChangeHandler} = useForm({...post});
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrors(validatePostValues(formValues));
+    setSubmitting(true);
+  };
 
   async function finnishSubmit() {
     try {
@@ -53,7 +62,7 @@ export default function EditPost() {
         <LoadingSpinner />
       ) : (
         <form onSubmit={handleSubmit} className={styles.login}>
-          <h2>Create Post</h2>
+          <h2>Edit Post</h2>
           {apiError ? <ErrorParagraph message={apiError} /> : null}
           <InputField
             label="country"

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm.jsx';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { validateValues } from '../../utils/validateUserForm.js';
+import {validateUserValues} from '../../utils/validateForms.js';
 import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx'
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
@@ -26,7 +26,7 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrors(validateValues(formValues));
+    setErrors(validateUserValues(formValues));
     setSubmitting(true);
   };
 
