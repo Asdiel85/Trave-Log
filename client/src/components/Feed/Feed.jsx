@@ -3,12 +3,14 @@ import * as postService from '../../service/postService';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 
 export default function Feed() {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +20,9 @@ export default function Feed() {
         setPosts(result);
         setLoading(false);
       })
-      .catch((err) => navigate('*'));
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   }, []);
 
   const deletePost = async (id) => {
@@ -26,7 +30,7 @@ export default function Feed() {
       await postService.deletePost(id);
       setPosts(posts.filter((post) => post._id !== id));
     } catch (error) {
-      navigate('*');
+      setErrorMessage(error.message);
     }
   };
 
@@ -44,7 +48,9 @@ export default function Feed() {
           />
         ))
       ) : (
-        <h1 style={{textAlign: 'center', marginTop: '30px'}}>There are no posts yet</h1>
+        <h1 style={{ textAlign: 'center', marginTop: '30px' }}>
+          There are no posts yet
+        </h1>
       )}
     </>
   );

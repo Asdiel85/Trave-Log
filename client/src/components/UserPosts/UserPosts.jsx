@@ -1,22 +1,23 @@
 import * as userService from '../../service/userService.js';
 import * as postsService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 import PostCard from '../PostCard/PostCard.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 
 export default function UserPosts({ id }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
 
   const deletePost = async (id) => {
     try {
-      await postsService.deletePost(id);
+      const response = await postsService.deletePost(id);
+      await handleResponse(response);
       setPosts((posts) => posts.filter((post) => post._id !== id));
     } catch (error) {
-      navigate('*');
+      setErrorMessage(error.message);
     }
   };
 
@@ -26,14 +27,15 @@ export default function UserPosts({ id }) {
       .then((response) => handleResponse(response))
       .then((posts) => {
         setPosts(posts);
-        setLoading(false)
+        setLoading(false);
       })
-      .catch((error) => navigate('/login'));
+      .catch((error) => setErrorMessage(error.message));
   }, [id]);
   return (
     <>
-      {loading ? <LoadingSpinner />:
-      posts.length > 0 ? (
+      {loading ? (
+        <LoadingSpinner />
+      ) : posts.length > 0 ? (
         posts.map((post) => (
           <PostCard
             key={post._id}
@@ -43,8 +45,7 @@ export default function UserPosts({ id }) {
         ))
       ) : (
         <h2 style={{ textAlign: 'center' }}>User has no posts</h2>
-      )
-}
+      )}
     </>
   );
 }

@@ -5,17 +5,18 @@ import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useForm from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 
 export default function EditPost() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [apiError, setApiError] = useState('');
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [errors, setErrors] = useState('');
   const [submitting, setSubmitting] = useState('');
 
@@ -33,7 +34,7 @@ export default function EditPost() {
       await handleResponse(response);
       navigate(`/post-details/${id}`)
     } catch (error) {
-      setApiError(error.message);
+      setErrorMessage(error.message);
     }
   }
 
@@ -46,13 +47,12 @@ export default function EditPost() {
         Object.assign(formValues, post);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => setErrorMessage(error.message));
   }, [id]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finnishSubmit();
-      navigate('/');
     }
   }, [errors]);
 
@@ -63,7 +63,6 @@ export default function EditPost() {
       ) : (
         <form onSubmit={handleSubmit} className={styles.login}>
           <h2>Edit Post</h2>
-          {apiError ? <ErrorParagraph message={apiError} /> : null}
           <InputField
             label="country"
             title="Country"
