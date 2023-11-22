@@ -1,11 +1,11 @@
 import styles from './EditUser.module.css';
 import { useEffect, useState } from 'react';
-import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../contexts/AuthContext.js';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { validateUserValues } from '../../utils/validateForms.js';
-import { UserContext } from '../../contexts/AuthContext.js';
 import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
