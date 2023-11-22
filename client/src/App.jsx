@@ -19,8 +19,11 @@ import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 import Users from './components/Users/Users.jsx';
 import EditPost from './components/EditPost/EditPost.jsx';
 import EditUser from './components/EditUser/EditUser.jsx';
+import { ErrorContext } from './contexts/ErrorContext.js';
+import ErrorModal from './components/ErrorModal/ErrorModal.jsx';
 
 function App() {
+  const [errorMessage, setErrorMessage] = useState(null)
   const [loggedUser, setLoggedUser] = useState(getLoggedUser());
   useEffect(() => {
     const user = getLoggedUser();
@@ -30,7 +33,9 @@ function App() {
   }, []);
   return (
     <>
+    <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
       <UserContext.Provider value={[loggedUser, setLoggedUser]}>
+        <ErrorModal/>
         <Navigation />
         <main className={styles.container}>
           <Routes>
@@ -54,6 +59,7 @@ function App() {
           <Footer />
         </main>
       </UserContext.Provider>
+      </ErrorContext.Provider>
     </>
   );
 }

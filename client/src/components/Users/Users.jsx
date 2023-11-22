@@ -12,12 +12,12 @@ import ConfirmModal from '../ConfirmModal/ConfirmModal';
 export default function Users() {
   const [loggedUser, setLoggedUer] = useContext(UserContext);
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
   const [loading, setloading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModalClick = (id) => {
-    setUserId(id)
+    setUserId(id);
     setShowModal(true);
   };
   const closeModal = () => {
@@ -25,9 +25,13 @@ export default function Users() {
   };
 
   const deleteUser = async (id) => {
-    await userService.deleteUser(id);
-    setUsers(users.filter((user) => user._id !== id));
-    setShowModal(false);
+    try {
+      await userService.deleteUser(id);
+      setUsers(users.filter((user) => user._id !== id));
+      setShowModal(false);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
@@ -82,7 +86,8 @@ export default function Users() {
       ) : (
         <h2 style={{ textAlign: 'center' }}>There are no users</h2>
       )}
-             {showModal && (
+
+      {showModal && (
         <ConfirmModal
           item="user"
           show={showModal}

@@ -2,11 +2,12 @@ import styles from './CreatePost.module.css';
 import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx'; 
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import useForm from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {useNavigate} from 'react-router-dom'
 
 export default function CreatePost() {
@@ -20,7 +21,7 @@ export default function CreatePost() {
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState('');
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (event) => {
@@ -33,15 +34,15 @@ export default function CreatePost() {
     try {
       const response = await postService.createPost(formValues);
       await handleResponse(response);
+      navigate('/')
     } catch (error) {
-      setApiError(error.message);
+      setErrorMessage(error.message)
     }
   }
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
       finnishSubmit();
-      navigate('/')
     }
   }, [errors]);
 
@@ -49,7 +50,6 @@ export default function CreatePost() {
     <>
       <form onSubmit={handleSubmit} className={styles.login}>
         <h2>Create Post</h2>
-        {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
           label="country"
           title="Country"
