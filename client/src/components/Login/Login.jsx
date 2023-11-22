@@ -5,6 +5,7 @@ import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import * as userService from '../../service/userService.js';
 import { UserContext } from '../../contexts/AuthContext.js';
 import { useContext } from 'react';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
@@ -21,9 +22,9 @@ export default function Login() {
   const from = location.state?.from?.pathname || '/';
 
   const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext)
   const [errors, setErrors] = useState('');
   const [submitting, setSubmitting] = useState('');
-  const [apiError, setApiError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,7 +41,7 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(userData));
       navigate(from, { replace: true });
     } catch (error) {
-      setApiError(error.message);
+      setErrorMessage(error.message)
     }
   }
 
@@ -54,7 +55,6 @@ export default function Login() {
     <>
       <form onSubmit={handleSubmit} className={styles.login}>
         <h2>Login</h2>
-        {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
           label="email"
           title="Email"
