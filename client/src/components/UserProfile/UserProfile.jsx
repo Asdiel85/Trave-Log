@@ -69,7 +69,7 @@ export default function UserProfile() {
               Show Posts
             </ListGroup.Item>
           </ListGroup>
-          {loggedUser && loggedUser.id === user._id || loggedUser?.isAdmin ? (
+          {loggedUser && loggedUser.id === user._id ? (
             <EditDeleteBtns id={user._id} item= "user" confirmTask={() =>deleteUser(user._id)}/>
           ) : null}
         </Card>

@@ -49,7 +49,11 @@ export default function Register() {
       }
       navigate(`/user/${id}/details`);
     } catch (error) {
-      setApiError(error.message);
+      if(error.message.includes('E1100')) {
+        setApiError('Email Already Exists!')
+      } else {
+        setApiError(error.message);
+      }
     }
   }
 
