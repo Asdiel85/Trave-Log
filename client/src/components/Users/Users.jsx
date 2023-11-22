@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/AuthContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 import * as userService from '../../service/userService';
 import { handleResponse } from '../../utils/handleResponse';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
@@ -15,6 +16,7 @@ export default function Users() {
   const [userId, setUserId] = useState(null);
   const [loading, setloading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext)
 
   const handleShowModalClick = (id) => {
     setUserId(id);
@@ -26,11 +28,12 @@ export default function Users() {
 
   const deleteUser = async (id) => {
     try {
-      await userService.deleteUser(id);
+    const responese = await userService.deleteUser(id);
+    await handleResponse(responese)
       setUsers(users.filter((user) => user._id !== id));
       setShowModal(false);
     } catch (error) {
-      console.log(error.message);
+      setErrorMessage(error.message)
     }
   };
 
@@ -42,7 +45,7 @@ export default function Users() {
         setUsers(users);
         setloading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => setErrorMessage(error.message));
   }, []);
   return (
     <>

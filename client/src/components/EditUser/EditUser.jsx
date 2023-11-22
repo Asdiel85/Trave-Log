@@ -10,9 +10,10 @@ import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import useForm from '../../hooks/useForm.jsx';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
 
 export default function Register() {
-  const {formValues, onChangeHandler} = useForm({
+  const { formValues, onChangeHandler } = useForm({
     email: '',
     firstName: '',
     lastName: '',
@@ -27,7 +28,7 @@ export default function Register() {
   const [user, setUser] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
-  const [apiError, setApiError] = useState('');
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -43,16 +44,16 @@ export default function Register() {
 
       if (loggedUser.id === id) {
         loggedUser.avatar = formValues.userAvatar;
-        loggedUser.isAdmin = formValues.isAdmin
-        setLoggedUer(loggedUser)
-        localStorage.setItem('user', JSON.stringify(loggedUser))
+        loggedUser.isAdmin = formValues.isAdmin;
+        setLoggedUer(loggedUser);
+        localStorage.setItem('user', JSON.stringify(loggedUser));
       }
       navigate(`/user/${id}/details`);
     } catch (error) {
-      if(error.message.includes('E1100')) {
-        setApiError('Email Already Exists!')
+      if (error.message.includes('E1100')) {
+        setErrorMessage('Email Already Exists!');
       } else {
-        setApiError(error.message);
+        setErrorMessage(error.message);
       }
     }
   }
@@ -66,7 +67,7 @@ export default function Register() {
         Object.assign(formValues, user);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => setErrorMessage(error.message));
   }, [id]);
 
   useEffect(() => {
@@ -76,10 +77,8 @@ export default function Register() {
   }, [errors]);
 
   return (
-    <>
       <form className={styles.login} onSubmit={handleSubmit}>
         <h2>Edit User</h2>
-        {apiError ? <ErrorParagraph message={apiError} /> : null}
         <InputField
           label="email"
           title="Email"
@@ -160,6 +159,5 @@ export default function Register() {
         ) : null}
         <SubmitBtn name="Register" />
       </form>
-    </>
   );
 }

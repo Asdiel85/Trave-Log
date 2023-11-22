@@ -41,7 +41,7 @@ export const likePost = async (postId, userId) => {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
-            'Authorization': getToken()
+            'Authorization': getToken() 
         },
         body: JSON.stringify({userId})
     })
@@ -61,11 +61,12 @@ export const unLikePost = async (postId, userId) => {
 }
 
 export const deletePost = async (postId) => {
-    await fetch(`${BASE_URL}${POSTS}/${postId}`,{
+  const response = await fetch(`${BASE_URL}${POSTS}/${postId}`,{
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json',
             'Authorization': getToken()
         },
     })
+    return response;
 }

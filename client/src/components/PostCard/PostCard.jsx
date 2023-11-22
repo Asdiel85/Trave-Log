@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
 import styles from './PostCard.module.css';
 import * as postService from '../../service/postService.js';
 import heart from '../../img/heart.svg';
 import heartFilled from '../../img/heartFilled.svg';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
+import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { handleResponse } from '../../utils/handleResponse.js';
 
 export default function Post({
   userAvatar,
@@ -19,28 +20,30 @@ export default function Post({
   likes,
   liked,
 }) {
-  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [likePost, setLikePost] = useState(liked);
   const [likesCount, setLikesCount] = useState(likes.length);
 
   const handleLikePostClick = async () => {
     try {
-      await postService.likePost(_id, loggedUser.id);
+      const response = await postService.likePost(_id, loggedUser.id);
+      await handleResponse(response);
       setLikePost(true);
       setLikesCount((prev) => prev + 1);
     } catch (error) {
-      navigate('*');
+      setErrorMessage(error.message);
     }
   };
 
   const handleUnlikeClick = async () => {
     try {
-      await postService.unLikePost(_id, loggedUser.id);
+      const response = await postService.unLikePost(_id, loggedUser.id);
+      await handleResponse(response);
       setLikePost(false);
       setLikesCount((prev) => prev - 1);
     } catch (error) {
-      navigate('*');
+      setErrorMessage(error.message);
     }
   };
 

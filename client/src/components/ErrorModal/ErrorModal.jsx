@@ -13,7 +13,7 @@ export default function ErrorModal() {
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{errorMessage}</Modal.Body>
+      <Modal.Body style={{textAlign: 'center'}}>{errorMessage}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
