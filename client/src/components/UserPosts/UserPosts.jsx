@@ -2,7 +2,7 @@ import * as userService from '../../service/userService.js';
 import * as postsService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useEffect, useState, useContext } from 'react';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import PostCard from '../PostCard/PostCard.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 

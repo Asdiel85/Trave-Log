@@ -9,7 +9,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useForm from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function EditPost() {
   const navigate = useNavigate();

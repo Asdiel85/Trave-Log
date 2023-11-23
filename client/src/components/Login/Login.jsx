@@ -5,7 +5,7 @@ import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import * as userService from '../../service/userService.js';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import { useContext } from 'react';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
