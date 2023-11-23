@@ -56,20 +56,21 @@ export default function Post({
       <Link to={`/post-details/${_id}`}>
         <img src={imageUrl} alt="Post image" className={styles.postImg} />
       </Link>
-      {loggedUser ? (
+      {loggedUser && (
         <div className={styles.interaction}>
           <div>
             <span>Likes {likesCount}</span>
-            {loggedUser.id !== owner ? (
+            {loggedUser.id !== owner && (
               <>
-                {likePost ? (
+                {likePost && (
                   <img
                     onClick={handleUnlikeClick}
                     className={styles.cardIcon}
                     src={heartFilled}
                     alt="Filled Heart"
                   />
-                ) : (
+                )}{' '}
+                {!likePost && (
                   <img
                     onClick={handleLikePostClick}
                     className={styles.cardIcon}
@@ -78,13 +79,13 @@ export default function Post({
                   />
                 )}
               </>
-            ) : null}
+            )}
           </div>
-          {loggedUser.id === owner ? (
+          {loggedUser.id === owner && (
             <EditDeleteBtns id={_id} item="post" confirmTask={confirmTask} />
-          ) : null}
+          )}
         </div>
-      ) : null}
+      )}
     </article>
   );
 }

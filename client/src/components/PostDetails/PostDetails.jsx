@@ -48,8 +48,7 @@ export default function PostDetails() {
 
   const deletePost = async (id) => {
     try {
-    const response = await postService.deletePost(post._id);
-    await handleResponse(response)
+      await postService.deletePost(id);
       setPost(null);
       navigate('/');
     } catch (error) {
@@ -91,20 +90,21 @@ export default function PostDetails() {
             <ListGroup.Item> {post.description}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
-            {loggedUser ? (
+            {loggedUser && (
               <div>
                 <div>
                   <span>Likes {likesCount}</span>
-                  {loggedUser.id !== post.owner ? (
+                  {loggedUser.id !== post.owner && (
                     <>
-                      {likePost ? (
+                      {likePost && (
                         <img
                           onClick={handleUnlikeClick}
                           className={styles.cardIcon}
                           src={heartFilled}
                           alt="Filled Heart"
                         />
-                      ) : (
+                      )}{' '}
+                      {!likePost && (
                         <img
                           onClick={handleLikePostClick}
                           className={styles.cardIcon}
@@ -113,17 +113,17 @@ export default function PostDetails() {
                         />
                       )}
                     </>
-                  ) : null}
+                  )}
                 </div>
-                {loggedUser.id === post.owner ? (
+                {loggedUser.id === post.owner && (
                   <EditDeleteBtns
                     id={post._id}
                     item="post"
                     confirmTask={() => deletePost(post._id)}
                   />
-                ) : null}
+                )}
               </div>
-            ) : null}
+            )}
           </Card.Body>
         </Card>
       )}
