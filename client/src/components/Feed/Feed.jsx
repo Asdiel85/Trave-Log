@@ -2,7 +2,7 @@ import PostCard from '../PostCard/PostCard';
 import * as postService from '../../service/postService';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.js';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 

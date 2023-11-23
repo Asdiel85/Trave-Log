@@ -2,7 +2,7 @@ import styles from './EditUser.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { validateUserValues } from '../../utils/validateForms.js';

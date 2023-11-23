@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.js';
 import * as userService from '../../service/userService';
 import { handleResponse } from '../../utils/handleResponse';

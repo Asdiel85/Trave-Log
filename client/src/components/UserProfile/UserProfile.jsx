@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import * as userService from '../../service/userService';
 import { handleResponse } from '../../utils/handleResponse.js';
 import Button from 'react-bootstrap/esm/Button.js';

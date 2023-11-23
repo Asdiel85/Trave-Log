@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.js';
 import * as postService from '../../service/postService';
 import styles from './PostDetails.module.css';
