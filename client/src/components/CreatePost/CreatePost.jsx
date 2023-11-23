@@ -21,7 +21,7 @@ export default function CreatePost() {
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
+  const [errroMessage, setErrorMessage] = useContext(ErrorContext);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (event) => {
@@ -61,7 +61,7 @@ export default function CreatePost() {
           onChange={onChangeHandler}
           error = {errors.country}
         />
-        {errors.country ? <ErrorParagraph message={errors.country} /> : null}
+        {errors.country && <ErrorParagraph message={errors.country} />}
         <InputField
           label="city"
           title="city"
@@ -73,7 +73,7 @@ export default function CreatePost() {
           onChange={onChangeHandler}
           error = {errors.city}
         />
-        {errors.city ? <ErrorParagraph message={errors.city} /> : null}
+        {errors.city && <ErrorParagraph message={errors.city} />}
         <InputField
           label="imageUrl"
           title="Image"
@@ -85,7 +85,7 @@ export default function CreatePost() {
           onChange={onChangeHandler}
           error = {errors.imageUrl}
         />
-        {errors.imageUrl ? <ErrorParagraph message={errors.imageUrl} /> : null}
+        {errors.imageUrl && <ErrorParagraph message={errors.imageUrl} />}
         <InputField
           label="cost"
           title="Cost"
@@ -97,7 +97,7 @@ export default function CreatePost() {
           onChange={onChangeHandler}
           error = {errors.cost}
         />
-        {errors.cost ? <ErrorParagraph message={errors.cost} /> : null}
+        {errors.cost && <ErrorParagraph message={errors.cost} />}
         <label htmlFor="description">Description</label>
         <textarea
         className={errors.description ? styles.errorTextarea : styles.textarea}
@@ -108,7 +108,7 @@ export default function CreatePost() {
           value={formValues.description}
           onChange={onChangeHandler}
         ></textarea>
-        {errors.description ? <ErrorParagraph message={errors.description} /> : null}
+        {errors.description && <ErrorParagraph message={errors.description} /> }
         <SubmitBtn name="Create" />
       </form>
     </>

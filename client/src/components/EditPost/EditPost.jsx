@@ -20,7 +20,7 @@ export default function EditPost() {
   const [errors, setErrors] = useState('');
   const [submitting, setSubmitting] = useState('');
 
-  const {formValues, onChangeHandler} = useForm({...post});
+  const { formValues, onChangeHandler } = useForm({ ...post });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +32,7 @@ export default function EditPost() {
     try {
       const response = await postService.editPost(id, formValues);
       await handleResponse(response);
-      navigate(`/post-details/${id}`)
+      navigate(`/post-details/${id}`);
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -74,7 +74,7 @@ export default function EditPost() {
             onChange={onChangeHandler}
             error={errors.country}
           />
-          {errors.country ? <ErrorParagraph message={errors.country} /> : null}
+          {errors.country && <ErrorParagraph message={errors.country} />}
           <InputField
             label="city"
             title="city"
@@ -86,7 +86,7 @@ export default function EditPost() {
             onChange={onChangeHandler}
             error={errors.city}
           />
-          {errors.city ? <ErrorParagraph message={errors.city} /> : null}
+          {errors.city && <ErrorParagraph message={errors.city} />}
           <InputField
             label="imageUrl"
             title="Image"
@@ -98,9 +98,7 @@ export default function EditPost() {
             onChange={onChangeHandler}
             error={errors.imageUrl}
           />
-          {errors.imageUrl ? (
-            <ErrorParagraph message={errors.imageUrl} />
-          ) : null}
+          {errors.imageUrl && <ErrorParagraph message={errors.imageUrl} />}
           <InputField
             label="cost"
             title="Cost"
@@ -112,7 +110,7 @@ export default function EditPost() {
             onChange={onChangeHandler}
             error={errors.cost}
           />
-          {errors.cost ? <ErrorParagraph message={errors.cost} /> : null}
+          {errors.cost && <ErrorParagraph message={errors.cost} />}
           <label htmlFor="description">Description</label>
           <textarea
             className={
@@ -125,9 +123,9 @@ export default function EditPost() {
             value={formValues.description}
             onChange={onChangeHandler}
           ></textarea>
-          {errors.description ? (
+          {errors.description && (
             <ErrorParagraph message={errors.description} />
-          ) : null}
+          )}
           <SubmitBtn name="Edit" />
         </form>
       )}

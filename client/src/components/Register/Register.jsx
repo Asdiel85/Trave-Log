@@ -61,7 +61,7 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.email}
       />
-      {errors.email ? <ErrorParagraph message={errors.email} /> : null}
+      {errors.email && <ErrorParagraph message={errors.email} />}
       <InputField
         label="firstName"
         title="First name"
@@ -73,7 +73,7 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.firstName}
       />
-      {errors.firstName ? <ErrorParagraph message={errors.firstName} /> : null}
+      {errors.firstName && <ErrorParagraph message={errors.firstName} />}
       <InputField
         label="lastName"
         title="Last name"
@@ -85,7 +85,7 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.lastName}
       />
-      {errors.lastName ? <ErrorParagraph message={errors.lastName} /> : null}
+      {errors.lastName && <ErrorParagraph message={errors.lastName} />}
       <InputField
         label="password"
         title="Password"
@@ -97,7 +97,7 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.password}
       />
-      {errors.password ? <ErrorParagraph message={errors.password} /> : null}
+      {errors.password && <ErrorParagraph message={errors.password} />}
       <InputField
         label="repeatPassword"
         title="Repeat password"
@@ -109,9 +109,9 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.repeatPassword}
       />
-      {errors.repeatPassword ? (
+      {errors.repeatPassword && (
         <ErrorParagraph message={errors.repeatPassword} />
-      ) : null}
+      )}
       <InputField
         label="userAvatar"
         title="User Avatar"
@@ -123,9 +123,7 @@ export default function Register() {
         onChange={onChangeHandler}
         error={errors.userAvatar}
       />
-      {errors.userAvatar ? (
-        <ErrorParagraph message={errors.userAvatar} />
-      ) : null}
+      {errors.userAvatar && <ErrorParagraph message={errors.userAvatar} />}
       <SubmitBtn name="Register" />
     </form>
   );

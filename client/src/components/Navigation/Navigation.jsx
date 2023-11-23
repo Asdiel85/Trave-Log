@@ -9,28 +9,37 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function Navigation() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loggedUser, setLoggedUser] = useContext(UserContext);
-  
-  const onLogout  = () => {
-    setLoggedUser(null)
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    navigate('/')
-  }
+
+  const onLogout = () => {
+    setLoggedUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/');
+  };
   return (
-    <Navbar sticky="top" collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar
+      sticky="top"
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-tertiary"
+    >
       <Container>
         <Navbar.Brand as={Link} to={'/'}>
           Travel Log
         </Navbar.Brand>
-        <Nav.Link as={Link} to={'/'}>Dashboard</Nav.Link>
+        <Nav.Link as={Link} to={'/'}>
+          Dashboard
+        </Nav.Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
-          {loggedUser ? <UserAvatar userAvatar={loggedUser.avatar} id={loggedUser.id} /> : null}
+          {loggedUser && (
+            <UserAvatar userAvatar={loggedUser.avatar} id={loggedUser.id} />
+          )}
           <Nav>
-            {loggedUser ? null : (
+            {!loggedUser && (
               <>
                 <Nav.Link as={Link} to={'/login'}>
                   Login
@@ -40,22 +49,25 @@ export default function Navigation() {
                 </Nav.Link>
               </>
             )}
-            {loggedUser ? (
+            {loggedUser && (
               <NavDropdown>
                 <NavDropdown.Item as={Link} to={'/create'}>
                   Create Post
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={`/user/${loggedUser.id}/details`}>
+                <NavDropdown.Item
+                  as={Link}
+                  to={`/user/${loggedUser.id}/details`}
+                >
                   Profile
                 </NavDropdown.Item>
-                {loggedUser.isAdmin ?  <NavDropdown.Item as={Link} to={'/users'}>
-                  Users
-                </NavDropdown.Item> : null} 
-                <NavDropdown.Item onClick={onLogout}>
-                  Logout
-                </NavDropdown.Item>
+                {loggedUser.isAdmin && (
+                  <NavDropdown.Item as={Link} to={'/users'}>
+                    Users
+                  </NavDropdown.Item>
+                )}
+                <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
-            ) : null}
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

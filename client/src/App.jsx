@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Routes, Route } from 'react-router-dom';
 import styles from './App.module.css';
 import Navigation from './components/Navigation/Navigation.jsx';
 import Feed from './components/Feed/Feed.jsx';

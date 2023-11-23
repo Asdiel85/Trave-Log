@@ -66,7 +66,7 @@ export default function Login() {
           onChange={onChangeHandler}
           error={errors.email}
         />
-        {errors.email ? <ErrorParagraph message={errors.email} /> : null}
+        {errors.email && <ErrorParagraph message={errors.email} />}
         <InputField
           label="password"
           title="Password"
@@ -78,7 +78,7 @@ export default function Login() {
           onChange={onChangeHandler}
           error={errors.password}
         />
-        {errors.password ? <ErrorParagraph message={errors.password} /> : null}
+        {errors.password && <ErrorParagraph message={errors.password} />}
         <SubmitBtn name="Login" />
       </form>
     </>

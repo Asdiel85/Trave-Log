@@ -77,87 +77,83 @@ export default function Register() {
   }, [errors]);
 
   return (
-      <form className={styles.login} onSubmit={handleSubmit}>
-        <h2>Edit User</h2>
-        <InputField
-          label="email"
-          title="Email"
-          type="email"
-          name="email"
-          placeholder="Email is required"
-          id="email"
-          value={formValues.email}
-          onChange={onChangeHandler}
-          error={errors.email}
-        />
-        {errors.email ? <ErrorParagraph message={errors.email} /> : null}
-        <InputField
-          label="firstName"
-          title="First name"
-          type="firstName"
-          name="firstName"
-          placeholder="First name is required"
-          id="firstName"
-          value={formValues.firstName}
-          onChange={onChangeHandler}
-          error={errors.firstName}
-        />
-        {errors.firstName ? (
-          <ErrorParagraph message={errors.firstName} />
-        ) : null}
-        <InputField
-          label="lastName"
-          title="Last name"
-          type="lastName"
-          name="lastName"
-          placeholder="Last name is required"
-          id="lastName"
-          value={formValues.lastName}
-          onChange={onChangeHandler}
-          error={errors.lastName}
-        />
-        {errors.lastName ? <ErrorParagraph message={errors.lastName} /> : null}
-        <InputField
-          label="password"
-          title="Password"
-          type="password"
-          name="password"
-          placeholder="Minimum 5 characters"
-          id="password"
-          value={formValues.password}
-          onChange={onChangeHandler}
-          error={errors.password}
-        />
-        {errors.password ? <ErrorParagraph message={errors.password} /> : null}
-        <InputField
-          label="repeatPassword"
-          title="Repeat password"
-          type="password"
-          name="repeatPassword"
-          placeholder="Repeat password is required"
-          id="repeatPassword"
-          value={formValues.repeatPassword}
-          onChange={onChangeHandler}
-          error={errors.repeatPassword}
-        />
-        {errors.repeatPassword ? (
-          <ErrorParagraph message={errors.repeatPassword} />
-        ) : null}
-        <InputField
-          label="userAvatar"
-          title="User Avatar"
-          type="text"
-          name="userAvatar"
-          placeholder="Avatar is required"
-          id="userAvatar"
-          value={formValues.userAvatar}
-          onChange={onChangeHandler}
-          error={errors.userAvatar}
-        />
-        {errors.userAvatar ? (
-          <ErrorParagraph message={errors.userAvatar} />
-        ) : null}
-        <SubmitBtn name="Register" />
-      </form>
+    <form className={styles.login} onSubmit={handleSubmit}>
+      <h2>Edit User</h2>
+      <InputField
+        label="email"
+        title="Email"
+        type="email"
+        name="email"
+        placeholder="Email is required"
+        id="email"
+        value={formValues.email}
+        onChange={onChangeHandler}
+        error={errors.email}
+      />
+      {errors.email && <ErrorParagraph message={errors.email} />}
+      <InputField
+        label="firstName"
+        title="First name"
+        type="firstName"
+        name="firstName"
+        placeholder="First name is required"
+        id="firstName"
+        value={formValues.firstName}
+        onChange={onChangeHandler}
+        error={errors.firstName}
+      />
+      {errors.firstName && <ErrorParagraph message={errors.firstName} />}
+      <InputField
+        label="lastName"
+        title="Last name"
+        type="lastName"
+        name="lastName"
+        placeholder="Last name is required"
+        id="lastName"
+        value={formValues.lastName}
+        onChange={onChangeHandler}
+        error={errors.lastName}
+      />
+      {errors.lastName && <ErrorParagraph message={errors.lastName} />}
+      <InputField
+        label="password"
+        title="Password"
+        type="password"
+        name="password"
+        placeholder="Minimum 5 characters"
+        id="password"
+        value={formValues.password}
+        onChange={onChangeHandler}
+        error={errors.password}
+      />
+      {errors.password && <ErrorParagraph message={errors.password} />}
+      <InputField
+        label="repeatPassword"
+        title="Repeat password"
+        type="password"
+        name="repeatPassword"
+        placeholder="Repeat password is required"
+        id="repeatPassword"
+        value={formValues.repeatPassword}
+        onChange={onChangeHandler}
+        error={errors.repeatPassword}
+      />
+      {errors.repeatPassword && (
+        <ErrorParagraph message={errors.repeatPassword} />
+      )}
+      <InputField
+        label="userAvatar"
+        title="User Avatar"
+        type="text"
+        name="userAvatar"
+        placeholder="Avatar is required"
+        id="userAvatar"
+        value={formValues.userAvatar}
+        onChange={onChangeHandler}
+        error={errors.userAvatar}
+      />
+      {errors.userAvatar && <ErrorParagraph message={errors.userAvatar} />}
+      <SubmitBtn name="Register" />
+    </form>
   );
 }
