@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import styles from './PostCard.module.css';
 import * as postService from '../../service/postService.js';
 import heart from '../../img/heart.svg';

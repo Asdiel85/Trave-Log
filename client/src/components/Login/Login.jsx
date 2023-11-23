@@ -3,7 +3,7 @@ import InputField from '../InputField/InputField';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import * as userService from '../../service/userService.js';
-import { UserContext } from '../../contexts/AuthContext.js';
+import { UserContext } from '../../contexts/AuthContext.jsx';
 import { useContext } from 'react';
 import { ErrorContext } from '../../contexts/ErrorContext.js';
 import { handleResponse } from '../../utils/handleResponse.js';

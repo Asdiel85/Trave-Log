@@ -12,9 +12,8 @@ import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
 import AdminGuard from './guards/AdminGuard/AdminGuard.jsx';
-import { UserContext } from './contexts/AuthContext.js';
-import { useEffect, useState } from 'react';
-import { getLoggedUser } from './utils/auth.js';
+import {useState } from 'react';
+import AuthProvider from './contexts/AuthContext.jsx';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 import Users from './components/Users/Users.jsx';
 import EditPost from './components/EditPost/EditPost.jsx';
@@ -24,17 +23,10 @@ import ErrorModal from './components/ErrorModal/ErrorModal.jsx';
 
 function App() {
   const [errorMessage, setErrorMessage] = useState(null)
-  const [loggedUser, setLoggedUser] = useState(getLoggedUser());
-  useEffect(() => {
-    const user = getLoggedUser();
-    if (user) {
-      setLoggedUser(user);
-    }
-  }, []);
   return (
     <>
     <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
-      <UserContext.Provider value={[loggedUser, setLoggedUser]}>
+      <AuthProvider>
         <ErrorModal/>
         <Navigation />
         <main className={styles.container}>
@@ -58,7 +50,7 @@ function App() {
           </Routes>
           <Footer />
         </main>
-      </UserContext.Provider>
+        </AuthProvider>
       </ErrorContext.Provider>
     </>
   );
