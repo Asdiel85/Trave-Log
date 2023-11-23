@@ -3,7 +3,7 @@ import * as postService from '../../service/postService';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthContext.jsx';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 
 export default function Feed() {

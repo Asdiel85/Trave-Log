@@ -7,7 +7,7 @@ import heart from '../../img/heart.svg';
 import heartFilled from '../../img/heartFilled.svg';
 import UserAvatar from '../UserAvatar/UserAvatar.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { handleResponse } from '../../utils/handleResponse.js';
 
 export default function Post({

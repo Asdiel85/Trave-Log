@@ -10,7 +10,7 @@ import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import useForm from '../../hooks/useForm.jsx';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function Register() {
   const { formValues, onChangeHandler } = useForm({

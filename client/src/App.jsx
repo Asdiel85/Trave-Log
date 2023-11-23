@@ -12,20 +12,17 @@ import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
 import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
 import AdminGuard from './guards/AdminGuard/AdminGuard.jsx';
-import {useState } from 'react';
 import AuthProvider from './contexts/AuthContext.jsx';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
 import Users from './components/Users/Users.jsx';
 import EditPost from './components/EditPost/EditPost.jsx';
 import EditUser from './components/EditUser/EditUser.jsx';
-import { ErrorContext } from './contexts/ErrorContext.js';
+import ErrorProvider from './contexts/ErrorContext.jsx';
 import ErrorModal from './components/ErrorModal/ErrorModal.jsx';
 
 function App() {
-  const [errorMessage, setErrorMessage] = useState(null)
   return (
-    <>
-    <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+    <ErrorProvider>
       <AuthProvider>
         <ErrorModal/>
         <Navigation />
@@ -51,8 +48,7 @@ function App() {
           <Footer />
         </main>
         </AuthProvider>
-      </ErrorContext.Provider>
-    </>
+        </ErrorProvider>
   );
 }
 

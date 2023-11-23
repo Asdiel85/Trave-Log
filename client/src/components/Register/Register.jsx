@@ -1,7 +1,7 @@
 import styles from './Register.module.css';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ErrorContext } from '../../contexts/ErrorContext.js';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import useForm from '../../hooks/useForm.jsx';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
