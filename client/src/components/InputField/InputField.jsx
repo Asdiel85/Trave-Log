@@ -8,12 +8,14 @@ export default function InputField({
   id,
   error,
   value,
+  testid,
   onChange,
 }) {
   return (
     <>
       <label htmlFor={label}>{title}</label>
       <input
+        data-testid = {testid}
         className={error ? styles.error : styles.input}
         type={type}
         name={name}
