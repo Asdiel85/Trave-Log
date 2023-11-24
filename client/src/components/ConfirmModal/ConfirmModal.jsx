@@ -5,7 +5,7 @@ export default function ConfirmModal({show, handleClose,confirmTask, item}) {
   
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} data-testid="confirm-modal">
         <Modal.Header closeButton>
           <Modal.Title>Delete {item}</Modal.Title>
         </Modal.Header>
