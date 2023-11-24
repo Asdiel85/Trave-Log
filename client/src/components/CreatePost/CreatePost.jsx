@@ -21,7 +21,7 @@ export default function CreatePost() {
 
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const [errroMessage, setErrorMessage] = useContext(ErrorContext);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = (event) => {
