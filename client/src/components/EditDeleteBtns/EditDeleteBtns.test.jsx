@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import EditDeleteBtns from './EditDeleteBtns';
-import { vi } from 'vitest';
 
 test('renders EditDeleteBtns component with Edit and Delete buttons', () => {
   const { getByText } = render(
@@ -22,8 +21,7 @@ test('clicking Edit button navigates to the correct edit URL', () => {
   );
   
   fireEvent.click(getByText('Edit'));
-  // Add assertions for the navigation to the edit URL
-  // For example, you can use a library like react-router-dom to handle route navigation in your app
+  // Add assertion related to the navigation here, if needed
 });
 
 test('clicking Delete button opens the ConfirmModal', () => {
@@ -38,8 +36,8 @@ test('clicking Delete button opens the ConfirmModal', () => {
 });
 
 test('clicking Delete button and then confirming calls confirmTask', () => {
-  const confirmTaskMock = vi.fn();
-  const { getByText, getByTestId } = render(
+  const confirmTaskMock = jest.fn();
+  const { getByText } = render(
     <MemoryRouter>
       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
     </MemoryRouter>
@@ -52,8 +50,8 @@ test('clicking Delete button and then confirming calls confirmTask', () => {
 });
 
 test('clicking Delete button and then canceling does not call confirmTask', () => {
-  const confirmTaskMock = vi.fn();
-  const { getByText, getByTestId } = render(
+  const confirmTaskMock = jest.fn();
+  const { getByText } = render(
     <MemoryRouter>
       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
     </MemoryRouter>
