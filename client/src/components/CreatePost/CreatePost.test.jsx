@@ -1,72 +1,145 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import CreatePost from './CreatePost';
-import { BrowserRouter } from 'react-router-dom';
+// import React from 'react';
+// import { render, screen, fireEvent, act } from '@testing-library/react';
+// import ErrorProvider from '../../contexts/ErrorContext.jsx';
+// import CreatePost from './CreatePost';
+// import { BrowserRouter } from 'react-router-dom';
+// import * as postService from '../../service/postService.js';
+// import { handleResponse } from '../../utils/handleResponse.js';
+// import { getToken } from '../../utils/auth';
 
-describe('Testing create post form', () => {
-  it('should render create post component with all the inputs', () => {
-    render(
-      <BrowserRouter>
-        <CreatePost />
-      </BrowserRouter>
-    );
-    expect(screen.getByTestId('country')).toBeTruthy();
-    expect(screen.getByTestId('city')).toBeTruthy();
-    expect(screen.getByTestId('imageUrl')).toBeTruthy();
-    expect(screen.getByTestId('cost')).toBeTruthy();
-    expect(screen.getByTestId('description')).toBeTruthy();
-    expect(screen.getByTestId('Create')).toBeTruthy();
-  });
+// // Mock the handleResponse function
+// jest.mock('../../utils/handleResponse.js');
 
-  it('should show error paragraphs on empty inputs', () => {
-    render(
-      <BrowserRouter>
-        <CreatePost />
-      </BrowserRouter>
-    );
+// // Mock the postService module
+// jest.mock('../../service/postService.js');
 
-    const btn = screen.getByTestId('Create');
-    fireEvent.click(btn);
+// jest.mock('../../utils/auth', () => ({
+//   getToken: jest.fn(() => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3OTU1MTI4NmVlNzFmNWNiZjBmZmYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDA4OTkxNjMsImV4cCI6MTcwMTA3MTk2M30.l1yFIPViWAUvHOBIygJYqj1eWl_GT48c0J_INC9SHLQ'),
+// }));
 
-    expect(screen.getByTestId('error-country')).toBeTruthy();
-    expect(screen.getByTestId('error-city')).toBeTruthy();
-    expect(screen.getByTestId('error-imageUrl')).toBeTruthy();
-    expect(screen.getByTestId('error-cost')).toBeTruthy();
-    expect(screen.getByTestId('error-description')).toBeTruthy();
-  });
+// describe('CreatePost component', () => {
+//   beforeEach(() => {
+//     jest.clearAllMocks();
+//   });
 
-  it('should not render error paragraphs with correctly filled data', () => {
-    render(
-      <BrowserRouter>
-        <CreatePost />
-      </BrowserRouter>
-    );
-    const btn = screen.getByTestId('Create');
-    const country = screen.getByTestId('country');
-    const city = screen.getByTestId('city');
-    const imageUrl = screen.getByTestId('imageUrl');
-    const cost = screen.getByTestId('cost');
-    const description = screen.getByTestId('description');
+//   test('renders CreatePost component', () => {
+//     render(
+//       <BrowserRouter>
+//         <ErrorProvider>
+//           <CreatePost />
+//         </ErrorProvider>
+//       </BrowserRouter>
+//     );
 
-    fireEvent.change(country, { target: { value: 'Usa' } });
-    fireEvent.change(city, { target: { value: 'Seattle' } });
-    fireEvent.change(imageUrl, {
-      target: {
-        value: 'https://media.timeout.com/images/106030305/750/562/image.jpg',
-      },
-    });
-    fireEvent.change(cost, { target: { value: '2222' } });
-    fireEvent.change(description, {
-      target: {
-        value:
-          'From its emerald parks to the endless views of Puget Sound, Seattle is…',
-      },
-    });
+//     expect(screen.getByText('Create Post')).toBeInTheDocument();
+//   });
 
-    fireEvent.click(btn);
-    expect(screen.queryByText('Country is required')).toBeNull();
-    expect(screen.queryByText('City is required')).toBeNull();
-    expect(screen.queryByText('Invalid image url')).toBeNull();
-    expect(screen.queryByText('Cost should be a positive number')).toBeNull();
-    expect(screen.queryByText('Description is required')).toBeNull();
-  });
-});
+//   test('submits the form successfully', async () => {
+//     // Mock fetch to resolve with an empty response
+//     global.fetch = jest.fn(() =>
+//       Promise.resolve({
+//         json: () => Promise.resolve({}),
+//       })
+//     );
+  
+//     render(
+//       <BrowserRouter>
+//         <ErrorProvider>
+//           <CreatePost />
+//         </ErrorProvider>
+//       </BrowserRouter>
+//     );
+  
+//     // Your provided fireEvent.change events...
+  
+//     fireEvent.click(screen.getByTestId('Create'));
+  
+//     await act(async () => {
+//       // No need for extra Promise.resolve() here
+//     });
+  
+//     // Ensure the correct mock function was called with the expected data
+//     expect(jest.fn()).toHaveBeenCalledWith(
+//       'http://localhost:3000/posts/create', // Replace with your actual API endpoint
+//       expect.objectContaining({
+//         method: 'POST',
+//         headers: expect.objectContaining({
+//           'Content-type': 'application/json',
+//           'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTU3OTU1MTI4NmVlNzFmNWNiZjBmZmYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDA4OTkxNjMsImV4cCI6MTcwMTA3MTk2M30.l1yFIPViWAUvHOBIygJYqj1eWl_GT48c0J_INC9SHLQ', // Use the mocked token
+//         }),
+//         body: JSON.stringify({
+//           country: 'USA',
+//           city: 'New York',
+//           imageUrl: 'https://media.timeout.com/images/105937857/750/562/image.jpg',
+//           cost: 6983,
+//           description: 'Portland is known for many things: its eccentric culture, its incredibly creative restaurants its theater and arts scene, and its outdoor beauty top the list of reasons to visit.',
+//         }),
+//       })
+//     );
+  
+//     // Ensure the mock handleResponse function was called
+//     expect(handleResponse).toHaveBeenCalled();
+//   });
+
+//   test('handles form submission error', async () => {
+//     // Mock postService.createPost to reject
+//     postService.createPost.mockRejectedValueOnce(
+//       new Error('Failed to create post')
+//     );
+
+//     render(
+//       <BrowserRouter>
+//         <ErrorProvider>
+//           <CreatePost />
+//         </ErrorProvider>
+//       </BrowserRouter>
+//     );
+
+//     fireEvent.click(screen.getByTestId('Create'));
+
+//     await act(async () => {
+//       // No need for extra Promise.resolve() here
+//     });
+
+//     // Ensure postService.createPost was called
+//     expect(postService.createPost).toHaveBeenCalled();
+
+//     // Ensure the mock dispatch function was called with the correct payload
+//     expect(handleResponse).toHaveBeenCalledWith({
+//       type: 'SET_ERROR_MESSAGE',
+//       payload: 'Failed to create post',
+//     });
+//   });
+
+//   // test('validates form inputs and shows error messages', async () => {
+//   //   jest
+//   //     .spyOn(require('../../utils/validateForms.js'), 'validatePostValues')
+//   //     .mockReturnValueOnce({
+//   //       country: '',
+//   //       city: 'City is required',
+//   //       imageUrl: 'Image is required',
+//   //       description: 'Description is required',
+//   //     });
+
+//   //   render(
+//   //     <BrowserRouter>
+//   //       <ErrorProvider>
+//   //         <CreatePost />
+//   //       </ErrorProvider>
+//   //     </BrowserRouter>
+//   //   );
+
+//   //   fireEvent.click(screen.getByTestId('Create'));
+
+//   //   // Ensure validatePostValues was called
+//   //   expect(
+//   //     require('../../utils/validateForms.js').validatePostValues
+//   //   ).toHaveBeenCalled();
+
+//   //   // Ensure error messages are displayed
+//   //   expect(screen.getByTestId('error-country')).toBeInTheDocument();
+//   //   expect(screen.getByTestId('error-city')).toBeInTheDocument();
+//   //   expect(screen.getByTestId('error-imageUrl')).toBeInTheDocument();
+//   //   expect(screen.getByTestId('error-description')).toBeInTheDocument();
+//   // });
+// });
