@@ -24,10 +24,19 @@ export default function CreatePost() {
   const [errorMessage, setErrorMessage] = useContext(ErrorContext);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(validatePostValues(formValues));
     setSubmitting(true);
+    if (Object.keys(errors).length === 0) {
+      try {
+        const response = await postService.createPost(formValues);
+        await handleResponse(response);
+        navigate('/');
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+    }
   };
 
   async function finnishSubmit() {
@@ -40,11 +49,11 @@ export default function CreatePost() {
     }
   }
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && submitting) {
-      finnishSubmit();
-    }
-  }, [errors]);
+  // useEffect(() => {
+  //   if (Object.keys(errors).length === 0 && submitting) {
+  //     finnishSubmit();
+  //   }
+  // }, [errors]);
 
   return (
     <>
@@ -118,7 +127,7 @@ export default function CreatePost() {
           onChange={onChangeHandler}
         ></textarea>
         {errors.description && <ErrorParagraph testId={'error-description'} message={errors.description} />}
-        <SubmitBtn testId={'Create'} name="Create" />
+        <SubmitBtn testId={'create'} name="Create" />
       </form>
     </>
   );

@@ -39,9 +39,9 @@ exports.login = async (email, password) => {
     avatar: user.userAvatar,
     isAdmin: user.isAdmin
   }
-  const token = await jwt.sign(payload, SECRET, { expiresIn: '2d' });
+  userData.token = await jwt.sign(payload, SECRET, { expiresIn: '2d' });
 
-  return {userData, token};
+  return userData;
 };
 
 exports.getUsers = () => {

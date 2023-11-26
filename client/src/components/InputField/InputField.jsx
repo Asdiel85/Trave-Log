@@ -10,6 +10,7 @@ export default function InputField({
   value,
   testid,
   onChange,
+  onBlur
 }) {
   return (
     <>
@@ -23,6 +24,7 @@ export default function InputField({
         id={id}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
       />
     </>
   );

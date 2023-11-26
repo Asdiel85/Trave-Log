@@ -27,7 +27,7 @@ function fetchResponse(data) {
 test('Testing if edit post form will be filled with the correct data', async () => {
   fetch.mockResolvedValue(fetchResponse(post));
   const currentPostResponse = await postService.getPostDetails(id);
-  const currentPost = await currentPostResponse.json(); // Parse JSON here
+  const currentPost = await currentPostResponse.json();
 
   expect(fetch).toBeCalledWith(`${BASE_URL}${POSTS}/${id}`);
   expect(currentPost).toStrictEqual(post);

@@ -1,3 +1,4 @@
+import Form from 'react-bootstrap/Form';
 import styles from './Login.module.css';
 import InputField from '../InputField/InputField';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
@@ -13,7 +14,7 @@ import { validateValuesLogin } from '../../utils/validateForms.js';
 import useForm from '../../hooks/useForm.jsx';
 
 export default function Login() {
-  const { formValues, onChangeHandler } = useForm({
+  const { formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({
     email: '',
     password: '',
   });
@@ -21,39 +22,27 @@ export default function Login() {
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext)
-  const [errors, setErrors] = useState('');
-  const [submitting, setSubmitting] = useState('');
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrors(validateValuesLogin(formValues));
-    setSubmitting(true);
-  };
-
-  async function finnishSubmit() {
-    try {
-      const response = await userService.login(formValues);
-      const { userData, token } = await handleResponse(response);
-      setLoggedUser(userData);
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(userData));
-      navigate(from, { replace: true });
-    } catch (error) {
-      setErrorMessage(error.message)
-    }
-  }
+  const [, setLoggedUser] = useContext(UserContext);
+  const [, setErrorMessage] = useContext(ErrorContext)
+  // const [submitting, setSubmitting] = useState('');
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      finnishSubmit();
+      userService.login(formValues)
+      .then(response => handleResponse(response))
+      .then(userData => {
+        setLoggedUser(userData);
+        localStorage.setItem('token', userData.token);
+        localStorage.setItem('user', JSON.stringify(userData));
+        navigate(from, { replace: true });
+      })
+      .catch(error => setErrorMessage(error.message))
     }
   }, [errors]);
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.login}>
+      <form onSubmit={(e) => handleSubmit(e, validateValuesLogin)} className={styles.login}>
         <h2>Login</h2>
         <InputField
           label="email"
