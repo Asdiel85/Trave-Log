@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 export default function useForm(initialValues) {
     const [formValues, setFormValues] = useState(initialValues)
@@ -9,8 +9,17 @@ export default function useForm(initialValues) {
         setFormValues(state => ({...state, [e.target.name]: e.target.value}))
     }
 
+    const handleSubmit = (e, validate) => {
+        e.preventDefault();
+        setErrors(validate(formValues));
+        setSubmitting(true);
+      };
+
     return {
         formValues,
         onChangeHandler,
+        handleSubmit,
+        errors,
+        submitting
     }
 }

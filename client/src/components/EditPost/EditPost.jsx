@@ -16,27 +16,9 @@ export default function EditPost() {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
-  const [errors, setErrors] = useState('');
-  const [submitting, setSubmitting] = useState('');
-
-  const { formValues, onChangeHandler } = useForm({ ...post });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrors(validatePostValues(formValues));
-    setSubmitting(true);
-  };
-
-  async function finnishSubmit() {
-    try {
-      const response = await postService.editPost(id, formValues);
-      await handleResponse(response);
-      navigate(`/post-details/${id}`);
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-  }
+  const [, setErrorMessage] = useContext(ErrorContext);
+  
+  const { formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({ ...post });
 
   useEffect(() => {
     postService
@@ -52,7 +34,10 @@ export default function EditPost() {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      finnishSubmit();
+     postService.editPost(id, formValues)
+     .then(response => handleResponse(response))
+     .then( navigate(`/post-details/${id}`))
+     .catch(error => setErrorMessage(error.message))
     }
   }, [errors]);
 
@@ -61,7 +46,7 @@ export default function EditPost() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <form onSubmit={handleSubmit} className={styles.login}>
+        <form onSubmit={(e) => handleSubmit(e, validatePostValues)} className={styles.login}>
           <h2>Edit Post</h2>
           <InputField
             label="country"
