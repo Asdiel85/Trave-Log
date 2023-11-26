@@ -1,4 +1,3 @@
-import Form from 'react-bootstrap/Form';
 import styles from './Login.module.css';
 import InputField from '../InputField/InputField';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
@@ -8,7 +7,7 @@ import { UserContext } from '../../contexts/AuthContext.jsx';
 import { useContext } from 'react';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { handleResponse } from '../../utils/handleResponse.js';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import { validateValuesLogin } from '../../utils/validateForms.js';
 import useForm from '../../hooks/useForm.jsx';
@@ -24,7 +23,6 @@ export default function Login() {
 
   const [, setLoggedUser] = useContext(UserContext);
   const [, setErrorMessage] = useContext(ErrorContext)
-  // const [submitting, setSubmitting] = useState('');
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {

@@ -7,11 +7,11 @@ import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import useForm from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
-import { useState, useEffect, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
-  const { formValues, onChangeHandler } = useForm({
+  const { formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({
     country: '',
     city: '',
     imageUrl: '',
@@ -20,44 +20,20 @@ export default function CreatePost() {
   });
 
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
-  const [submitting, setSubmitting] = useState(false);
+  const [, setErrorMessage] = useContext(ErrorContext);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrors(validatePostValues(formValues));
-    setSubmitting(true);
-    if (Object.keys(errors).length === 0) {
-      try {
-        const response = await postService.createPost(formValues);
-        await handleResponse(response);
-        navigate('/');
-      } catch (error) {
-        setErrorMessage(error.message);
-      }
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && submitting) {
+      postService.createPost(formValues)
+      .then(response => handleResponse(response))
+      .then(navigate('/'))
+      .catch(error => setErrorMessage(error.message))
     }
-  };
-
-  async function finnishSubmit() {
-    try {
-      const response = await postService.createPost(formValues);
-      await handleResponse(response);
-      navigate('/');
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-  }
-
-  // useEffect(() => {
-  //   if (Object.keys(errors).length === 0 && submitting) {
-  //     finnishSubmit();
-  //   }
-  // }, [errors]);
+  }, [errors]);
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.login}>
+      <form onSubmit={(e) => handleSubmit(e, validatePostValues)} className={styles.login}>
         <h2>Create Post</h2>
         <InputField
           testid={'country'}
