@@ -1,62 +1,89 @@
-// import React from 'react';
-// import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-// import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import CreatePost from './CreatePost';
+import { BASE_URL, CREATE_POST } from '../../utils/constants';
+import * as postService from '../../service/postService';
+import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render } from '@testing-library/react';
 
-// import CreatePost from './CreatePost';
+describe('Testing create post component', () => {
+  it('should render properly', () => {
+    const { getByTestId, getByText } = render(
+      <BrowserRouter>
+        <CreatePost />
+      </BrowserRouter>
+    );
+    expect(getByText('Create Post')).toBeTruthy();
+    expect(getByTestId('country')).toBeTruthy();
+    expect(getByTestId('city')).toBeTruthy();
+    expect(getByTestId('imageUrl')).toBeTruthy();
+    expect(getByTestId('cost')).toBeTruthy();
+    expect(getByTestId('description')).toBeTruthy();
+    expect(getByTestId('create')).toBeTruthy();
+  });
 
-// jest.mock('../../service/postService.js', () => ({
-//   createPost: jest.fn(),
-// }));
+  it('should show error paragraph if data is filled incorectly', async () => {
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <CreatePost />
+      </BrowserRouter>
+    );
 
-// describe('CreatePost Component', () => {
-//   it('displays error messages for invalid input in each field', async () => {
-//     render(
-//       <MemoryRouter>
-//         <CreatePost />
-//       </MemoryRouter>
-//     );
+    fireEvent.change(getByTestId('country'), {
+      target: { value: '' },
+    });
+    fireEvent.change(getByTestId('city'), {
+      target: { value: '' },
+    });
+    fireEvent.change(getByTestId('imageUrl'), {
+      target: { value: '' },
+    });
+    fireEvent.change(getByTestId('cost'), { target: { value: '0' } });
+    fireEvent.change(getByTestId('description'), {
+      target: { value: '' },
+    });
 
-//     // Submit form with invalid input
-//     fireEvent.click(screen.getByTestId('create'));
+    fireEvent.click(getByTestId('create'));
 
-//     // Wait for the asynchronous operation to complete
-//     await waitFor(() => {
-//       // Add assertions based on the expected behavior after a form submission with errors
-//       // For example, check if error messages are displayed for each field
-//       expect(screen.getByTestId('error-country')).toBeInTheDocument();
-//       expect(screen.getByTestId('error-city')).toBeInTheDocument();
-//       expect(screen.getByTestId('error-imageUrl')).toBeInTheDocument();
-//       expect(screen.getByTestId('error-cost')).toBeInTheDocument();
-//       expect(screen.getByTestId('error-description')).toBeInTheDocument();
-//     });
-//   });
+    expect(getByTestId('error-country')).toBeTruthy();
+    expect(getByTestId('error-city')).toBeTruthy();
+    expect(getByTestId('error-imageUrl')).toBeTruthy();
+    expect(getByTestId('error-cost')).toBeTruthy();
+    expect(getByTestId('error-description')).toBeTruthy();
+  });
+  it('should make api call when data filled correctly', () => {
+    const spy = vi.spyOn(postService, 'createPost');
 
-//   it('does not display error messages for valid input', async () => {
-//     render(
-//       <MemoryRouter>
-//         <CreatePost />
-//       </MemoryRouter>
-//     );
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <CreatePost />
+      </BrowserRouter>
+    );
 
-//     // Fill in the form with valid input
-//     fireEvent.change(screen.getByTestId('country'), { target: { value: 'Valid Country' } });
-//     fireEvent.change(screen.getByTestId('city'), { target: { value: 'Valid City' } });
-//     fireEvent.change(screen.getByTestId('imageUrl'), { target: { value: 'Valid Image URL' } });
-//     fireEvent.change(screen.getByTestId('cost'), { target: { value: '10' } });
-//     fireEvent.change(screen.getByTestId('description'), { target: { value: 'Valid Description' } });
+    fireEvent.change(getByTestId('country'), {
+      target: { value: 'Usa' },
+    });
+    fireEvent.change(getByTestId('city'), {
+      target: { value: 'Portland' },
+    });
+    fireEvent.change(getByTestId('imageUrl'), {
+      target: {
+        value: 'https://media.timeout.com/images/105937857/750/562/image.jpg',
+        cost: '6983',
+      },
+    });
+    fireEvent.change(getByTestId('cost'), { target: { value: '6983' } });
+    fireEvent.change(getByTestId('description'), {
+      target: { value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' },
+    });
 
-//     // Submit form
-//     fireEvent.click(screen.getByTestId('create'));
-
-//     // Wait for the asynchronous operation to complete
-//     await waitFor(() => {
-//       // Add assertions based on the expected behavior after a successful form submission
-//       // For example, check if error messages are NOT displayed
-//       expect(screen.queryByTestId('error-country')).not.toBeInTheDocument();
-//       expect(screen.queryByTestId('error-city')).not.toBeInTheDocument();
-//       expect(screen.queryByTestId('error-imageUrl')).not.toBeInTheDocument();
-//       expect(screen.queryByTestId('error-cost')).not.toBeInTheDocument();
-//       expect(screen.queryByTestId('error-description')).not.toBeInTheDocument();
-//     });
-//   });
-// });
+    fireEvent.click(getByTestId('create'));
+    expect(spy).toHaveBeenLastCalledWith({
+      country: 'Usa',
+      city: 'Portland',
+      imageUrl: 'https://media.timeout.com/images/105937857/750/562/image.jpg',
+      cost: '6983',
+      description: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    });
+  });
+});
