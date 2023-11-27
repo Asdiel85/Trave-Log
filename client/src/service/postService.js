@@ -8,8 +8,8 @@ export const getAllPosts = async () => {
 }
 
 export const getPostDetails = async (id) => {
-    const response = await fetch(`${BASE_URL}${POSTS}/${id}`)
-   return response;
+    const response = await fetch(`${BASE_URL}${POSTS}/${id}`);
+    return  response
 }
 
 export const createPost  = async (postData) => {
