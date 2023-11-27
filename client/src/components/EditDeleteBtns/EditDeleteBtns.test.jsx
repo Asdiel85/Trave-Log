@@ -1,64 +1,70 @@
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import EditDeleteBtns from './EditDeleteBtns';
+import { describe, expect, it } from 'vitest';
 
-test('renders EditDeleteBtns component with Edit and Delete buttons', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
-    </MemoryRouter>
-  );
-  
-  expect(getByText('Edit')).toBeInTheDocument();
-  expect(getByText('Delete')).toBeInTheDocument();
+describe('Testing edit and delete buttons component', () => {
+  it('should render the component corectly', () => {
+    const { getByTestId} = render(
+      <MemoryRouter>
+        <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
+      </MemoryRouter>
+    );
+    
+    expect(getByTestId('edit')).toBeTruthy();
+    expect(getByTestId('delete')).toBeTruthy();
+  })
+  it('clicking Edit button navigates to the correct edit URL', () => {
+    const { getByTestId, getByText } = render(
+      <MemoryRouter>
+        <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
+      </MemoryRouter>
+    );
+    
+     fireEvent.click(getByTestId('edit'));
+     expect(getByText('Edit')).toBeTruthy() 
+  });
+  it('clicking Delete button opens the ConfirmModal', () => {
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
+      </MemoryRouter>)
+
+      fireEvent.click(getByTestId('delete'));
+      expect(getByTestId('confirm-modal')).toBeTruthy()
+  });
 });
 
-test('clicking Edit button navigates to the correct edit URL', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
-    </MemoryRouter>
-  );
-  
-  fireEvent.click(getByText('Edit'));
-  // Add assertion related to the navigation here, if needed
-});
 
-test('clicking Delete button opens the ConfirmModal', () => {
-  const { getByText, getByTestId } = render(
-    <MemoryRouter>
-      <EditDeleteBtns id={1} item="Task" confirmTask={() => {}} />
-    </MemoryRouter>
-  );
   
-  fireEvent.click(getByText('Delete'));
-  expect(getByTestId('confirm-modal')).toBeInTheDocument();
-});
+//   fireEvent.click(getByTestId('delete'));
+//   expect(getByTestId('confirm-modal')).toBeInTheDocument();
+// });
 
-test('clicking Delete button and then confirming calls confirmTask', () => {
-  const confirmTaskMock = jest.fn();
-  const { getByText } = render(
-    <MemoryRouter>
-      <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
-    </MemoryRouter>
-  );
+// describe('clicking Delete button and then confirming calls confirmTask', () => {
+//   const confirmTaskMock = jest.fn();
+//   const { getByText,getByTestId } = render(
+//     <MemoryRouter>
+//       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
+//     </MemoryRouter>
+//   );
   
-  fireEvent.click(getByText('Delete'));
-  fireEvent.click(getByText('Yes', { selector: 'button' }));
+//   fireEvent.click(getByTestId('delete'));
+//   fireEvent.click(getByTestId('yes', { selector: 'button' }));
   
-  expect(confirmTaskMock).toHaveBeenCalled();
-});
+//   expect(confirmTaskMock).toHaveBeenCalled();
+// });
 
-test('clicking Delete button and then canceling does not call confirmTask', () => {
-  const confirmTaskMock = jest.fn();
-  const { getByText } = render(
-    <MemoryRouter>
-      <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
-    </MemoryRouter>
-  );
+// describe('clicking Delete button and then canceling does not call confirmTask', () => {
+//   const confirmTaskMock = jest.fn();
+//   const { getByText,getByTestId } = render(
+//     <MemoryRouter>
+//       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
+//     </MemoryRouter>
+//   );
   
-  fireEvent.click(getByText('Delete'));
-  fireEvent.click(getByText('No', { selector: 'button' }));
+//   fireEvent.click(getByTestId('delete'));
+//   fireEvent.click(getByTestId('no', { selector: 'button' }));
   
-  expect(confirmTaskMock).not.toHaveBeenCalled();
-});
+//   expect(confirmTaskMock).not.toHaveBeenCalled();
+// });

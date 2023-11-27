@@ -15,8 +15,8 @@ export default function EditDeleteBtns({id, item, confirmTask}) {
  
     return (
         <> 
-          <Button as={Link} to={`/${item}/${id}/edit`} variant="warning" size='sm'>Edit</Button>
-          <Button onClick={handleShowModalClick} variant="danger" size='sm'>Delete</Button> 
+          <Button data-testid ='edit' as={Link} to={`/${item}/${id}/edit`} variant="warning" size='sm'>Edit</Button>
+          <Button data-testid ='delete' onClick={handleShowModalClick} variant="danger" size='sm'>Delete</Button> 
           {showModal && (<ConfirmModal item={item} show = {showModal} confirmTask={confirmTask} handleClose = {closeModal}/>)}
         </>
       );
