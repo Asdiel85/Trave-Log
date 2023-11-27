@@ -11,7 +11,7 @@ export const useForm = (initialValues) => {
 
   const handleSubmit = (e, validate) => {
     e.preventDefault();
-    setErrors(validate(formValues, errors));
+    setErrors(validate(formValues));
     setSubmitting(true);
   };
 
