@@ -5,7 +5,7 @@ import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
-import useForm from '../../hooks/useForm.jsx';
+import {useForm} from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <form onSubmit={(e) => handleSubmit(e, validatePostValues)} className={styles.login}>
+      <form data-testid='post-form' onSubmit={(e) => handleSubmit(e, validatePostValues)} className={styles.login}>
         <h2>Create Post</h2>
         <InputField
           testid={'country'}

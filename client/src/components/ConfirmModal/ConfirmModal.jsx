@@ -11,10 +11,10 @@ export default function ConfirmModal({show, handleClose,confirmTask, item}) {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this {item}?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={confirmTask}>
+          <Button data-testid = 'yes' variant="secondary" onClick={confirmTask}>
             Yes
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button data-testid = 'no' variant="primary" onClick={handleClose}>
             No
           </Button>
         </Modal.Footer>

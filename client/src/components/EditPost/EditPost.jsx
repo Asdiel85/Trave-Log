@@ -7,7 +7,7 @@ import * as postService from '../../service/postService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useForm from '../../hooks/useForm.jsx';
+import {useForm} from '../../hooks/useForm.jsx';
 import { validatePostValues } from '../../utils/validateForms.js';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 

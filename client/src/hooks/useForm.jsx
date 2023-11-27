@@ -1,25 +1,25 @@
-import { useState, useContext } from "react";
+import { useState } from 'react';
 
-export default function useForm(initialValues) {
-    const [formValues, setFormValues] = useState(initialValues)
-    const [errors, setErrors] = useState({});
-    const [submitting, setSubmitting] = useState(false);
-   
+export const useForm = (initialValues) => {
+  const [formValues, setFormValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+
   const onChangeHandler = (e) => {
-        setFormValues(state => ({...state, [e.target.name]: e.target.value}))
-    }
+    setFormValues((state) => ({ ...state, [e.target.name]: e.target.value }));
+  };
 
-    const handleSubmit = (e, validate) => {
-        e.preventDefault();
-        setErrors(validate(formValues));
-        setSubmitting(true);
-      };
+  const handleSubmit = (e, validate) => {
+    e.preventDefault();
+    setErrors(validate(formValues, errors));
+    setSubmitting(true);
+  };
 
-    return {
-        formValues,
-        onChangeHandler,
-        handleSubmit,
-        errors,
-        submitting
-    }
-}
+  return {
+    formValues,
+    onChangeHandler,
+    handleSubmit,
+    errors,
+    submitting,
+  };
+};

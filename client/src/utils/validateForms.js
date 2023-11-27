@@ -2,8 +2,7 @@ const imagePattern = /^(http|https):\/\//;
 const emailPattern =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const validatePostValues = (inputValues) => {
-    let errors = {};
+export const validatePostValues = (inputValues, errors) => {
     if (!inputValues.country) {
       errors.country = 'Country is required';
     }
@@ -21,7 +20,6 @@ export const validatePostValues = (inputValues) => {
     } else if(inputValues.description.length < 20 || inputValues.description.length > 200){
       errors.description = 'Description should be between 20 and 200 characters'
     }
-    return errors;
   };
 
   export const validateUserValues = (inputValues) => {
