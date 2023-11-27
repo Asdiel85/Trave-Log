@@ -51,7 +51,7 @@ describe('Testing create post component', () => {
     expect(getByTestId('error-cost')).toBeTruthy();
     expect(getByTestId('error-description')).toBeTruthy();
   });
-  it('should make api call when data filled correctly', () => {
+  it('should make api call when data filled correctly', async () => {
     const spy = vi.spyOn(postService, 'createPost');
 
     const { getByTestId } = render(
