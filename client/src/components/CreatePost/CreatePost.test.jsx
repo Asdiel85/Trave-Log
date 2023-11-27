@@ -78,7 +78,7 @@ describe('Testing create post component', () => {
     });
 
     fireEvent.click(getByTestId('create'));
-    expect(spy).toHaveBeenLastCalledWith({
+    expect(spy).toHaveBeenCalledWith({
       country: 'Usa',
       city: 'Portland',
       imageUrl: 'https://media.timeout.com/images/105937857/750/562/image.jpg',

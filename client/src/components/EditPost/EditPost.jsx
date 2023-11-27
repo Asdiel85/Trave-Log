@@ -14,24 +14,23 @@ import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 export default function EditPost() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(true);
   const [, setErrorMessage] = useContext(ErrorContext);
   
-  const { formValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({ ...post });
-
+  
   useEffect(() => {
     postService
-      .getPostDetails(id)
-      .then((response) => handleResponse(response))
-      .then((post) => {
-        setPost(post);
-        Object.assign(formValues, post);
-        setLoading(false);
-      })
-      .catch((error) => setErrorMessage(error.message));
+    .getPostDetails(id)
+    .then((response) => handleResponse(response))
+    .then((post) => {
+      setFormValues(post)
+      setLoading(false);
+    })
+    .catch((error) => setErrorMessage(error.message));
   }, [id]);
-
+  
+  const { formValues, setFormValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({});
+  
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
      postService.editPost(id, formValues)
@@ -44,7 +43,7 @@ export default function EditPost() {
   return (
     <>
       {loading ? (
-        <LoadingSpinner />
+        <LoadingSpinner data-testid = 'loading' />
       ) : (
         <form onSubmit={(e) => handleSubmit(e, validatePostValues)} className={styles.login}>
           <h2>Edit Post</h2>
@@ -58,6 +57,7 @@ export default function EditPost() {
             value={formValues.country}
             onChange={onChangeHandler}
             error={errors.country}
+            testid= 'country'
           />
           {errors.country && <ErrorParagraph message={errors.country} />}
           <InputField
