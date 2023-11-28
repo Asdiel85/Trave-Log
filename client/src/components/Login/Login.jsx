@@ -59,7 +59,7 @@ export default function Login() {
           error={errors.email}
           testid="email"
         />
-        {errors.email && <ErrorParagraph message={errors.email} />}
+        {errors.email && <ErrorParagraph testId= 'error-email' message={errors.email} />}
         <InputField
           label="password"
           title="Password"
@@ -72,8 +72,8 @@ export default function Login() {
           error={errors.password}
           testid="password"
         />
-        {errors.password && <ErrorParagraph message={errors.password} />}
-        <SubmitBtn name="Login" />
+        {errors.password && <ErrorParagraph testId= 'error-password' message={errors.password} />}
+        <SubmitBtn testId= 'submit' name="Login" />
       </form>
     </>
   );
