@@ -9,75 +9,60 @@ import { validateUserValues } from '../../utils/validateForms.js';
 import InputField from '../InputField/InputField.jsx';
 import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import {useForm} from '../../hooks/useForm.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function Register() {
-  const { formValues, onChangeHandler } = useForm({
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    repeatPassword: '',
-    userAvatar: '',
-  });
-
   const navigate = useNavigate();
   const { id } = useParams();
   const [loggedUser, setLoggedUer] = useContext(UserContext);
-  const [user, setUser] = useState([]);
-  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
-  const [submitting, setSubmitting] = useState(false);
+  const [, setErrorMessage] = useContext(ErrorContext);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrors(validateUserValues(formValues));
-    setSubmitting(true);
-  };
-
-  async function finnishSubmit() {
-    try {
-      const response = await userService.editUser(id, formValues);
-      await handleResponse(response);
-
-      if (loggedUser.id === id) {
-        loggedUser.avatar = formValues.userAvatar;
-        loggedUser.isAdmin = formValues.isAdmin;
-        setLoggedUer(loggedUser);
-        localStorage.setItem('user', JSON.stringify(loggedUser));
-      }
-      navigate(`/user/${id}/details`);
-    } catch (error) {
-      if (error.message.includes('E1100')) {
-        setErrorMessage('Email Already Exists!');
-      } else {
-        setErrorMessage(error.message);
-      }
-    }
-  }
-
+ 
   useEffect(() => {
     userService
       .getOne(id)
       .then((response) => handleResponse(response))
       .then((user) => {
-        setUser(user);
-        Object.assign(formValues, user);
+       setFormValues(user)
         setLoading(false);
       })
       .catch((error) => setErrorMessage(error.message));
   }, [id]);
 
+  const { formValues, setFormValues, onChangeHandler, handleSubmit, errors, submitting } = useForm({});
+  
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      finnishSubmit();
+      userService.editUser(id, formValues)
+      .then(response => handleResponse(response))
+      .then(() => {
+        if (loggedUser.id === id) {
+          loggedUser.avatar = formValues.userAvatar;
+          loggedUser.isAdmin = formValues.isAdmin;
+          setLoggedUer(loggedUser);
+          localStorage.setItem('user', JSON.stringify(loggedUser));
+        }
+        navigate(`/user/${id}/details`);
+      })
+      .catch(error => {
+        if (error.message.includes('E1100')) {
+          setErrorMessage('Email Already Exists!');
+        } else {
+          setErrorMessage(error.message);
+        }
+      })
     }
   }, [errors]);
 
   return (
-    <form className={styles.login} onSubmit={handleSubmit}>
+    <>
+    {loading ? (
+      <LoadingSpinner data-testid = 'loading' />
+    ) : (
+    <form className={styles.login} onSubmit={(e) => handleSubmit(e, validateUserValues)}>
       <h2>Edit User</h2>
       <InputField
         label="email"
@@ -134,7 +119,7 @@ export default function Register() {
         name="repeatPassword"
         placeholder="Repeat password is required"
         id="repeatPassword"
-        value={formValues.repeatPassword}
+        value={formValues.repeatPassword || ''}
         onChange={onChangeHandler}
         error={errors.repeatPassword}
       />
@@ -155,5 +140,7 @@ export default function Register() {
       {errors.userAvatar && <ErrorParagraph message={errors.userAvatar} />}
       <SubmitBtn name="Register" />
     </form>
+    )}
+  </>
   );
 }
