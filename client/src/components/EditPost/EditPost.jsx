@@ -70,6 +70,7 @@ export default function EditPost() {
             value={formValues.city}
             onChange={onChangeHandler}
             error={errors.city}
+            testid={'city'}
           />
           {errors.city && <ErrorParagraph message={errors.city} />}
           <InputField
@@ -82,6 +83,7 @@ export default function EditPost() {
             value={formValues.imageUrl}
             onChange={onChangeHandler}
             error={errors.imageUrl}
+            testid= 'imageUrl'
           />
           {errors.imageUrl && <ErrorParagraph message={errors.imageUrl} />}
           <InputField
@@ -94,6 +96,7 @@ export default function EditPost() {
             value={formValues.cost}
             onChange={onChangeHandler}
             error={errors.cost}
+            testid= 'cost'
           />
           {errors.cost && <ErrorParagraph message={errors.cost} />}
           <label htmlFor="description">Description</label>
@@ -107,6 +110,7 @@ export default function EditPost() {
             rows="10"
             value={formValues.description}
             onChange={onChangeHandler}
+            data-testid = 'description'
           ></textarea>
           {errors.description && (
             <ErrorParagraph message={errors.description} />

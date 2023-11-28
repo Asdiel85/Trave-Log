@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import CreatePost from './CreatePost';
-import { BASE_URL, CREATE_POST } from '../../utils/constants';
 import * as postService from '../../service/postService';
 import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
@@ -78,7 +77,7 @@ describe('Testing create post component', () => {
     });
 
     fireEvent.click(getByTestId('create'));
-    expect(spy).toHaveBeenCalledWith({
+  await expect(spy).toHaveBeenCalledWith({
       country: 'Usa',
       city: 'Portland',
       imageUrl: 'https://media.timeout.com/images/105937857/750/562/image.jpg',
