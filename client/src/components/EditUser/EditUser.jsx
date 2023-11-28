@@ -16,7 +16,7 @@ import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 export default function Register() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [loggedUser, setLoggedUer] = useContext(UserContext);
+  const {loggedUser, setLoggedUer} = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [, setErrorMessage] = useContext(ErrorContext);
 
@@ -74,6 +74,7 @@ export default function Register() {
         value={formValues.email}
         onChange={onChangeHandler}
         error={errors.email}
+        testid= 'email'
       />
       {errors.email && <ErrorParagraph message={errors.email} />}
       <InputField
@@ -86,6 +87,7 @@ export default function Register() {
         value={formValues.firstName}
         onChange={onChangeHandler}
         error={errors.firstName}
+        testid= 'firstName'
       />
       {errors.firstName && <ErrorParagraph message={errors.firstName} />}
       <InputField
@@ -98,6 +100,7 @@ export default function Register() {
         value={formValues.lastName}
         onChange={onChangeHandler}
         error={errors.lastName}
+        testid= 'lastName'
       />
       {errors.lastName && <ErrorParagraph message={errors.lastName} />}
       <InputField
@@ -110,6 +113,7 @@ export default function Register() {
         value={formValues.password}
         onChange={onChangeHandler}
         error={errors.password}
+        testid= 'password'
       />
       {errors.password && <ErrorParagraph message={errors.password} />}
       <InputField
@@ -122,6 +126,7 @@ export default function Register() {
         value={formValues.repeatPassword || ''}
         onChange={onChangeHandler}
         error={errors.repeatPassword}
+        testid= 'repeatPassword'
       />
       {errors.repeatPassword && (
         <ErrorParagraph message={errors.repeatPassword} />
@@ -136,6 +141,7 @@ export default function Register() {
         value={formValues.userAvatar}
         onChange={onChangeHandler}
         error={errors.userAvatar}
+        testid= 'userAvatar'
       />
       {errors.userAvatar && <ErrorParagraph message={errors.userAvatar} />}
       <SubmitBtn name="Register" />

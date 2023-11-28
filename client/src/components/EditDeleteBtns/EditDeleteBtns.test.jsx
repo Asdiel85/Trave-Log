@@ -37,34 +37,3 @@ describe('Testing edit and delete buttons component', () => {
 
 
   
-//   fireEvent.click(getByTestId('delete'));
-//   expect(getByTestId('confirm-modal')).toBeInTheDocument();
-// });
-
-// describe('clicking Delete button and then confirming calls confirmTask', () => {
-//   const confirmTaskMock = jest.fn();
-//   const { getByText,getByTestId } = render(
-//     <MemoryRouter>
-//       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
-//     </MemoryRouter>
-//   );
-  
-//   fireEvent.click(getByTestId('delete'));
-//   fireEvent.click(getByTestId('yes', { selector: 'button' }));
-  
-//   expect(confirmTaskMock).toHaveBeenCalled();
-// });
-
-// describe('clicking Delete button and then canceling does not call confirmTask', () => {
-//   const confirmTaskMock = jest.fn();
-//   const { getByText,getByTestId } = render(
-//     <MemoryRouter>
-//       <EditDeleteBtns id={1} item="Task" confirmTask={confirmTaskMock} />
-//     </MemoryRouter>
-//   );
-  
-//   fireEvent.click(getByTestId('delete'));
-//   fireEvent.click(getByTestId('no', { selector: 'button' }));
-  
-//   expect(confirmTaskMock).not.toHaveBeenCalled();
-// });

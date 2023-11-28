@@ -8,7 +8,7 @@ export default function ErrorModal() {
   const handleClose = () => setErrorMessage(null)
 
   return (
-    <Modal show={errorMessage ? true : false} onHide={handleClose}>
+    <Modal show={errorMessage ? true : false} onHide={handleClose} data-testid = 'confirm-modal'>
       <Modal.Header closeButton>
         <Modal.Title>Error</Modal.Title>
       </Modal.Header>
