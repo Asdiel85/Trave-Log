@@ -21,8 +21,8 @@ export default function PostDetails() {
   const [post, setPost] = useState({});
   const [likePost, setLikePost] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
+  const [loggedUser,] = useContext(UserContext);
+  const [, setErrorMessage] = useContext(ErrorContext);
 
   const handleLikePostClick = async () => {
     try {
@@ -74,7 +74,7 @@ export default function PostDetails() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Card style={{ width: '60%', margin: '30px auto' }}>
+        <Card data-tesid = 'card' style={{ width: '60%', margin: '30px auto' }}>
           <Card.Img variant="top" src={post.imageUrl} />
           <Card.Body>
             <Card.Title>
