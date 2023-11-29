@@ -20,8 +20,8 @@ export default function Post({
   likes,
   liked,
 }) {
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
+  const [loggedUser,] = useContext(UserContext);
+  const [, setErrorMessage] = useContext(ErrorContext);
   const [likePost, setLikePost] = useState(liked);
   const [likesCount, setLikesCount] = useState(likes.length);
 
@@ -48,7 +48,7 @@ export default function Post({
   };
 
   return (
-    <article className={styles.card}>
+    <article data-testid = 'postCard' className={styles.card}>
       <div className={styles.info}>
         <UserAvatar id={owner} userAvatar={userAvatar} />
         <span>{country}</span>
@@ -57,13 +57,13 @@ export default function Post({
         <img src={imageUrl} alt="Post image" className={styles.postImg} />
       </Link>
       {loggedUser && (
-        <div className={styles.interaction}>
+        <div data-testId = 'interaction' className={styles.interaction}>
           <div>
             <span>Likes {likesCount}</span>
             {loggedUser.id !== owner && (
               <>
                 {likePost && (
-                  <img
+                  <img data-testid = 'unLikePost'
                     onClick={handleUnlikeClick}
                     className={styles.cardIcon}
                     src={heartFilled}
@@ -71,7 +71,7 @@ export default function Post({
                   />
                 )}{' '}
                 {!likePost && (
-                  <img
+                  <img data-testid = 'likePost'
                     onClick={handleLikePostClick}
                     className={styles.cardIcon}
                     src={heart}
