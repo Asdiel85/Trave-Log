@@ -17,7 +17,7 @@ import { handleResponse } from '../../utils/handleResponse.js';
 export default function PostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({});
   const [likePost, setLikePost] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
@@ -74,7 +74,7 @@ export default function PostDetails() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Card data-tesid = 'card' style={{ width: '60%', margin: '30px auto' }}>
+        <Card data-testid = 'card' style={{ width: '60%', margin: '30px auto' }}>
           <Card.Img variant="top" src={post.imageUrl} />
           <Card.Body>
             <Card.Title>
