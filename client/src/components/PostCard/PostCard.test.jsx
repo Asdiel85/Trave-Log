@@ -1,9 +1,11 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
-import Post from './PostCard.jsx';
 import { BrowserRouter } from 'react-router-dom';
+import Post from './PostCard.jsx';
+import * as postService from '../../service/postService.js';
+
 const post = {
   _id: '65579776286ee71f5cbf1021',
   userAvatar: 'https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg',
@@ -25,48 +27,79 @@ describe('Testing post card component', () => {
   it('should render post correctly', () => {
     const loggedUser = null;
     const { getByTestId, queryByTestId } = render(
-        <BrowserRouter>
-      <ErrorContext.Provider value={[, setErrorMessage]}>
-        <UserContext.Provider value={[loggedUser, ]}>
-          <Post
-            userAvatar={post.userAvatar}
-            country={post.country}
-            imageUrl={post.imageUrl}
-            _id={post._id}
-            owner={post.owner}
-            confirmTask={vi.fn()}
-            liked={false}
-            likes={post.likes}
-          />
-        </UserContext.Provider>
-      </ErrorContext.Provider>
+      <BrowserRouter>
+        <ErrorContext.Provider value={[, setErrorMessage]}>
+          <UserContext.Provider value={[loggedUser]}>
+            <Post
+              userAvatar={post.userAvatar}
+              country={post.country}
+              imageUrl={post.imageUrl}
+              _id={post._id}
+              owner={post.owner}
+              confirmTask={vi.fn()}
+              liked={false}
+              likes={post.likes}
+            />
+          </UserContext.Provider>
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
     expect(getByTestId('postCard')).toBeTruthy();
     expect(queryByTestId('interaction')).toBeNull();
   });
   it('should render properly with logged user', () => {
-    const loggedUser = 'Pesho'
+    const loggedUser = 'Pesho';
     const { getByTestId, queryByTestId } = render(
-        <BrowserRouter>
-      <ErrorContext.Provider value={[, setErrorMessage]}>
-        <UserContext.Provider value={[loggedUser, ]}>
-          <Post
-            userAvatar={post.userAvatar}
-            country={post.country}
-            imageUrl={post.imageUrl}
-            _id={post._id}
-            owner={post.owner}
-            confirmTask={vi.fn()}
-            liked={false}
-            likes={post.likes}
-          />
-        </UserContext.Provider>
-      </ErrorContext.Provider>
-      </BrowserRouter>)
-       expect(getByTestId('postCard')).toBeTruthy();
-       expect(getByTestId('interaction')).toBeTruthy();
-       expect(getByTestId('likePost')).toBeTruthy();
-       expect(queryByTestId('unLikePost')).toBeNull()
-  })
+      <BrowserRouter>
+        <ErrorContext.Provider value={[, setErrorMessage]}>
+          <UserContext.Provider value={[loggedUser]}>
+            <Post
+              userAvatar={post.userAvatar}
+              country={post.country}
+              imageUrl={post.imageUrl}
+              _id={post._id}
+              owner={post.owner}
+              confirmTask={vi.fn()}
+              liked={false}
+              likes={post.likes}
+            />
+          </UserContext.Provider>
+        </ErrorContext.Provider>
+      </BrowserRouter>
+    );
+    expect(getByTestId('postCard')).toBeTruthy();
+    expect(getByTestId('interaction')).toBeTruthy();
+    expect(getByTestId('likePost')).toBeTruthy();
+    expect(queryByTestId('unLikePost')).toBeNull();
+  });
+  it('should show if liked or not correctly', async () => {
+    const loggedUser = { email: 'Pesho', id: '1' };
+    const { getByTestId } = render(
+      <BrowserRouter>
+        <ErrorContext.Provider value={[, setErrorMessage]}>
+          <UserContext.Provider value={[loggedUser]}>
+            <Post
+              userAvatar={post.userAvatar}
+              country={post.country}
+              imageUrl={post.imageUrl}
+              _id={post._id}
+              owner={post.owner}
+              confirmTask={vi.fn()}
+              liked={false}
+              likes={post.likes}
+            />
+          </UserContext.Provider>
+        </ErrorContext.Provider>
+      </BrowserRouter>
+    );
+
+    const spy = vi.spyOn(postService, 'likePost');
+
+    fireEvent.click(getByTestId('likePost'));
+    expect(spy).toHaveBeenCalledWith(post._id, '1');
+    
+    waitFor(() => {
+        expect(getByTestId('unLikePost')).toBeTruthy();
+    }) 
+  });
 });

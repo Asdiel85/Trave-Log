@@ -57,7 +57,7 @@ export default function Post({
         <img src={imageUrl} alt="Post image" className={styles.postImg} />
       </Link>
       {loggedUser && (
-        <div data-testId = 'interaction' className={styles.interaction}>
+        <div data-testid = 'interaction' className={styles.interaction}>
           <div>
             <span>Likes {likesCount}</span>
             {loggedUser.id !== owner && (
