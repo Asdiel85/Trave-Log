@@ -4,8 +4,10 @@ import CreatePost from './CreatePost';
 import * as postService from '../../service/postService';
 import { describe, it, expect, vi } from 'vitest';
 import { fireEvent, render } from '@testing-library/react';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 describe('Testing create post component', () => {
+  const setErrorMessage = vi.fn();
   it('should render properly', () => {
     const { getByTestId, getByText } = render(
       <BrowserRouter>
@@ -24,7 +26,9 @@ describe('Testing create post component', () => {
   it('should show error paragraph if data is filled incorectly', async () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <CreatePost />
+        <ErrorContext.Provider value="message">
+          <CreatePost />
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
 
@@ -52,10 +56,13 @@ describe('Testing create post component', () => {
   });
   it('should make api call when data filled correctly', async () => {
     const spy = vi.spyOn(postService, 'createPost');
+    const errorMessage = null;
 
     const { getByTestId } = render(
       <BrowserRouter>
-        <CreatePost />
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+          <CreatePost />
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
 
@@ -77,7 +84,7 @@ describe('Testing create post component', () => {
     });
 
     fireEvent.click(getByTestId('create'));
-  await expect(spy).toHaveBeenCalledWith({
+    await expect(spy).toHaveBeenCalledWith({
       country: 'Usa',
       city: 'Portland',
       imageUrl: 'https://media.timeout.com/images/105937857/750/562/image.jpg',

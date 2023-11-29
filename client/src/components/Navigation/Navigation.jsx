@@ -41,10 +41,10 @@ export default function Navigation() {
           <Nav>
             {!loggedUser && (
               <>
-                <Nav.Link as={Link} to={'/login'}>
+                <Nav.Link data-testid = 'login' as={Link} to={'/login'}>
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to={'/register'}>
+                <Nav.Link data-testid = 'register' as={Link} to={'/register'}>
                   Register
                 </Nav.Link>
               </>
