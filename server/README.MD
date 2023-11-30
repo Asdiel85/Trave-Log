@@ -1,5 +1,12 @@
 # SERVER DOCUMENTATION
 
+## Quick Links
+
+- [Authentication Controller Documentation](#authentication-controller-documentation)
+- [Posts Controller Documentation](#posts-controller-documentation)
+- [User Controller Documentation](#user-controller-documentation)
+
+
 ## Authentication Controller Documentation
 
 ### Register User
