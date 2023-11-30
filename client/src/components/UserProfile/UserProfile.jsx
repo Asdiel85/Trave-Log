@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/esm/Button.js';
 import UserPosts from '../UserPosts/UserPosts.jsx';
 import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
+import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function UserProfile() {
   const { id } = useParams();
@@ -18,6 +19,7 @@ export default function UserProfile() {
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
   const [showPosts, setShowPosts] = useState(false);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext)
 
   const hadnleShowPostsClick = (e) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ export default function UserProfile() {
         localStorage.removeItem('user')
       }
     } catch (error) {
-      console.log(error.message);
+      setErrorMessage(error.message)
     }
   }
 
@@ -47,7 +49,7 @@ export default function UserProfile() {
         setLoading(false);
       })
       .catch((error) => {
-        navigate('/login');
+        setErrorMessage(error.message)
       });
   }, [id]);
 

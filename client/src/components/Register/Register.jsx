@@ -1,8 +1,8 @@
 import styles from './Register.module.css';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
-import {useForm} from '../../hooks/useForm.jsx';
+import { useForm } from '../../hooks/useForm.jsx';
 import * as userService from '../../service/userService.js';
 import { handleResponse } from '../../utils/handleResponse.js';
 import { validateUserValues } from '../../utils/validateForms.js';
@@ -11,25 +11,18 @@ import SubmitBtn from '../SubmitBtn/SubmitBtn.jsx';
 import ErrorParagraph from '../ErrorParagraph/ErrorParagraph.jsx';
 
 export default function Register() {
-  const { formValues, onChangeHandler } = useForm({
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    repeatPassword: '',
-    userAvatar: '',
-  });
+  const { formValues, onChangeHandler, handleSubmit, errors, submitting } =
+    useForm({
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      repeatPassword: '',
+      userAvatar: '',
+    });
 
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
-  const [submitting, setSubmitting] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrors(validateUserValues(formValues));
-    setSubmitting(true);
-  };
+  const [, setErrorMessage] = useContext(ErrorContext);
 
   async function finnishSubmit() {
     try {
@@ -48,7 +41,10 @@ export default function Register() {
   }, [errors]);
 
   return (
-    <form className={styles.login} onSubmit={handleSubmit}>
+    <form
+      className={styles.login}
+      onSubmit={(e) => handleSubmit(e, validateUserValues)}
+    >
       <h2>Register</h2>
       <InputField
         label="email"
@@ -60,8 +56,11 @@ export default function Register() {
         value={formValues.email}
         onChange={onChangeHandler}
         error={errors.email}
+        testid="email"
       />
-      {errors.email && <ErrorParagraph message={errors.email} />}
+      {errors.email && (
+        <ErrorParagraph testId="error-email" message={errors.email} />
+      )}
       <InputField
         label="firstName"
         title="First name"
@@ -72,8 +71,11 @@ export default function Register() {
         value={formValues.firstName}
         onChange={onChangeHandler}
         error={errors.firstName}
+        testid="firstName"
       />
-      {errors.firstName && <ErrorParagraph message={errors.firstName} />}
+      {errors.firstName && (
+        <ErrorParagraph testId="error-firstName" message={errors.firstName} />
+      )}
       <InputField
         label="lastName"
         title="Last name"
@@ -84,8 +86,11 @@ export default function Register() {
         value={formValues.lastName}
         onChange={onChangeHandler}
         error={errors.lastName}
+        testid="lastName"
       />
-      {errors.lastName && <ErrorParagraph message={errors.lastName} />}
+      {errors.lastName && (
+        <ErrorParagraph testId="error-lastName" message={errors.lastName} />
+      )}
       <InputField
         label="password"
         title="Password"
@@ -96,8 +101,11 @@ export default function Register() {
         value={formValues.password}
         onChange={onChangeHandler}
         error={errors.password}
+        testid="password"
       />
-      {errors.password && <ErrorParagraph message={errors.password} />}
+      {errors.password && (
+        <ErrorParagraph testId="error-password" message={errors.password} />
+      )}
       <InputField
         label="repeatPassword"
         title="Repeat password"
@@ -108,6 +116,7 @@ export default function Register() {
         value={formValues.repeatPassword}
         onChange={onChangeHandler}
         error={errors.repeatPassword}
+        testid="repeatPassword"
       />
       {errors.repeatPassword && (
         <ErrorParagraph message={errors.repeatPassword} />
@@ -122,9 +131,12 @@ export default function Register() {
         value={formValues.userAvatar}
         onChange={onChangeHandler}
         error={errors.userAvatar}
+        testid="userAvatar"
       />
-      {errors.userAvatar && <ErrorParagraph message={errors.userAvatar} />}
-      <SubmitBtn name="Register" />
+      {errors.userAvatar && (
+        <ErrorParagraph testId="error-userAvatar" message={errors.userAvatar} />
+      )}
+      <SubmitBtn testId="register" name="Register" />
     </form>
   );
 }
