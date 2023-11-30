@@ -8,10 +8,13 @@ import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 describe('Testing create post component', () => {
   const setErrorMessage = vi.fn();
+  const errorMessage = null;
   it('should render properly', () => {
     const { getByTestId, getByText } = render(
       <BrowserRouter>
-        <CreatePost />
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+          <CreatePost />
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
     expect(getByText('Create Post')).toBeTruthy();
@@ -26,7 +29,7 @@ describe('Testing create post component', () => {
   it('should show error paragraph if data is filled incorectly', async () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <ErrorContext.Provider value="message">
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <CreatePost />
         </ErrorContext.Provider>
       </BrowserRouter>
@@ -56,7 +59,6 @@ describe('Testing create post component', () => {
   });
   it('should make api call when data filled correctly', async () => {
     const spy = vi.spyOn(postService, 'createPost');
-    const errorMessage = null;
 
     const { getByTestId } = render(
       <BrowserRouter>
