@@ -45,14 +45,24 @@ Users can share their travel experiences by filling out a comprehensive form tha
 
 
 ## Screenshots
-
+  Login Component
 ![Login](./Screen-Shots/Login.PNG)
-a
+
+  Register Component
 ![Register](./Screen-Shots/Register.PNG)
-a
+
+  Dashboard without logged in user
 ![Dashboard](./Screen-Shots/Dashboard.PNG)
+
+Dashboard with logged in user
 ![Dashboard with user](./Screen-Shots/DashboardLogin.PNG)
+
+Post Details
 ![Post Details](./Screen-Shots/PostDetails.PNG)
+
+User Profile
 ![User Profile](./Screen-Shots/UserProfile.PNG)
+
+Users Table
 ![Users](./Screen-Shots/Users.PNG)
 
