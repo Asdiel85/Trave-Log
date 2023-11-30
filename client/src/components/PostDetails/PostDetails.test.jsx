@@ -26,7 +26,7 @@ const post = {
 describe('testing post details component',  () => {
 
   it('should render component with the correct data',  async() => {
-    const spy = vi.spyOn(postService, 'getPostDetails');
+    global.fetch = vi.fn();
     const loggedUser = null;
     const setLoggedUser = vi.fn();
     const setErrorMessage = vi.fn();
@@ -34,12 +34,13 @@ describe('testing post details component',  () => {
     const currentPost = post;
     const setPost = vi.fn();
 
-    vi.spyOn(Router, 'useParams').mockReturnValue({
-      id: '65579776286ee71f5cbf1021',
-    });
-    vi.spyOn(React, 'useEffect').mockReturnValue(post);
-    vi.spyOn(React, 'useState').mockReturnValueOnce([post, setPost])
-    render(
+    function createFetchResponse(data) {
+      return { json: () => new Promise((resolve) => resolve(data)) };
+    }
+
+    fetch.mockResolvedValue(createFetchResponse(post));
+   
+    async () => { render(
       <BrowserRouter>
         <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <UserContext.Provider value={[loggedUser, setLoggedUser]}>
@@ -49,9 +50,10 @@ describe('testing post details component',  () => {
       </BrowserRouter>
     );
     
-    
+    const data =  await postService.getPostDetails(post._id);
    
 
-    expect(screen.getByTestId('car')).toBeTruthy()
+    expect(screen.getByTestId('card')).toBeTruthy()
+    }
   });
 });
