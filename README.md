@@ -47,7 +47,9 @@ Users can share their travel experiences by filling out a comprehensive form tha
 ## Screenshots
 
 ![Login](./Screen-Shots/Login.PNG)
+a
 ![Register](./Screen-Shots/Register.PNG)
+a
 ![Dashboard](./Screen-Shots/Dashboard.PNG)
 ![Dashboard with user](./Screen-Shots/DashboardLogin.PNG)
 ![Post Details](./Screen-Shots/PostDetails.PNG)
