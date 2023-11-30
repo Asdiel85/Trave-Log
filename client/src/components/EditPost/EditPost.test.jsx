@@ -1,12 +1,16 @@
 import React from 'react';
 import Router from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
 import EditPost from './EditPost';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-describe('testing edit post component', async () => {
-  global.fetch = vi.fn();
+describe('testing edit post component', () => {
+  jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
+    useParams: jest.fn(),
+  }));
+  
+  global.fetch = jest.fn();
 
   function createFetchResponse(data) {
     return { json: () => new Promise((resolve) => resolve(data)) };
@@ -28,7 +32,7 @@ describe('testing edit post component', async () => {
   };
   fetch.mockResolvedValue(createFetchResponse(post));
   it('it should render with the correct data', async () => {
-    vi.spyOn(Router, 'useParams').mockReturnValue({
+    jest.spyOn(Router, 'useParams').mockReturnValue({
       id: '65579776286ee71f5cbf1021',
     });
     (async () => {

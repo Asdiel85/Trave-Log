@@ -1,12 +1,13 @@
 import React from 'react';
-import { getByTestId, render, screen } from '@testing-library/react';
-import {  BrowserRouter, MemoryRouter} from 'react-router-dom';
+import {  render } from '@testing-library/react';
+import {  MemoryRouter} from 'react-router-dom';
 import Router from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import PostDetails from './PostDetails.jsx';
 import * as postService from '../../service/postService.js';
+
+
 
 const post = {
   _id: '65579776286ee71f5cbf1021',
@@ -24,34 +25,38 @@ const post = {
 };
 
 describe('testing post details component',  () => {
-
+  jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
+    useParams: jest.fn(),
+  }));
+  
   it('should render component with the correct data',  async() => {
-    const spy = vi.spyOn(postService, 'getPostDetails');
+    const spy = jest.spyOn(postService, 'getPostDetails');
     const loggedUser = null;
-    const setLoggedUser = vi.fn();
-    const setErrorMessage = vi.fn();
+    const setLoggedUser = jest.fn();
+    const setErrorMessage = jest.fn();
     const errorMessage = '';
     const currentPost = post;
-    const setPost = vi.fn();
+    const setPost = jest.fn();
 
-    vi.spyOn(Router, 'useParams').mockReturnValue({
+    jest.spyOn(Router, 'useParams').mockReturnValue({
       id: '65579776286ee71f5cbf1021',
     });
-    vi.spyOn(React, 'useEffect').mockReturnValue(post);
-    vi.spyOn(React, 'useState').mockReturnValueOnce([post, setPost])
-    render(
-      <BrowserRouter>
+    jest.spyOn(React, 'useEffect').mockReturnValue(post);
+    jest.spyOn(React, 'useState').mockReturnValueOnce([currentPost, setPost])
+
+
+   const {getByTestId} = render(
+      <MemoryRouter initialEntries={[`/post-details/${post._id}`]}>   
         <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
-          <UserContext.Provider value={[loggedUser, setLoggedUser]}>
-            <PostDetails />
+        <UserContext.Provider value={[loggedUser, setLoggedUser]}>          
+            <PostDetails/>
           </UserContext.Provider>
         </ErrorContext.Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    
-    
-   
 
-    expect(screen.getByTestId('car')).toBeTruthy()
+      expect(getByTestId('card')).toBeTruthy()
+
   });
 });

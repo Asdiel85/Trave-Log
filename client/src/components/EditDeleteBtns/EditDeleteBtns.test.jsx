@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import EditDeleteBtns from './EditDeleteBtns';
-import { describe, expect, it } from 'vitest';
 
 describe('Testing edit and delete buttons component', () => {
   it('should render the component corectly', () => {

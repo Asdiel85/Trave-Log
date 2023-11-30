@@ -1,6 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
 import ConfirmModal from './ConfirmModal.jsx';
-import { describe, it, expect, vi } from 'vitest';
 
 describe('Testing confirm modal', () => {
   it('should render properly', () => {
@@ -17,7 +16,7 @@ describe('Testing confirm modal', () => {
     expect(getByTestId('no')).toBeTruthy();
   });
   it('should calls confirmTask when "Yes" button is clicked', () => {
-    const confirmTaskMock = vi.fn();
+    const confirmTaskMock = jest.fn();
     const { getByTestId } = render(
       <ConfirmModal
         show={true}
@@ -31,7 +30,7 @@ describe('Testing confirm modal', () => {
     expect(confirmTaskMock).toHaveBeenCalled();
   });
   it(' should calls handleClose when "No" button is clicked', () => {
-    const handleCloseMock = vi.fn();
+    const handleCloseMock = jest.fn();
     const { getByTestId } = render(
       <ConfirmModal
         show={true}

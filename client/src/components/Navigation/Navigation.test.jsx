@@ -1,11 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
 import { render } from '@testing-library/react';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import Navigation from './Navigation.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('testing navigation component', () => {
-  const setLoggedUser = vi.fn();
+  const setLoggedUser = jest.fn();
   it('should render correctly without user', () => {
     const loggedUser = null;
 

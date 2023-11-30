@@ -13,7 +13,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 import {useForm} from '../../hooks/useForm.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
-export default function Register() {
+export default function EditUser() {
   const navigate = useNavigate();
   const { id } = useParams();
   const {loggedUser, setLoggedUer} = useContext(UserContext);

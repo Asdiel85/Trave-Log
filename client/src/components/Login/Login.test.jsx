@@ -1,21 +1,24 @@
 import React from 'react';
-import { describe, expect, it, vi } from 'vitest';
+
 import { fireEvent, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
-import ErrorProvider from '../../contexts/ErrorContext';
+import ErrorProvider, { ErrorContext } from '../../contexts/ErrorContext';
 import AuthProvider from '../../contexts/AuthContext';
 import * as userService from '../../service/userService';
+
+const setErrorMessage = jest.fn();
+const errorMessage = ''
 
 describe('testing login component', () => {
   it('should render correctly', () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <ErrorProvider>
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <AuthProvider>
             <Login />
           </AuthProvider>
-        </ErrorProvider>
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
     expect(getByTestId('email')).toBeTruthy();
@@ -25,11 +28,11 @@ describe('testing login component', () => {
   it('should show error messages when fields are empty', () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <ErrorProvider>
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <AuthProvider>
             <Login />
           </AuthProvider>
-        </ErrorProvider>
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
 
@@ -48,15 +51,15 @@ describe('testing login component', () => {
   it('should make correct api call with correct filled data', () => {
     const { getByTestId } = render(
       <BrowserRouter>
-        <ErrorProvider>
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <AuthProvider>
             <Login />
           </AuthProvider>
-        </ErrorProvider>
+        </ErrorContext.Provider>
       </BrowserRouter>
     );
 
-    const spy = vi.spyOn(userService, 'login');
+    const spy = jest.spyOn(userService, 'login');
 
     fireEvent.change(getByTestId('email'), {
       target: { value: 'asdiel@abv.bg' },

@@ -1,5 +1,4 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import { BrowserRouter } from 'react-router-dom';
@@ -22,7 +21,7 @@ const post = {
 };
 
 describe('Testing post card component', () => {
-  const setErrorMessage = vi.fn();
+  const setErrorMessage = jest.fn();
 
   it('should render post correctly', () => {
     const loggedUser = null;
@@ -36,7 +35,7 @@ describe('Testing post card component', () => {
               imageUrl={post.imageUrl}
               _id={post._id}
               owner={post.owner}
-              confirmTask={vi.fn()}
+              confirmTask={jest.fn()}
               liked={false}
               likes={post.likes}
             />
@@ -59,7 +58,7 @@ describe('Testing post card component', () => {
               imageUrl={post.imageUrl}
               _id={post._id}
               owner={post.owner}
-              confirmTask={vi.fn()}
+              confirmTask={jest.fn()}
               liked={false}
               likes={post.likes}
             />
@@ -84,7 +83,7 @@ describe('Testing post card component', () => {
               imageUrl={post.imageUrl}
               _id={post._id}
               owner={post.owner}
-              confirmTask={vi.fn()}
+              confirmTask={jest.fn()}
               liked={false}
               likes={post.likes}
             />
@@ -93,13 +92,10 @@ describe('Testing post card component', () => {
       </BrowserRouter>
     );
 
-    const spy = vi.spyOn(postService, 'likePost');
+    const spy = jest.spyOn(postService, 'likePost');
 
     fireEvent.click(getByTestId('likePost'));
-    expect(spy).toHaveBeenCalledWith(post._id, '1');
-    
-    waitFor(() => {
+    expect(spy).toHaveBeenCalledWith(post._id, '1'); 
         expect(getByTestId('unLikePost')).toBeTruthy();
-    }) 
   });
 });

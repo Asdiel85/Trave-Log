@@ -1,4 +1,3 @@
-import { describe, expect, it, vi } from "vitest";
 import * as postService from '../../service/postService'
 import { BASE_URL } from "../../utils/constants";
 
@@ -36,7 +35,7 @@ const dataArray = [
 
 describe('Tesing feed component', () => {
     it('should render all the data', async () => {
-        global.fetch = vi.fn()
+        global.fetch = jest.fn()
 
 function createFetchResponse(data) {
   return { json: () => new Promise((resolve) => resolve(data)) }
