@@ -43,3 +43,8 @@ New users can register by providing basic information, and existing users can lo
 
 Users can share their travel experiences by filling out a comprehensive form that includes details such as location, photo, cost, and description.
 
+
+## Screenshots
+
+![Login](./Screen-Shots/Login.PNG)
+
