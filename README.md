@@ -7,12 +7,6 @@ Not owners will be albe to like and dislike(only if it's been liked before) post
 There are two json files extracted from MongoDBCompas with users and posts for testing.
 The password for all the users is: 11111
 
-## Quick Links
-
-- [Authentication Controller Documentation](#authentication-controller-documentation)
-- [Posts Controller Documentation](#posts-controller-documentation)
-- [User Controller Documentation](#user-controller-documentation)
-
 ## Getting Started
 
 To get started with Travel Log Web App, follow these simple steps:
