@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import * as userService from '../../service/userService';
@@ -14,12 +14,11 @@ import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function UserProfile() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
   const [showPosts, setShowPosts] = useState(false);
-  const [errorMessage, setErrorMessage] = useContext(ErrorContext)
+  const [, setErrorMessage] = useContext(ErrorContext)
 
   const hadnleShowPostsClick = (e) => {
     e.preventDefault();
@@ -58,7 +57,7 @@ export default function UserProfile() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <Card style={{ maxWidth: '500px', width: '100%', margin: '30px auto' }}>
+        <Card data-testid = 'card' style={{ maxWidth: '500px', width: '100%', margin: '30px auto' }}>
           <Card.Img variant="top" src={user.userAvatar} />
           <Card.Body>
             <Card.Title>
@@ -67,7 +66,7 @@ export default function UserProfile() {
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroup.Item>Email: {user.email}</ListGroup.Item>
-            <ListGroup.Item as={Button} onClick={hadnleShowPostsClick}>
+            <ListGroup.Item data-testid = 'showPostsBtn' as={Button} onClick={hadnleShowPostsClick}>
               Show Posts
             </ListGroup.Item>
           </ListGroup>

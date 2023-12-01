@@ -1,7 +1,7 @@
+import { useState, useEffect, useContext } from 'react';
 import PostCard from '../PostCard/PostCard';
 import * as postService from '../../service/postService';
-import { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { handleResponse } from '../../utils/handleResponse.js';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
@@ -11,13 +11,13 @@ export default function Feed() {
   const [posts, setPosts] = useState([]);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useContext(ErrorContext);
-  const navigate = useNavigate();
 
   useEffect(() => {
     postService
       .getAllPosts()
-      .then((result) => {
-        setPosts(result);
+      .then((responese) => handleResponse(responese))
+      .then((posts) =>{
+        setPosts(posts);
         setLoading(false);
       })
       .catch((error) => {

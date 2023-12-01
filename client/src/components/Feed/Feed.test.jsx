@@ -1,8 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
+import { render, waitFor } from '@testing-library/react';
 import * as postService from '../../service/postService'
-import { BASE_URL } from "../../utils/constants";
+import { BrowserRouter } from "react-router-dom";
+import { ErrorContext } from "../../contexts/ErrorContext.jsx";
+import { UserContext } from "../../contexts/AuthContext.jsx";
+import Feed from "./Feed.jsx";
 
-const dataArray = [
+const posts = [
     {
       _id: "6557985c286ee71f5cbf1041",
       userAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHb…",
@@ -35,19 +39,29 @@ const dataArray = [
   
 
 describe('Tesing feed component', () => {
+  const loggedUser = 'Pesho';
+  const setLoggedUser = vi.fn();
+  const errorMessage = '';
+  const setErrorMessage = vi.fn();
     it('should render all the data', async () => {
-        global.fetch = vi.fn()
+     vi.spyOn(postService, 'getAllPosts').mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(posts)
+      })
 
-function createFetchResponse(data) {
-  return { json: () => new Promise((resolve) => resolve(data)) }
-}
+      const { getByText } = render(
+        <BrowserRouter>
+        <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+          <UserContext.Provider value={[loggedUser, setLoggedUser]}>
+            <Feed />
+          </UserContext.Provider>
+        </ErrorContext.Provider>
+      </BrowserRouter>
+      );
 
-fetch.mockResolvedValue(createFetchResponse(dataArray))
-
-const data = await (await postService.getAllPosts())
-
-expect(fetch).toHaveBeenCalledWith(`${BASE_URL}`)
-
-expect(data).toStrictEqual(dataArray)
+      await waitFor(() => {
+        expect(getByText('Usa')).toBeTruthy()
+        expect(getByText('UsaEdit')).toBeTruthy()
+      })
     })
 })

@@ -1,6 +1,6 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import EditUser from './EditUser';
 import { ErrorContext } from '../../contexts/ErrorContext';
@@ -23,21 +23,17 @@ const user = {
 
 describe('testing edit user component', () => {
   it('shoul render with correct data', async () => {
-    global.fetch = vi.fn();
-    
+  
+    vi.spyOn(userService, 'getOne').mockResolvedValue({
+      ok:true,
+      json: () => Promise.resolve(user)
+    })
     const loggedUser = user;
     const setLoggedUser = vi.fn();
 
     const errorMessage = '';
     const setErrorMessage = vi.fn();
 
-    function createFetchResponse(data) {
-      return { json: () => new Promise((resolve) => resolve(data)) };
-    }
-
-    fetch.mockResolvedValue(createFetchResponse(user));
-
-    async () => {
       const { getByTestId } = render(
         <BrowserRouter>
           <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
@@ -48,15 +44,14 @@ describe('testing edit user component', () => {
         </BrowserRouter>
       );
 
-      const data =  await userService.getOne(user._id);
-
-      expect(getByTestId('firstName').value).toEqual('Martina');
-      expect(getByTestId('lastName').value).toEqual('Hristova');
-      expect(getByTestId('email').value).toEqual('asdiel4@abv.bg');
-      expect(getByTestId('password').value).toEqual(
-        '$2b$10$T0lL5K.4HGj7R5ar5BNjQOtho/Kb8HRSjqmA6Z5AqMZ/DdHmqWh1S'
-      );
-      expect(getByTestId('repeatPasswod').value).toEqual('');
-    };
+      await waitFor(() => {
+        expect(getByTestId('firstName').value).toEqual('Martina');
+        expect(getByTestId('lastName').value).toEqual('Hristova');
+        expect(getByTestId('email').value).toEqual('asdiel4@abv.bg');
+        expect(getByTestId('password').value).toEqual(
+          '$2b$10$T0lL5K.4HGj7R5ar5BNjQOtho/Kb8HRSjqmA6Z5AqMZ/DdHmqWh1S'
+        );
+      })
+  
   });
 });

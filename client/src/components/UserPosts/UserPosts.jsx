@@ -9,7 +9,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
 export default function UserPosts({ id }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [, setErrorMessage] = useContext(ErrorContext);
+  const [errorMessage, setErrorMessage] = useContext(ErrorContext);
 
   const deletePost = async (id) => {
     try {
