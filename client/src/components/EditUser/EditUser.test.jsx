@@ -9,18 +9,6 @@ import { UserContext } from '../../contexts/AuthContext.jsx';
 import * as userService from '../../service/userService.js'
 import { handleResponse } from '../../utils/handleResponse.js';
 
-// jest.mock('react-router', () => ({
-//   ...jest.requireActual('react-router'),
-//   useParams: jest.fn(),
-// }));
-
-// jest.mock('react', () => ({
-// ...jest.requireActual('react'),
-//   useEffect: (effect) => effect(),
-//   }));
-
-
-
 const user = {
   _id: '655795e0286ee71f5cbf1014',
   userAvatar:
@@ -39,17 +27,8 @@ describe('testing edit user component', () => {
   it('shoul render with correct data', async () => {
 
     jest.spyOn(userService, 'getOne').mockResolvedValue({
-      _id: '655795e0286ee71f5cbf1014',
-      userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHb…',
-      firstName: 'Martina',
-      lastName: 'Hristova',
-      email: 'asdiel4@abv.bg',
-      password: '$2b$10$T0lL5K.4HGj7R5ar5BNjQOtho/Kb8HRSjqmA6Z5AqMZ/DdHmqWh1S',
-      isAdmin: false,
-      createdAt: '2023-11-17T16:33:36.929+00:00',
-      updatedAt: '2023-11-17T16:33:36.929+00:00',
-      __v: 0,
+      ok: true,
+      json: () => Promise.resolve(user)
     })
     
     const token = 'token';
@@ -70,12 +49,6 @@ describe('testing edit user component', () => {
         </ErrorContext.Provider>
       </BrowserRouter>
     )
-    
-    const data= await (await userService.getOne(user._id))
-    
-    expect(data).toHaveBeenCalled();
-    
-    
     
       await waitFor(() => {
         expect(screen.getByTestId('firstName').value).toEqual('Martina');
