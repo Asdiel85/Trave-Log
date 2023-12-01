@@ -20,35 +20,6 @@ const user = {
   __v: 0,
 };
 
-const posts = [ {
-  "_id": "65649b1b2834ac660cf7c8cf",
-  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHb…",
-  "country": "Usa",
-  "city": "Boston",
-  "imageUrl": "https://media.timeout.com/images/105937857/750/562/image.jpg",
-  "cost": 22232,
-  "description": "sdasdDSFASDFASDFASDFASDFASFASDFASDF",
-  "likes": [],
-  "owner": "655795e0286ee71f5cbf1014",
-  "createdAt": "2023-11-27T13:35:23.777+00:00",
-  "updatedAt": "2023-11-28T12:50:34.458+00:00",
-  "__v": 0
-},
-{
-  "_id": "6564d2a82834ac660cf7c947",
-  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_lj6Uv0ddAQ8LHb…",
-  "country": "UsaEdit",
-  "city": "Boston",
-  "imageUrl": "https://media.timeout.com/images/105483065/750/562/image.jpg",
-  "cost": 2222,
-  "description": "dadasdasdasdasdsddsadas",
-  "likes": [],
-  "owner": "655795e0286ee71f5cbf1014",
-  "createdAt": "2023-11-27T17:32:24.109+00:00",
-  "updatedAt": "2023-11-28T12:50:34.458+00:00",
-  "__v": 0
-}]
-
 describe('testing user profile component', () => {
   
   afterEach(() => {

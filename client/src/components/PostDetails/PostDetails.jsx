@@ -59,7 +59,7 @@ export default function PostDetails() {
   useEffect(() => {
     postService
       .getPostDetails(id)
-      .then((res) => handleResponse(res))
+      .then((response) => handleResponse(response))
       .then((post) => {
         setPost(post);
         setLikePost(post.likes.includes(loggedUser?.id));

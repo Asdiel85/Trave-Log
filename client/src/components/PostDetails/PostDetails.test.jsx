@@ -1,7 +1,6 @@
 import React from 'react';
-import { getByTestId, render, screen } from '@testing-library/react';
-import {  BrowserRouter, MemoryRouter} from 'react-router-dom';
-import Router from 'react-router';
+import { render, waitFor } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
@@ -23,24 +22,18 @@ const post = {
   updatedAt: '2023-11-17T16:40:22.748Z',
 };
 
-describe('testing post details component',  () => {
-
-  it('should render component with the correct data',  async() => {
-    global.fetch = vi.fn();
+describe('testing post details component', () => {
+  it('should render component with the correct data', async () => {
+    vi.spyOn(postService, 'getPostDetails').mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(post),
+    });
     const loggedUser = null;
     const setLoggedUser = vi.fn();
     const setErrorMessage = vi.fn();
     const errorMessage = '';
-    const currentPost = post;
-    const setPost = vi.fn();
 
-    function createFetchResponse(data) {
-      return { json: () => new Promise((resolve) => resolve(data)) };
-    }
-
-    fetch.mockResolvedValue(createFetchResponse(post));
-   
-    async () => { render(
+    const { getByTestId, getByText } = render(
       <BrowserRouter>
         <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <UserContext.Provider value={[loggedUser, setLoggedUser]}>
@@ -49,11 +42,11 @@ describe('testing post details component',  () => {
         </ErrorContext.Provider>
       </BrowserRouter>
     );
-    
-    const data =  await postService.getPostDetails(post._id);
-   
 
-    expect(screen.getByTestId('card')).toBeTruthy()
-    }
+    expect(getByTestId('card')).toBeTruthy();
+   await waitFor(() => {
+      expect(getByText('Country: Usa')).toBeTruthy();
+      expect(getByText('City: Portland')).toBeTruthy();
+    })
   });
 });
