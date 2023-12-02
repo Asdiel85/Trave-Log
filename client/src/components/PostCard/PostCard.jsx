@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import styles from './PostCard.module.css';
@@ -24,6 +24,7 @@ export default function Post({
   const [, setErrorMessage] = useContext(ErrorContext);
   const [likePost, setLikePost] = useState(liked);
   const [likesCount, setLikesCount] = useState(likes.length);
+  const navigate = useNavigate()
 
   const handleLikePostClick = async () => {
     try {
@@ -33,6 +34,7 @@ export default function Post({
       setLikesCount((prev) => prev + 1);
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 
@@ -43,7 +45,8 @@ export default function Post({
       setLikePost(false);
       setLikesCount((prev) => prev - 1);
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.message)
+      navigate('/error')
     }
   };
 

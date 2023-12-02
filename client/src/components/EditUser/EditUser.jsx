@@ -25,7 +25,10 @@ export default function Register() {
         setFormValues(user);
         setLoading(false);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((error) => {
+        setErrorMessage(error.message)
+        navigate('/error')
+      });
   }, [id]);
 
   const {
@@ -54,6 +57,7 @@ export default function Register() {
             setErrorMessage('Email Already Exists!');
           } else {
             setErrorMessage(error.message);
+            navigate('/error')
           }
         });
     }

@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import * as userService from '../../service/userService';
@@ -14,6 +14,7 @@ import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 
 export default function UserProfile() {
   const { id } = useParams();
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
@@ -36,6 +37,7 @@ export default function UserProfile() {
       }
     } catch (error) {
       setErrorMessage(error.message)
+      navigate('/error')
     }
   }
 
@@ -49,6 +51,7 @@ export default function UserProfile() {
       })
       .catch((error) => {
         setErrorMessage(error.message)
+        navigate('/error')
       });
   }, [id]);
 

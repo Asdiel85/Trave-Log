@@ -1,12 +1,11 @@
-import errorPage from '../../img/errorPage.png'
 import styles from './ErrorPage.module.css'
+import errorImage from '../../img/errorImage.webp'
 
 export default function ErrorPage() {
     return (
-        <>
         <div>
-            <img className={styles.errorImage} src={errorPage} alt="Error image" />
+            <img className={styles.errorImage} src={errorImage} alt="Error image" />
         </div>
-        </>
+
     )
 }
