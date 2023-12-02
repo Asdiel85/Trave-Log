@@ -4,6 +4,7 @@ import { render, waitFor } from '@testing-library/react';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import UserPosts from './UserPosts.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
+import { BrowserRouter } from 'react-router-dom';
 
 const dataArray = [
   {
@@ -47,9 +48,11 @@ describe('testing user posts component', () => {
       json: () => Promise.resolve(dataArray),
     });
     render(
+      <BrowserRouter>
       <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
         <UserPosts />
       </ErrorContext.Provider>
+      </BrowserRouter>
     );
     expect(result).toHaveBeenCalled(1);
   });
