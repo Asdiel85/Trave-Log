@@ -5,11 +5,13 @@ import { useEffect, useState, useContext } from 'react';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import PostCard from '../PostCard/PostCard.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserPosts({ id }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useContext(ErrorContext);
+  const navigate = useNavigate()
 
   const deletePost = async (id) => {
     try {
@@ -18,6 +20,7 @@ export default function UserPosts({ id }) {
       setPosts((posts) => posts.filter((post) => post._id !== id));
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 
@@ -29,7 +32,10 @@ export default function UserPosts({ id }) {
         setPosts(posts);
         setLoading(false);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((error) => {
+        setErrorMessage(error.message)
+        navigate('/error')
+      });
   }, [id]);
   return (
     <>

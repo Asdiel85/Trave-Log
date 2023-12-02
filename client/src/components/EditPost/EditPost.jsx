@@ -24,7 +24,10 @@ export default function EditPost() {
       setFormValues(post)
       setLoading(false);
     })
-    .catch((error) => setErrorMessage(error.message));
+    .catch((error) => {
+      setErrorMessage(error.message)
+      navigate('/error')
+    });
   }, [id]);
   
   
@@ -33,7 +36,10 @@ export default function EditPost() {
      postService.editPost(id, formValues)
      .then(response => handleResponse(response))
      .then( navigate(`/post-details/${id}`))
-     .catch(error => setErrorMessage(error.message))
+     .catch(error => {
+      setErrorMessage(error.message)
+      navigate('/error')
+    })
     }
   }, [errors]);
 

@@ -32,6 +32,7 @@ export default function PostDetails() {
       setLikesCount((prev) => prev + 1);
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 
@@ -43,6 +44,7 @@ export default function PostDetails() {
       setLikesCount((prev) => prev - 1);
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 
@@ -53,6 +55,7 @@ export default function PostDetails() {
       navigate('/');
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 
@@ -66,7 +69,10 @@ export default function PostDetails() {
         setLikesCount(post.likes.length);
         setLoading(false);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((error) => {
+        setErrorMessage(error.message)
+        navigate('/error')
+      });
   }, [id]);
 
   return (

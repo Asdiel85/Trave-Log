@@ -36,7 +36,12 @@ export default function Login() {
           localStorage.setItem('user', JSON.stringify(userData));
           navigate(from, { replace: true });
         })
-        .catch((error) => setErrorMessage(error.message));
+        .catch((error) => {
+          setErrorMessage(error.message)
+          if(error.message === 'Failed to fetch') {
+            navigate('/error')
+          }
+        });
     }
   }, [errors]);
 

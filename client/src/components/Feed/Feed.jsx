@@ -5,12 +5,14 @@ import { handleResponse } from '../../utils/handleResponse.js';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export default function Feed() {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useContext(ErrorContext);
+  const navigate = useNavigate()
 
   useEffect(() => {
     postService
@@ -22,6 +24,7 @@ export default function Feed() {
       })
       .catch((error) => {
         setErrorMessage(error.message);
+        navigate('/error')
       });
   }, []);
 
@@ -31,6 +34,7 @@ export default function Feed() {
       setPosts(posts.filter((post) => post._id !== id));
     } catch (error) {
       setErrorMessage(error.message);
+      navigate('/error')
     }
   };
 

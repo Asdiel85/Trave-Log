@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthContext.jsx';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import * as userService from '../../service/userService';
@@ -17,6 +18,7 @@ export default function Users() {
   const [loading, setloading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useContext(ErrorContext)
+  const navigate = useNavigate()
 
   const handleShowModalClick = (id) => {
     setUserId(id);
@@ -34,6 +36,7 @@ export default function Users() {
       setShowModal(false);
     } catch (error) {
       setErrorMessage(error.message)
+      navigate('/error')
     }
   };
 
@@ -45,7 +48,10 @@ export default function Users() {
         setUsers(users);
         setloading(false);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((error) => {
+        setErrorMessage(error.message)
+        navigate('/error')
+      });
   }, []);
   return (
     <>

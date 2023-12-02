@@ -27,8 +27,8 @@ export default function CreatePost() {
         .then((response) => handleResponse(response))
         .then(navigate('/'))
         .catch((error) => {
-          const message = error.message;
-          setErrorMessage((prev) => ({ ...prev, message }));
+          setErrorMessage(error.message);
+          navigate('/error')
         });
     }
   }, [errors]);

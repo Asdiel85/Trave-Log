@@ -6,7 +6,6 @@ import Feed from './components/Feed/Feed.jsx';
 import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
 import CreatePost from './components/CreatePost/CreatePost.jsx';
-import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import PostDetails from './components/PostDetails/PostDetails.jsx';
 import UserProfile from './components/UserProfile/UserProfile.jsx';
@@ -19,6 +18,8 @@ import EditPost from './components/EditPost/EditPost.jsx';
 import EditUser from './components/EditUser/EditUser.jsx';
 import ErrorProvider from './contexts/ErrorContext.jsx';
 import ErrorModal from './components/ErrorModal/ErrorModal.jsx';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage.jsx';
+import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
             <Route element={<AdminGuard />}>
               <Route path="/users" element={<Users />} />
             </Route>
-            <Route path="*" element={<ErrorPage />} />
+            <Route path='/error' element = {<ErrorPage/>}/>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </main>
