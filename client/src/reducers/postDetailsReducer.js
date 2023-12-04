@@ -9,6 +9,7 @@ export const postDetailsReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_START":
       return {
+        ...state,
         loading: true,
         post: {},
         likePost: false,
@@ -16,6 +17,7 @@ export const postDetailsReducer = (state, action) => {
       };
       case "FETCH_SUCCES":
         return {
+          ...state,
             loading: false,
             post: action.payload,
             likesCount: action.payload.likes.length,
@@ -25,13 +27,13 @@ export const postDetailsReducer = (state, action) => {
         return {
            ...state,
            likesCount: state.likesCount + 1,
-           likePost: !state.likePost        
+           likePost: true        
         };
         case "UNLIKE_POST":
         return {
            ...state,
            likesCount: state.likesCount - 1,
-           likePost: !state.likePost        
+           likePost: false        
         };
         case "DELETE_POST":
         return {
