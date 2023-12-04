@@ -1,116 +1,131 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../../contexts/AuthContext.jsx';
-import { ErrorContext } from '../../contexts/ErrorContext.jsx';
-import * as postService from '../../service/postService';
-import styles from './PostDetails.module.css';
-import heart from '../../img/heart.svg';
-import heartFilled from '../../img/heartFilled.svg';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import UserAvatar from '../UserAvatar/UserAvatar.jsx';
-import EditDeleteBtns from '../EditDeleteBtns/EditDeleteBtns.jsx';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.jsx';
-import { handleResponse } from '../../utils/handleResponse.js';
+import { useEffect, useReducer } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/AuthContext.jsx";
+import { ErrorContext } from "../../contexts/ErrorContext.jsx";
+import * as postService from "../../service/postService";
+import styles from "./PostDetails.module.css";
+import heart from "../../img/heart.svg";
+import heartFilled from "../../img/heartFilled.svg";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import UserAvatar from "../UserAvatar/UserAvatar.jsx";
+import EditDeleteBtns from "../EditDeleteBtns/EditDeleteBtns.jsx";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import { handleResponse } from "../../utils/handleResponse.js";
+import {
+  INITIAL_STATE,
+  postDetailsReducer,
+} from "../../reducers/postDetailsReducer.js";
 
 export default function PostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState({});
-  const [likePost, setLikePost] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
-  const [loggedUser,] = useContext(UserContext);
+  const [loggedUser] = useContext(UserContext);
   const [, setErrorMessage] = useContext(ErrorContext);
+  const [state, dispatch] = useReducer(postDetailsReducer, INITIAL_STATE);
 
   const handleLikePostClick = async () => {
     try {
-      const response = await postService.likePost(post._id, loggedUser.id);
+      const response = await postService.likePost(
+        state.post._id,
+        loggedUser.id
+      );
       await handleResponse(response);
-      setLikePost(true);
-      setLikesCount((prev) => prev + 1);
+      dispatch({
+        type: "LIKE_POST",
+        payload: state.post.likes,
+        userId: loggedUser.id,
+      });
     } catch (error) {
       setErrorMessage(error.message);
-      navigate('/error')
+      navigate("/error");
     }
   };
 
   const handleUnlikeClick = async () => {
     try {
-      const response = await postService.unLikePost(post._id, loggedUser.id);
+      const response = await postService.unLikePost(
+        state.post._id,
+        loggedUser.id
+      );
       await handleResponse(response);
-      setLikePost(false);
-      setLikesCount((prev) => prev - 1);
+      dispatch({
+        type: "UNLIKE_POST",
+        payload: state.post.likes,
+        userId: loggedUser.id,
+      });
     } catch (error) {
       setErrorMessage(error.message);
-      navigate('/error')
+      navigate("/error");
     }
   };
 
   const deletePost = async (id) => {
     try {
       await postService.deletePost(id);
-      setPost(null);
-      navigate('/');
+      dispatch({type : "DELETE_POST"})
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
-      navigate('/error')
+      navigate("/error");
     }
   };
 
   useEffect(() => {
+    dispatch({ type: "FETCH_START" });
     postService
       .getPostDetails(id)
       .then((response) => handleResponse(response))
       .then((post) => {
-        setPost(post);
-        setLikePost(post.likes.includes(loggedUser?.id));
-        setLikesCount(post.likes.length);
-        setLoading(false);
+        dispatch({
+          type: "FETCH_SUCCES",
+          payload: post,
+          userId: loggedUser.id,
+        });
       })
       .catch((error) => {
-        setErrorMessage(error.message)
-        navigate('/error')
+        setErrorMessage(error.message);
+        navigate("/error");
       });
   }, [id]);
 
   return (
     <>
-      {loading ? (
+      {state.loading ? (
         <LoadingSpinner />
       ) : (
-        <Card data-testid = 'card' style={{ width: '60%', margin: '30px auto' }}>
-          <Card.Img variant="top" src={post.imageUrl} />
+        <Card data-testid="card" style={{ width: "60%", margin: "30px auto" }}>
+          <Card.Img variant="top" src={state.post.imageUrl} />
           <Card.Body>
             <Card.Title>
               <span>
-                <UserAvatar userAvatar={post.userAvatar} />
-              </span>{' '}
-              Country: {post.country}
+                <UserAvatar id={state.post.owner} userAvatar={state.post.userAvatar} />
+              </span>{" "}
+              Country: {state.post.country}
             </Card.Title>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>City: {post.city}</ListGroup.Item>
-            <ListGroup.Item>Cost: {post.cost} Euro</ListGroup.Item>
-            <ListGroup.Item> {post.description}</ListGroup.Item>
+            <ListGroup.Item>City: {state.post.city}</ListGroup.Item>
+            <ListGroup.Item>Cost: {state.post.cost} Euro</ListGroup.Item>
+            <ListGroup.Item> {state.post.description}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
             {loggedUser && (
               <div>
                 <div>
-                  <span>Likes {likesCount}</span>
-                  {loggedUser.id !== post.owner && (
+                  <span>Likes {state.likesCount}</span>
+                  {loggedUser.id !== state.post.owner && (
                     <>
-                      {likePost && (
+                      {state.likePost && (
                         <img
                           onClick={handleUnlikeClick}
                           className={styles.cardIcon}
                           src={heartFilled}
                           alt="Filled Heart"
                         />
-                      )}{' '}
-                      {!likePost && (
+                      )}{" "}
+                      {!state.likePost && (
                         <img
                           onClick={handleLikePostClick}
                           className={styles.cardIcon}
@@ -121,11 +136,11 @@ export default function PostDetails() {
                     </>
                   )}
                 </div>
-                {loggedUser.id === post.owner && (
+                {loggedUser.id === state.post.owner && (
                   <EditDeleteBtns
-                    id={post._id}
+                    id={state.post._id}
                     item="post"
-                    confirmTask={() => deletePost(post._id)}
+                    confirmTask={() => deletePost(state.post._id)}
                   />
                 )}
               </div>
