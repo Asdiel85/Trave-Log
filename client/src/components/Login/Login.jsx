@@ -7,15 +7,13 @@ import { UserContext } from '../../contexts/AuthContext.jsx';
 import { useContext } from 'react';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../service/userService.js';
 import { useForm } from '../../hooks/useForm.jsx';
 import { validateValuesLogin } from '../../utils/validateForms.js';
 
 export default function Login() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
 
   const [, setLoggedUser] = useContext(UserContext);
   const [, setErrorMessage] = useContext(ErrorContext);
@@ -34,7 +32,7 @@ export default function Login() {
           setLoggedUser(userData);
           localStorage.setItem('token', userData.token);
           localStorage.setItem('user', JSON.stringify(userData));
-          navigate(from, { replace: true });
+          navigate('/');
         })
         .catch((error) => {
           setErrorMessage(error.message)
