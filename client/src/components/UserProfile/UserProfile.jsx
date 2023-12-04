@@ -16,9 +16,9 @@ export default function UserProfile() {
   const { id } = useParams();
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
-  const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
   const [showPosts, setShowPosts] = useState(false);
+  const [loggedUser, setLoggedUser] = useContext(UserContext);
   const [, setErrorMessage] = useContext(ErrorContext)
 
   const hadnleShowPostsClick = (e) => {

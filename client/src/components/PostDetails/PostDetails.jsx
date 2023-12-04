@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/AuthContext.jsx";
@@ -89,8 +89,6 @@ export default function PostDetails() {
         navigate("/error");
       });
   }, [id]);
-
-  console.log(state);
 
   return (
     <>
