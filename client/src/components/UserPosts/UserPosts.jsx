@@ -15,8 +15,7 @@ export default function UserPosts({ id }) {
 
   const deletePost = async (id) => {
     try {
-      const response = await postsService.deletePost(id);
-      await handleResponse(response);
+      await postsService.deletePost(id);
       setPosts((posts) => posts.filter((post) => post._id !== id));
     } catch (error) {
       setErrorMessage(error.message);
