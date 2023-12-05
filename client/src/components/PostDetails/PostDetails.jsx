@@ -78,13 +78,18 @@ export default function PostDetails() {
       .getPostDetails(id)
       .then((response) => handleResponse(response))
       .then((post) => {
-        dispatch({
-          type: "FETCH_SUCCES",
-          payload: post,
-          userId: loggedUser.id,
-        });
+        if(post === null) {
+          navigate('*')
+        } else {
+          dispatch({
+            type: "FETCH_SUCCES",
+            payload: post,
+            userId: loggedUser.id,
+          });
+        }
       })
       .catch((error) => {
+        dispatch({type: "FETCH_FAILED"})
         setErrorMessage(error.message);
         navigate("/error");
       });

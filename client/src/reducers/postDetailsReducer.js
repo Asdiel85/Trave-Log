@@ -3,6 +3,7 @@ export const INITIAL_STATE = {
   post: {},
   likePost: false,
   likesCount: 0,
+  error: false
 };
 
 export const postDetailsReducer = (state, action) => {
@@ -19,10 +20,16 @@ export const postDetailsReducer = (state, action) => {
         return {
           ...state,
             loading: false,
-            post: action.payload,
-            likesCount: action.payload.likes.length,
-            likePost: action.payload.likes.includes(action.userId),
+            post: action?.payload,
+            likesCount: action.payload?.likes.length,
+            likePost: action.payload?.likes.includes(action.userId),
           };
+          case "FETCH_FAILED":
+            return {
+              ...state,
+              loading: false,
+              error: true
+              };
       case "LIKE_POST":
         return {
            ...state,
