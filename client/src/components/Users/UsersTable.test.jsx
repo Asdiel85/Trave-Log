@@ -1,10 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
-import * as userService from '../../service/userService';
+import * as userService from '../../service/userService.js';
 import { ErrorContext } from '../../contexts/ErrorContext.jsx';
 import { UserContext } from '../../contexts/AuthContext.jsx';
-import Users from './Users.jsx';
+import UsersTable from './UsersTable.jsx';
 
 const users = [ {
     "_id": "65579551286ee71f5cbf0fff",
@@ -46,7 +46,7 @@ describe('testing users component', () => {
       <BrowserRouter>
         <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
           <UserContext.Provider value={[loggedUser, setLoggedUser]}>
-            <Users />
+            <UsersTable/>
           </UserContext.Provider>
         </ErrorContext.Provider>
       </BrowserRouter>
