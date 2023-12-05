@@ -19,5 +19,7 @@ export const userProfileReducer = (state, action) => {
         loading: false,
         showPosts: !action.payload,
       };
+      default: 
+      return state
   }
 };
