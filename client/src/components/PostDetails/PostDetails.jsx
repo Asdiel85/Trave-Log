@@ -84,7 +84,7 @@ export default function PostDetails() {
           dispatch({
             type: "FETCH_SUCCES",
             payload: post,
-            userId: loggedUser.id,
+            userId: loggedUser?.id,
           });
         }
       })
