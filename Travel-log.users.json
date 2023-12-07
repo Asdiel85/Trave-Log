@@ -1,59 +1,5 @@
 [{
   "_id": {
-    "$oid": "65579551286ee71f5cbf0fff"
-  },
-  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
-  "firstName": "Martin",
-  "lastName": "Hristov",
-  "email": "asdiel@abv.bg",
-  "password": "$2b$10$.Gi8OEKUOC4iKbfk86xqZe0rxWVDh7xVuftHTk1bh.eS4e6vAml5O",
-  "isAdmin": false,
-  "createdAt": {
-    "$date": "2023-11-17T16:31:13.131Z"
-  },
-  "updatedAt": {
-    "$date": "2023-11-17T16:31:13.131Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "65579582286ee71f5cbf100b"
-  },
-  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkD0mtfLvOHjjnce6_tqQ9uvs-3ZZ1shUs3Nkr3OkQ&s",
-  "firstName": "Martin",
-  "lastName": "Hristov",
-  "email": "asdiel1@abv.bg",
-  "password": "$2b$10$X2AaOWKahXK2UzB35VttGupr5Rv02XTcApyOMeDsNrl2yE2Fat7YC",
-  "isAdmin": false,
-  "createdAt": {
-    "$date": "2023-11-17T16:32:02.645Z"
-  },
-  "updatedAt": {
-    "$date": "2023-11-17T16:32:02.645Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "655795a5286ee71f5cbf100e"
-  },
-  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLDAcdzLQul2HdnF9ZUYKN9ctlbAXqxIfstcgQk3Fk0g&s",
-  "firstName": "Martin",
-  "lastName": "Hristov",
-  "email": "asdiel2@abv.bg",
-  "password": "$2b$10$TAexR3WkHAumxK2uJn7Vn.7RLuSL55oZix3ouEOySo9ySUmaRh81i",
-  "isAdmin": false,
-  "createdAt": {
-    "$date": "2023-11-17T16:32:37.501Z"
-  },
-  "updatedAt": {
-    "$date": "2023-11-17T16:32:37.501Z"
-  },
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "655795c6286ee71f5cbf1011"
   },
   "userAvatar": "https://www.shutterstock.com/image-vector/african-bearded-man-wearing-tshirt-260nw-1476685571.jpg",
@@ -121,6 +67,168 @@
   },
   "updatedAt": {
     "$date": "2023-11-17T16:35:08.503Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579551286ee71f5cbf0fff"
+  },
+  "userAvatar": "https://i.ytimg.com/vi/IQ5TQn5gE7o/maxresdefault.jpg",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel@abv.bg",
+  "password": "$2b$10$.Gi8OEKUOC4iKbfk86xqZe0rxWVDh7xVuftHTk1bh.eS4e6vAml5O",
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2023-11-17T16:31:13.131Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:31:13.131Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65579582286ee71f5cbf100b"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkD0mtfLvOHjjnce6_tqQ9uvs-3ZZ1shUs3Nkr3OkQ&s",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel1@abv.bg",
+  "password": "$2b$10$X2AaOWKahXK2UzB35VttGupr5Rv02XTcApyOMeDsNrl2yE2Fat7YC",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:32:02.645Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:32:02.645Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "655795a5286ee71f5cbf100e"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLDAcdzLQul2HdnF9ZUYKN9ctlbAXqxIfstcgQk3Fk0g&s",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel2@abv.bg",
+  "password": "$2b$10$TAexR3WkHAumxK2uJn7Vn.7RLuSL55oZix3ouEOySo9ySUmaRh81i",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-11-17T16:32:37.501Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-17T16:32:37.501Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65716f5b19cc8fd6f54a0127"
+  },
+  "userAvatar": "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/125296371/original/653cc81872119844644e33d40f5afd9bd61743b6/create-cool-cartoon-avatars.jpg",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel7@abv.bg",
+  "password": "$2b$10$q75XokVrE6azYKIYNpuOeOnrZZx4KyygpSeLHYAt9BCXaAg.2b0US",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:08:11.721Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:08:11.721Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65716f8b19cc8fd6f54a012a"
+  },
+  "userAvatar": "https://pbs.twimg.com/media/DpA1qojXUAAukgt.jpg",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel8@abv.bg",
+  "password": "$2b$10$J114bzgclSSQXhb88BWTxOcNtCnm7RMOI24tlkLB9jxMJWc39eMCm",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:08:59.805Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:08:59.805Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65716fb619cc8fd6f54a012d"
+  },
+  "userAvatar": "https://i.seadn.io/gae/V2_f7h4iOKf4nthrT_q2b9QaVq1ZBa3KrnJkh8x4EFB5k4nx7iYdOnjaSrXWEvpKm6GeMUB2oE7hwPWOWo18RPtwjiU8rIfra8oBQg?auto=format&dpr=1&w=1000",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel9@abv.bg",
+  "password": "$2b$10$wp5wWxhLBNtznmTf59gY9OWV2GJh5yl3oAoRIhYgw4jz56ShRoO7W",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:09:42.437Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:09:42.437Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6571705119cc8fd6f54a0130"
+  },
+  "userAvatar": "https://cdn4.iconfinder.com/data/icons/cool-avatars-2/190/00-30-512.png",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel10@abv.bg",
+  "password": "$2b$10$Mtm0vUweV2oDMWeFQa0ibuVlWe3r8miQ/5WQUImwEkyS8YJ5d6Qh.",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:12:17.017Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:12:17.017Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6571707d19cc8fd6f54a0133"
+  },
+  "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRbbK2pa-B1UTy51qUBkmiDrvVpwxAlewARg&usqp=CAU",
+  "firstName": "Martina",
+  "lastName": "Hristova",
+  "email": "asdiel11@abv.bg",
+  "password": "$2b$10$lcF5Em3445XtMZLtOWu.JujIMnX8TR2F6aLOWKH0SbbW5JKRPeb5i",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:13:01.408Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:13:01.408Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6571709a19cc8fd6f54a0136"
+  },
+  "userAvatar": "https://toppng.com/uploads/preview/cool-avatar-transparent-image-cool-boy-avatar-11562893383qsirclznyw.png",
+  "firstName": "Martin",
+  "lastName": "Hristov",
+  "email": "asdiel12@abv.bg",
+  "password": "$2b$10$f28KAmbeWj78J75VsvUyLefe0pVGbN1aCoy0yYjQNuwDMAMfF56qi",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2023-12-07T07:13:30.320Z"
+  },
+  "updatedAt": {
+    "$date": "2023-12-07T07:13:30.320Z"
   },
   "__v": 0
 }]

@@ -103,7 +103,7 @@ export default function UsersTable() {
         <ConfirmModal
           item="user"
           show={state.showModal}
-          confirmTask={() => deleteUser(userId)}
+          confirmTask={() => deleteUser(state.userId)}
           handleClose={closeModal}
         />
       )}
