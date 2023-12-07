@@ -13,7 +13,7 @@ import AuthGuard from './guards/AuthGuard/AuthGuard.jsx';
 import AdminGuard from './guards/AdminGuard/AdminGuard.jsx';
 import AuthProvider from './contexts/AuthContext.jsx';
 import LoggedInGuard from './guards/LoggedInGuard/LoggedInGuard.jsx';
-import Users from './components/Users/Users.jsx';
+import UsersTable from './components/Users/UsersTable.jsx';
 import EditPost from './components/EditPost/EditPost.jsx';
 import EditUser from './components/EditUser/EditUser.jsx';
 import ErrorProvider from './contexts/ErrorContext.jsx';
@@ -42,7 +42,7 @@ function App() {
               <Route path="/user/:id/edit" element={<EditUser />} />
             </Route>
             <Route element={<AdminGuard />}>
-              <Route path="/users" element={<Users />} />
+              <Route path="/users" element={<UsersTable />} />
             </Route>
             <Route path='/error' element = {<ErrorPage/>}/>
             <Route path="*" element={<NotFoundPage />} />
