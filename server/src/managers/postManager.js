@@ -7,7 +7,7 @@ exports.create = async (postData) => {
 };
 
 exports.getPosts = () => {
-  const result = Post.find();
+  const result = Post.find().sort({createdAt: -1});
 
   return result;
 };
